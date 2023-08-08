@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>arrow-down (1)</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="File-info-top-layout" transform="translate(-514.000000, -39.000000)" stroke="#2672FB" stroke-width="1.5">
+            <g id="Group-4">
+                <g id="Dynamic-group" transform="translate(515.000000, 35.000000)">
+                    <g id="arrow-down-(1)" transform="translate(0.000000, 5.000000)">
+                        <line x1="4.66666667" y1="0" x2="4.66666667" y2="9.33333333" id="Path"></line>
+                        <polyline id="Path" points="9.33333333 4.66666667 4.66666667 9.33333333 0 4.66666667"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

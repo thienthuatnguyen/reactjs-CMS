@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="4px" viewBox="0 0 16 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>ellipsis-h-solid</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Header" transform="translate(-1204.000000, -48.000000)" fill="#3D4A68" fill-rule="nonzero">
+            <g id="user/loggedIn" transform="translate(1204.000000, 40.000000)">
+                <g id="ellipsis-h-solid" transform="translate(0.000000, 8.000000)">
+                    <path d="M10,2 C10,3.10555556 9.10555556,4 8,4 C6.89444444,4 6,3.10555556 6,2 C6,0.894444444 6.89444444,0 8,0 C9.10555556,0 10,0.894444444 10,2 Z M14,0 C12.8944444,0 12,0.894444444 12,2 C12,3.10555556 12.8944444,4 14,4 C15.1055556,4 16,3.10555556 16,2 C16,0.894444444 15.1055556,0 14,0 Z M2,0 C0.894444444,0 4.4408921e-16,0.894444444 4.4408921e-16,2 C4.4408921e-16,3.10555556 0.894444444,4 2,4 C3.10555556,4 4,3.10555556 4,2 C4,0.894444444 3.10555556,0 2,0 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

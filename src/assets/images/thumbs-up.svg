@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>thumbs-up</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="File-info-top-layout" transform="translate(-789.000000, -93.000000)" stroke="#707EA4" stroke-width="1.5">
+            <g id="Group-4">
+                <g id="Group-6" transform="translate(601.000000, 91.000000)">
+                    <g id="Group-2" transform="translate(108.000000, 0.000000)">
+                        <g id="thumbs-up" transform="translate(88.000000, 10.000000) scale(-1, -1) translate(-88.000000, -10.000000) translate(81.000000, 3.000000)">
+                            <path d="M8.39989232,4.89993719 L8.39989232,2.09997308 C8.39989232,0.940189973 7.45970235,0 6.29991924,0 L3.49995513,6.29991924 L3.49995513,13.9999113 L11.3958539,13.9999113 C12.0939457,14.0077125 12.6911601,13.5000802 12.795836,12.8098358 L13.7618236,6.50991655 C13.823462,6.10382048 13.7036524,5.69114321 13.4341287,5.38119106 C13.1646051,5.0712389 12.7725625,4.895286 12.3618415,4.89993719 L8.39989232,4.89993719 Z M3.49995513,13.9998205 L1.39998205,13.9998205 C0.626793316,13.9998205 0,13.3730272 0,12.5998385 L0,7.6999013 C0,6.92671256 0.626793316,6.29991924 1.39998205,6.29991924 L3.49995513,6.29991924" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

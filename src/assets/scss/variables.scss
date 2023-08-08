@@ -1,0 +1,18 @@
+$white:#fff;
+$black:#000;
+$blue:#2672FB;
+$green:#04CB04 ;
+$red:#FB211E;
+$organe:#CB0704;
+$brown: #586687;
+$bodyColor: #3D4A68;
+$borderColor1: #ECEFF4;
+$borderColor2: #D3D9E6 ;
+$bodyColorGray: #D3D9E6;
+$yellow: #FAB800 ;
+$gray: #9C9C9C;
+@mixin border-radius($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+}

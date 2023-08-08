@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="14px" viewBox="0 0 16 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>rotate-cw</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="File-info-top-layout" transform="translate(-679.000000, -38.000000)" stroke="#2672FB" stroke-width="1.5">
+            <g id="Group-4">
+                <g id="Group-3" transform="translate(680.000000, 35.000000)">
+                    <g id="rotate-cw" transform="translate(0.000000, 4.000000)">
+                        <polyline id="Path" points="13.3333333 0.666666667 13.3333333 4.66666667 9.33333333 4.66666667"></polyline>
+                        <path d="M11.66,8 C10.7697479,10.5198563 8.3202101,12.147137 5.65227746,11.9910595 C2.98434483,11.834982 0.741263162,9.93317694 0.150907993,7.32670318 C-0.439447177,4.72022941 0.765260393,2.03751484 3.105567,0.747092534 C5.4458736,-0.543329774 8.35752493,-0.130335485 10.2466667,1.76 L13.3333333,4.66666667" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
