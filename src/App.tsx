@@ -1,12 +1,12 @@
 
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
 import AddMore from './containers/AddMore';
 import Home from './containers/Home';
 import NotFoundPage from './containers/NotFoundPage';
 import PublicRoute from './containers/PublicRoute';
 import PrivateRoute from './containers/PrivateRoute';
 import { Header } from './components/Header';
+import Login from './containers/login/Login';
 function App() {
   return (
     <div className="wrapper-app">
@@ -16,6 +16,11 @@ function App() {
           <Route path="/" element={
             <PublicRoute >
               <Home></Home>
+            </PublicRoute>} >
+          </Route>
+          <Route path="/login" element={
+            <PublicRoute >
+              <Login></Login>
             </PublicRoute>} >
           </Route>
           <Route path="/add" element={

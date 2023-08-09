@@ -1,0 +1,219 @@
+// Custom variables
+@import "variables";
+
+
+@font-face {
+    font-family: "SimplonNorm";
+    font-style: normal;
+    font-weight: 700;
+    font-display: auto;
+    src: url('/assets/fonts/SimplonNorm-Bold.svg#str_replace("SimplonNorm", " ", "_")') format("svg"), url("/assets/fonts/SimplonNorm-Bold.ttf") format("truetype"), url("/assets/fonts/SimplonNorm-Bold.woff") format("woff"), url("/assets/fonts/SimplonNorm-Bold.woff2") format("woff2"); }
+  
+  @font-face {
+    font-family: "SimplonNorm";
+    font-style: italic;
+    font-weight: 700;
+    font-display: auto;
+    src: url('/assets/fonts/SimplonNorm-BoldItalic.svg#str_replace("SimplonNorm", " ", "_")') format("svg"), url("/assets/fonts/SimplonNorm-BoldItalic.ttf") format("truetype"), url("/assets/fonts/SimplonNorm-BoldItalic.woff") format("woff"), url("/assets/fonts/SimplonNorm-BoldItalic.woff2") format("woff2"); }
+  
+  @font-face {
+    font-family: "SimplonNorm";
+    font-style: normal;
+    font-weight: 500;
+    font-display: auto;
+    src: url('/assets/fonts/SimplonNorm-Medium.svg#str_replace("SimplonNorm", " ", "_")') format("svg"), url("/assets/fonts/SimplonNorm-Medium.ttf") format("truetype"), url("/assets/fonts/SimplonNorm-Medium.woff") format("woff"), url("/assets/fonts/SimplonNorm-Medium.woff2") format("woff2"); }
+  
+  @font-face {
+    font-family: "SimplonNorm";
+    font-style: italic;
+    font-weight: 500;
+    font-display: auto;
+    src: url('/assets/fonts/SimplonNorm-MediumItalic.svg#str_replace("SimplonNorm", " ", "_")') format("svg"), url("/assets/fonts/SimplonNorm-MediumItalic.ttf") format("truetype"), url("/assets/fonts/SimplonNorm-MediumItalic.woff") format("woff"), url("/assets/fonts/SimplonNorm-MediumItalic.woff2") format("woff2"); }
+  
+  @font-face {
+    font-family: "SimplonNorm";
+    font-style: normal;
+    font-weight: 400;
+    font-display: auto;
+    src: url('/assets/fonts/SimplonNorm-Regular.svg#str_replace("SimplonNorm", " ", "_")') format("svg"), url("/assets/fonts/SimplonNorm-Regular.ttf") format("truetype"), url("/assets/fonts/SimplonNorm-Regular.woff") format("woff"), url("/assets/fonts/SimplonNorm-Regular.woff2") format("woff2"); }
+  
+  @font-face {
+    font-family: "SimplonNorm";
+    font-style: italic;
+    font-weight: 400;
+    font-display: auto;
+    src: url('/assets/fonts/SimplonNorm-RegularItalic.svg#str_replace("SimplonNorm", " ", "_")') format("svg"), url("/assets/fonts/SimplonNorm-RegularItalic.ttf") format("truetype"), url("/assets/fonts/SimplonNorm-RegularItalic.woff") format("woff"), url("/assets/fonts/SimplonNorm-RegularItalic.woff2") format("woff2"); }
+  
+  @font-face {
+    font-family: "SimplonNorm";
+    font-style: normal;
+    font-weight: 300;
+    font-display: auto;
+    src: url('/assets/fonts/SimplonNorm-Light.svg#str_replace("SimplonNorm", " ", "_")') format("svg"), url("/assets/fonts/SimplonNorm-Light.ttf") format("truetype"), url("/assets/fonts/SimplonNorm-Light.woff") format("woff"), url("/assets/fonts/SimplonNorm-Light.woff2") format("woff2"); }
+  
+  @font-face {
+    font-family: "SimplonNorm";
+    font-style: italic;
+    font-weight: 300;
+    font-display: auto;
+    src: url('/assets/fonts/SimplonNorm-LightItalic.svg#str_replace("SimplonNorm", " ", "_")') format("svg"), url("/assets/fonts/SimplonNorm-LightItalic.ttf") format("truetype"), url("/assets/fonts/SimplonNorm-LightItalic.woff") format("woff"), url("/assets/fonts/SimplonNorm-LightItalic.woff2") format("woff2"); }
+  
+body {
+    color: $body-color;
+    background-color: #fff;
+    font-family: "SimplonNorm";
+    scrollbar-face-color:$gray-dark;
+    scrollbar-arrow-color: #fff;
+    scrollbar-shadow-color: #fff;
+}
+html, body {
+    height: 100%;
+    font-size: 14px;
+    font-weight: normal;
+    scroll-behavior: smooth;
+    font-weight: 400;
+    overflow: hidden;
+}
+::-webkit-scrollbar {
+    width: 12px;
+    -webkit-appearance: none;
+   
+    
+  }
+  
+/* Track */
+::-webkit-scrollbar-track {
+    border: 1px solid #E9ECF2;
+    border-radius: 5px;
+    background-color: #F4F5F8;
+    
+}
+   
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #B7C3DC;
+    width: 6px !important;
+    border: 3px solid #F4F5F8;
+}
+
+.break-all {
+    word-break: break-all;
+}
+
+.break-word {
+    word-break: break-word;
+}
+
+@keyframes bounce-alpha-up {
+	0% {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	25%{
+		opacity: 0;
+		transform: translateY(-10px) scale(.9);
+	}
+	26%{
+		opacity: 0;
+		transform: translateY(10px) scale(.9);
+	}
+	55% {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+.bounce-alpha-up {
+	animation-name: bounce-alpha-up;
+	animation-duration: 1.4s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+@keyframes bounce-alpha-right {
+	0% {
+		opacity: 1;
+		transform: translateX(0) scale(1);
+	}
+	25% {
+		opacity: 0;
+		transform: translateX(10px) scale(.9);
+	}
+	26% {
+		opacity: 0;
+		transform: translateX(-10px) scale(.9);
+	}
+	55% {
+		opacity: 1;
+		transform: translateX(0) scale(1);
+	}
+}
+
+.bounce-alpha-right {
+	animation-name: bounce-alpha-right;
+	animation-duration: 1.4s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+@keyframes bounce-alpha-circle {
+	from { transform: rotate(0deg) translateX(2px) rotate(0deg); }
+	to   { transform: rotate(360deg) translateX(2px) rotate(-360deg); }
+}
+
+.bounce-alpha-circle {
+	animation-name: bounce-alpha-circle;
+	animation-duration: 1.4s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+.box-shadow-wrapper {
+    border: 1px solid $gray-dark;
+    background-color: #FFFFFF;
+}
+
+input::-ms-reveal,
+input::-ms-clear {
+display: none;
+}
+
+
+
+.thread {
+    ul {
+        display: inline-flex;
+        align-items: center;
+        li {
+            display: inline-block;
+            padding-right: 5px;
+            a {
+                font-size: 17px;
+                color: $blue !important;
+                cursor: pointer;
+                &.not-link {
+                    color: $body-color !important;
+                    cursor: default;
+                }
+            }
+            img.thread-arrow-list {
+                margin-left: 8px;
+            }
+            
+            &:last-child {
+                padding-right: 0;
+                a {
+                    color: $body-color !important;
+                    font-weight: 500;
+                }
+            }
+           
+        }
+    }
+}
+
+.bold {
+    font-weight: 500;
+}
+
+

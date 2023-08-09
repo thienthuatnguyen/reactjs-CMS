@@ -1,18 +1,88 @@
-$white:#fff;
-$black:#000;
-$blue:#2672FB;
-$green:#04CB04 ;
-$red:#FB211E;
-$organe:#CB0704;
-$brown: #586687;
-$bodyColor: #3D4A68;
-$borderColor1: #ECEFF4;
-$borderColor2: #D3D9E6 ;
-$bodyColorGray: #D3D9E6;
-$yellow: #FAB800 ;
-$gray: #9C9C9C;
+//variables for color all app
+$red : #CB0704;
+$bg-red : rgba(203,7,4,0.5);
+
+$green: #148B14;
+$bg-green: rgba(20,139,20,0.5);
+
+$white: #ffffff;
+$yellow: #FDB00D;
+$black: #000000;
+$deep-ocean-blue: #111F42;
+
+$blue: #2672FB;
+$blue-dark: #194CA7;
+$blue-flash: #4494FB;
+$blue-medium: #2265DF;
+
+$gray: #E9ECF2;
+$gray-flash: #F4F5F8; // background input disabled
+$gray-dark: #D3D9E6; // border-color, disabled button
+$bg-gray: rgba(236,239,244,0.5);
+$gray-out: #A2B2D2;
+
+$body-color: #3D4A68;
+
+$brown: #707EA4;
+$brown-flash: #8B9DC1; // placeholder color, // disabled text
+
+$statusVeryHight: #900E11;
+$statusHight: #FB211E;
+$statusMedium: #FAB800;
+$statusLow: #C6CB04;
+$statusVeryLow: #E2E900;
+$statusUnKnown: #ECEFF4;
+$icon-hover: #2672FB;
 @mixin border-radius($radius) {
 	border-radius: $radius;
 	-webkit-border-radius: $radius;
 	-moz-border-radius: $radius;
+}
+@mixin box-shadow($left, $top, $radius, $color) {
+	box-shadow: $left $top $radius $color;
+	-webkit-box-shadow: $left $top $radius $color;
+	-moz-box-shadow: $left $top $radius $color;
+}
+
+@mixin transition($property, $duration, $easing: linear) {
+	transition: $property $duration $easing;
+	-webkit-transition: $property $duration $easing;
+	-moz-transition: $property $duration $easing;
+}
+
+$padding-top-main-page: 20px;
+$padding-bottom-main-page: 15px;
+$width-left-content-scan-result-page: 260px;
+$width-right-content-scan-result-page:100%;
+$padding-right-content-scan-result-page:30px;
+
+$spacers: (
+	0: 0,
+	5: 5,
+	7: 7,
+	10: 10,
+	15: 15,
+	20: 20,
+	25: 25,
+	30: 30,
+	35: 35,
+	40: 40,
+	45: 45,
+	50: 50,
+	55: 55,
+	60: 60,
+	65: 65,
+	70: 70,
+	75: 75,
+	80: 80,
+) !default;
+$input-height: 30px;
+.flex-row {
+	display: flex;
+}
+.w-200 {
+	width: 200px;
+}
+.fw-500 {
+	font-weight: bold;
 }
