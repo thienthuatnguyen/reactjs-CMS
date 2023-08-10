@@ -3,6 +3,8 @@ import "./SignUp.scss";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
+import validateService from '../../services/validateService';
+import authService from "../../services/authService";
 
 function SignUp() {
   const {
@@ -11,7 +13,18 @@ function SignUp() {
     formState: { errors }
   } = useForm();
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    authService.getUser().then(()=> {}).catch((error)=> {
+      console.log(error.message)
+    });
+    // authService.signUp(data).then(
+    //   ()=> {}
+    // ).catch(
+    //   (error) => {
+    //     console.log(error)
+    //   }
+    // ).finally(
+    //   ()=> {}
+    // );
   };
   const formValues = {
     userName: "",
@@ -48,8 +61,7 @@ function SignUp() {
             required: true,
             validate: {
               inCorrect: (value) => {
-                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                return re.test(value)
+                return validateService.validateEmail(value);
               },
             }
           })}

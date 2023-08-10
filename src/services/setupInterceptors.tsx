@@ -1,8 +1,8 @@
 import { baseURL } from '../utils/config'
+import { useNavigate } from 'react-router-dom';
 
 
-export const SetupInterceptors = http => {
-
+function SetupInterceptors(http)  {
     http.interceptors.request.use(
         config => {
             config.headers['token'] = `${localStorage.getItem('token')}`
@@ -28,8 +28,14 @@ export const SetupInterceptors = http => {
                 return Promise.reject(error)
             }
         }
+        if (resBaseURL === baseURL && status === 404) {
+            // window.location.href = '/404';
+
+        }
         return Promise.reject(error)
     })
 }
+
+
 
 export default SetupInterceptors
