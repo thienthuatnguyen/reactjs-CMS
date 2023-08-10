@@ -1,10 +1,10 @@
 import React from "react";
-import "./Login.scss";
+import "./SignUp.scss";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
 
-function Login() {
+function SignUp() {
   const {
     register,
     handleSubmit,
@@ -125,4 +125,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;

@@ -7,6 +7,7 @@ import PublicRoute from './containers/PublicRoute';
 import PrivateRoute from './containers/PrivateRoute';
 import { Header } from './components/Header';
 import Login from './containers/login/Login';
+import SignUp from './containers/signup/SignUp';
 function App() {
   return (
     <div className="wrapper-app">
@@ -21,6 +22,11 @@ function App() {
           <Route path="/login" element={
             <PublicRoute >
               <Login></Login>
+            </PublicRoute>} >
+          </Route>
+          <Route path="/sign-up" element={
+            <PublicRoute >
+              <SignUp></SignUp>
             </PublicRoute>} >
           </Route>
           <Route path="/add" element={
