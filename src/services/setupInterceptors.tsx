@@ -1,6 +1,4 @@
 import { baseURL } from '../utils/config'
-import { useNavigate } from 'react-router-dom';
-
 
 function SetupInterceptors(http)  {
     http.interceptors.request.use(
@@ -35,7 +33,5 @@ function SetupInterceptors(http)  {
         return Promise.reject(error)
     })
 }
-
-
 
 export default SetupInterceptors

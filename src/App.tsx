@@ -8,12 +8,18 @@ import PrivateRoute from './containers/PrivateRoute';
 import { Header } from './components/Header';
 import Login from './containers/login/Login';
 import SignUp from './containers/signup/SignUp';
+import UserPage from './containers/user/User';
+import UserDetailPage from './containers/user/UserDetail';
 function App() {
   return (
     <div className="wrapper-app">
       <Header></Header>
       <div className="App-intro">
         <Routes>
+          <Route path="/users">
+            <Route path=":userId" element={<UserDetailPage />} />
+            <Route path="/users" element={<UserPage />} />
+          </Route>
           <Route path="/" element={
             <PublicRoute >
               <Home></Home>
