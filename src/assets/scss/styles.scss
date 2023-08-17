@@ -68,6 +68,7 @@ body {
     scrollbar-face-color:$gray-dark;
     scrollbar-arrow-color: #fff;
     scrollbar-shadow-color: #fff;
+    margin: 0;
 }
 html, body {
     height: 100%;
@@ -218,5 +219,29 @@ display: none;
 .bold {
     font-weight: 500;
 }
-
+div#root {
+    width: 100%;
+    height: 100%;
+    .wrapper-app {
+        width: 100%;
+        height: 100%;
+        .main-page {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            .page-content {
+                overflow: auto;
+                flex: 1 1 100%;
+            }
+            header.header-app {
+                flex: 1 1 auto;
+            }
+            footer.footer-app {
+                flex: 1 1 auto;
+            }
+        }
+    }
+    
+}
 

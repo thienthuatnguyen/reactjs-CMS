@@ -5,54 +5,58 @@ import Home from './containers/Home';
 import NotFoundPage from './containers/NotFoundPage';
 import PublicRoute from './containers/PublicRoute';
 import PrivateRoute from './containers/PrivateRoute';
-import { Header } from './components/Header';
+import { Header } from './components/header/Header';
 import Login from './containers/login/Login';
 import SignUp from './containers/signup/SignUp';
 import UserPage from './containers/user/User';
 import UserDetailPage from './containers/user/UserDetail';
+import UseState from './containers/UseState';
 function App() {
   return (
     <div className="wrapper-app">
-      <Header></Header>
-      <div className="App-intro">
-        <Routes>
-          <Route path="/users">
-            <Route path=":userId" element={<UserDetailPage />} />
-            <Route path="/users" element={<UserPage />} />
-          </Route>
-          <Route path="/" element={
-            <PublicRoute >
-              <Home></Home>
-            </PublicRoute>} >
-          </Route>
-          <Route path="/login" element={
-            <PublicRoute >
-              <Login></Login>
-            </PublicRoute>} >
-          </Route>
-          <Route path="/sign-up" element={
-            <PublicRoute >
-              <SignUp></SignUp>
-            </PublicRoute>} >
-          </Route>
-          <Route path="/add" element={
-            <PrivateRoute >
-              <AddMore></AddMore>
-            </PrivateRoute>} >
-          </Route>
+      <Routes>
+        <Route path="/user">
+          <Route path=":userId" element={<UserDetailPage />} />
+          <Route path="/user" element={
+            <PrivateRoute>
+              <UserPage />
+            </PrivateRoute>} />
+        </Route>
+        <Route path="/" element={
+          <PublicRoute >
+            <Home></Home>
+          </PublicRoute>} >
+        </Route>
+        <Route path="/login" element={
+          <PublicRoute >
+            <Login></Login>
+          </PublicRoute>} >
+        </Route>
+        <Route path="/sign-up" element={
+          <PublicRoute >
+            <SignUp></SignUp>
+          </PublicRoute>} >
+        </Route>
+        <Route path="/demo-hook-use-state" element={
+          <PublicRoute >
+            <UseState></UseState>
+          </PublicRoute>} >
+        </Route>
+        <Route path="/add" element={
+          <PrivateRoute >
+            <AddMore></AddMore>
+          </PrivateRoute>} >
+        </Route>
 
-          <Route path="*" element={<NotFoundPage />}>
+        <Route path="*" element={<NotFoundPage />}>
 
-          </Route>
-          <Route path="/404" element={<NotFoundPage />}>
+        </Route>
+        <Route path="/404" element={<NotFoundPage />}>
 
-          </Route>
+        </Route>
 
-        </Routes>
-
-      </div>
+      </Routes>
     </div>
-
   );
 }
 
