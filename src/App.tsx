@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import AddMore from './containers/AddMore';
 import Home from './containers/Home';
 import NotFoundPage from './containers/NotFoundPage';
-import PublicRoute from './containers/PublicRoute';
+import PublicRoute from './containers/public-router/PublicRoute';
 import PrivateRoute from './containers/PrivateRoute';
 import { Header } from './components/header/Header';
 import Login from './containers/login/Login';
@@ -22,7 +22,7 @@ function App() {
               <UserPage />
             </PrivateRoute>} />
         </Route>
-        <Route path="/" element={
+        <Route path="/home" element={
           <PublicRoute >
             <Home></Home>
           </PublicRoute>} >

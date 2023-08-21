@@ -1,4 +1,41 @@
 @import '../../assets/scss/variables.scss';
-.wrapper-login-page {
+.login-form {
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 35px;
+    .phone-input {
+        margin-bottom: 30px;
+        .wrapper-input {
+            width: 255px;
+            position: relative;
+            margin-top: 10px;
+            img.icon-phone {
+                position: absolute;
+                left: 15px;
+                top: 10px;
+            }
+            input {
+                @include border-radius(50%);
+                border-radius: 18px !important;
+                text-align: center !important;
+                border: 1px solid $green !important;
+            }
+        }
+        
+    }
+    button.my-btn.btn-login {
+        background-color: $blue-dark;
+        font-size: 18px !important;
+        color: #fff;
+        text-transform: none;
+        width: 300px;
+    }
+    .link-signup {
+        margin-top: 20px;
+        a {
+            font-weight: bold;
+            color: $blue;
+        }
+    }
 }

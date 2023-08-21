@@ -216,8 +216,9 @@
     input.form-control {
         height: $input-height;
         width: 100%;
-        line-height: 30px !important;
-        color: $body-color
+        line-height: 36px !important;
+        color: $body-color;
+        box-sizing: border-box;
     }
 }
 .validate-error {
@@ -261,4 +262,9 @@
             margin-bottom: 10px;
         }
     }
+}
+
+button.my-btn {
+    height: 36px;
+    box-sizing: border-box;
 }

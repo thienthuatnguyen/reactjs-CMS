@@ -1,0 +1,24 @@
+import { Navigate } from "react-router-dom";
+import bgSignUp from "../../assets/images/bg-signup.png";
+import logo from "../../assets/images/logo.png";
+import "./PublicRoute.scss";
+function PublicRoute({ children }) {
+  // const auth = useAuth();
+  const auth = true;
+  return auth ?
+    <div className="main-page public-page">
+      <div className="box-wrapper">
+        <div className="left-content">
+          <h1 className="title">Welcome to</h1>
+          <div className="logo">
+            <img src={logo} alt="logo"></img>
+          </div>
+          {children}
+        </div>
+        <div className="right-content">
+          <img src={bgSignUp} alt="baner-signup"></img>
+        </div>
+      </div>
+    </div> : <Navigate to="/login" />;
+}
+export default PublicRoute;

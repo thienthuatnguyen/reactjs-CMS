@@ -1,38 +1,21 @@
 //variables for color all app
 $red : #CB0704;
-$bg-red : rgba(203,7,4,0.5);
 
-$green: #148B14;
-$bg-green: rgba(20,139,20,0.5);
-
+$green: #3b9a49;
 $white: #ffffff;
-$yellow: #FDB00D;
-$black: #000000;
-$deep-ocean-blue: #111F42;
-
-$blue: #2672FB;
-$blue-dark: #194CA7;
-$blue-flash: #4494FB;
-$blue-medium: #2265DF;
-
+$blue: #1191d3;
+$blue-dark: #1B4E89;
 $gray: #E9ECF2;
-$gray-flash: #F4F5F8; // background input disabled
-$gray-dark: #D3D9E6; // border-color, disabled button
-$bg-gray: rgba(236,239,244,0.5);
-$gray-out: #A2B2D2;
-
-$body-color: #3D4A68;
-
+$body-color: #212529;
+$bg-input: #F0F0F0;
+$border-input: #e8e8e8;
+$brown-flash: #1B4E89;
+$gray-dark: #D3D9E6; 
 $brown: #707EA4;
-$brown-flash: #8B9DC1; // placeholder color, // disabled text
+$bg-gray: #f2f6f9;
+$text-blue: #1C508A;
+$placeholder: #cfcdcd;
 
-$statusVeryHight: #900E11;
-$statusHight: #FB211E;
-$statusMedium: #FAB800;
-$statusLow: #C6CB04;
-$statusVeryLow: #E2E900;
-$statusUnKnown: #ECEFF4;
-$icon-hover: #2672FB;
 @mixin border-radius($radius) {
 	border-radius: $radius;
 	-webkit-border-radius: $radius;
@@ -76,7 +59,7 @@ $spacers: (
 	75: 75,
 	80: 80,
 ) !default;
-$input-height: 30px;
+$input-height: 36px;
 .flex-row {
 	display: flex;
 }

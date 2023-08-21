@@ -33,28 +33,28 @@ input.form-control, textarea.form-control {
   border-radius: 0px !important;
   -webkit-border-radius: 0px !important;
   -moz-border-radius: 0px !important;
-  border: 1px solid $gray-dark !important;
+  border: 1px solid $border-input !important;
   background-color: transparent !important;
   padding: 5px 10px !important;
   line-height: 20px !important;
 }
 input.form-control, textarea.form-control {
   &::-webkit-input-placeholder { /* Edge */
-    color: $brown-flash !important;
+    color: $placeholder !important;
   }
 
   &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: $brown-flash !important;
+    color: $placeholder !important;
   }
 
   &::placeholder {
-    color: $brown-flash !important;
+    color: $placeholder !important;
   }
 }
 
 
 input.form-control:disabled, textarea.form-control:disabled {
-  border: 1px solid $gray-dark !important;
+  border: 1px solid $border-input !important;
   background-color: #F4F5F8 !important;
   color: #707EA4 !important;
   cursor: not-allowed;
@@ -171,7 +171,7 @@ button.btn[disabled] {
 		top:50%;
 		transform: translateY(-50%);
 		right: 10px;
-		border-left: 1px solid $gray-dark;
+		border-left: 1px solid $border-input;
 		padding-left: 10px;
 	}
 	textarea ~ .form-suffix{

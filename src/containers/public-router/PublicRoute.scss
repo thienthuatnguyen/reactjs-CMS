@@ -1,0 +1,42 @@
+@import '../../assets/scss/variables.scss';
+
+.main-page.public-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .box-wrapper {
+    width: 1170px;
+    @include border-radius(20px);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    display: flex;
+
+    .left-content {
+      flex: 1 1 50%;
+      max-width: 50%;
+      min-width: 50%;
+      text-align: center;
+
+      h1.title {
+        font-size: 14px;
+        font-weight: 400;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 30px;
+        margin-top: 30px;
+      }
+    }
+
+    .right-content {
+      flex: 1 1 50%;
+      max-width: 50%;
+      min-width: 50%;
+
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
