@@ -1,0 +1,40 @@
+@import '../../assets/scss/variables.scss';
+.signup-auth-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 35px;
+    
+   .form-group.phone-input-glag {
+        width: 300px;
+        margin-top: 10px;
+   } 
+   .text-otp {
+    font-size: 12px;
+    text-align: left;
+    width: 300px;
+    margin-top: 10px;
+   }
+    .link-signup {
+        margin-top: 20px;
+        a {
+            font-weight: bold;
+            color: $blue;
+        }
+    }
+    .wrapper-input-code {
+        margin-bottom: 20px;
+        input {
+            height: 36px;
+            width: 36px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid $green;
+            margin-right: 17px;
+            text-align: center;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

@@ -45,6 +45,7 @@
     "history": "^5.3.0",
     "i18next-browser-languagedetector": "^7.0.2",
     "react": "^18.2.0",
+    "react-auth-code-input": "^3.2.1",
     "react-burger-menu": "^3.0.9",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",

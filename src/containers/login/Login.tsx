@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
 import phoneLogo from "../../assets/images/icon-phone.png";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const {
@@ -17,6 +18,8 @@ function Login() {
   const formValues = {
     phoneNumber: ''
   };
+  const navigate = useNavigate();
+
 
   return (
     <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
@@ -47,7 +50,7 @@ function Login() {
         Đăng nhập
       </Button>
       <div className="link-signup">
-        <span>Bạn chưa có tài khoản?</span>&nbsp;<a href="sign-up">Đăng ký</a>
+        <span>Bạn chưa có tài khoản?</span>&nbsp;<a href="javascript:void(0)" onClick={() => navigate("/sign-up")}>Đăng ký</a>
       </div>
     </form>
   );

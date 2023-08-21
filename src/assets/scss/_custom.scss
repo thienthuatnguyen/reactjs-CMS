@@ -8,6 +8,10 @@ ul, li, p {
 }
 a {
   text-decoration: none !important;
+  &:hover {
+    text-decoration: underline !important;
+
+  }
 }
 ul li {
   list-style: none;
