@@ -27,7 +27,7 @@
     margin-bottom: 5px;
    
     .label-config {
-        font-weight: 500;
+        font-weight: bold;
         margin-bottom: 0 !important;
     }
     img {
@@ -128,7 +128,7 @@
         width: 100%;
     }
     .label-config {
-        font-weight: 500;
+        font-weight: bold;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -219,6 +219,35 @@
         line-height: 36px !important;
         color: $body-color;
         box-sizing: border-box;
+        border-radius: 5px !important;
+    }
+    input.form-control.bg-gray {
+        background-color: #f0f0f0 !important;
+    }
+    button.btn-show-hide-password {
+        border: 0 !important;
+        padding: 0 !important;
+        background-color: transparent !important;
+        position: absolute;
+        right: 20px;
+        top: 8px;
+        cursor: pointer;
+        z-index: 1;
+        height: 20px;
+        width: 27px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &.phone-input-glag {
+        input.form-control {
+            padding-left: 55px !important;
+        }
+        img.glag {
+            position: absolute;
+            left: 10px;
+            top: 9px;
+        }
     }
 }
 .validate-error {
@@ -245,13 +274,13 @@
     color: $red !important;
 }
 .btn-transparent {
-    font-weight: 500;
+    font-weight: bold;
 }
 .group-setting {
     margin-bottom: 40px;
     .name-group {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: bold;
         margin-bottom: 20px;
     }   
     .form-group.have-description-text {

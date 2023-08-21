@@ -37,7 +37,6 @@ html, body {
     font-size: 14px;
     font-weight: normal;
     scroll-behavior: smooth;
-    font-weight: 400;
     overflow: hidden;
 }
 ::-webkit-scrollbar {
@@ -170,7 +169,7 @@ display: none;
                 padding-right: 0;
                 a {
                     color: $body-color !important;
-                    font-weight: 500;
+                    font-weight: bold;
                 }
             }
            
@@ -179,7 +178,7 @@ display: none;
 }
 
 .bold {
-    font-weight: 500;
+    font-weight: bold;
 }
 div#root {
     width: 100%;

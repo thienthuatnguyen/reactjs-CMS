@@ -1,4 +1,22 @@
 @import '../../assets/scss/variables.scss';
-.wrapper-signup-page {
+.signup-form {
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 35px;
+    .title-form {
+        margin-bottom: 10px;
+    }
+    .form-group  {
+        width: 300px;
+    }
+    .text-confirm {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        width: 100%;
+        a {
+            font-weight: bold;
+            color: $blue;
+        }
+    }
 }

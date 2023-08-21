@@ -1,46 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignUp.scss";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
 import validateService from '../../services/validateService';
 import authService from "../../services/authService";
+import showPassImage from "../../assets/images/show-pass.png";
+import hidePassImage from "../../assets/images/hide-pass.png";
+import vnGlag from "../../assets/images/vietnam-flag.png";
 
 function SignUp() {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
+  const togglePasswordConfirm = () => {
+    setConfirmPasswordShown(!confirmPasswordShown);
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm();
   const onSubmit = (data) => {
-    authService.getUser().then(()=> {}).catch((error)=> {
-      console.log(error.message)
-    });
-    // authService.signUp(data).then(
-    //   ()=> {}
-    // ).catch(
-    //   (error) => {
-    //     console.log(error)
-    //   }
-    // ).finally(
-    //   ()=> {}
-    // );
+
+
   };
   const formValues = {
     userName: "",
-    email: '',
+    codeIntroduce: '',
     passWord: "",
     confirmPassword: "",
     phoneNumber: ''
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
+      <div className="title-form">Vui lòng nhập đầy đủ thông tin</div>
+      <div className={`form-group phone-input-glag ${errors.phoneNumber ? 'has-error' : ''}`}>
+        <input type="tel" className="form-control bg-gray" id="phoneNumber" aria-describedby="phone-number-helper-text"
+          defaultValue={formValues.phoneNumber}
+          placeholder="Số điện thoại"
+          {...register("phoneNumber", {
+            required: true
+          })}
+        />
+        <img className="glag" src={vnGlag}></img>
+        <div className="form-control-feedback">
+          <span className="arrow"></span>
+          <img src={imgError} />
+          {errors.phoneNumber && <span id="phone-number-helper-text">Số điện thoại là bắt buộc.</span>}
+        </div>
+      </div>
+
+
       <div className={`form-group ${errors.userName ? 'has-error' : ''}`}>
-        <label className="label-config" htmlFor="userName">User Name</label>
-        <input type="text" className="form-control" id="userName" aria-describedby="user-name-helper-text"
+        <input type="text" className="form-control bg-gray" id="userName" aria-describedby="user-name-helper-text"
           defaultValue={formValues.userName}
-          placeholder="User Name"
+          placeholder="Nhập họ và tên"
           {...register("userName", {
             required: true
           })}
@@ -48,53 +69,35 @@ function SignUp() {
         <div className="form-control-feedback">
           <span className="arrow"></span>
           <img src={imgError} />
-          {errors.userName && <span id="user-name-helper-text">User name is required.</span>}
+          {errors.userName && <span id="user-name-helper-text">Họ và tên là bắt buộc.</span>}
         </div>
       </div>
 
-      <div className={`form-group ${errors.email ? 'has-error' : ''}`}>
-        <label className="label-config" htmlFor="email">Email</label>
-        <input type="text" className="form-control" id="email" aria-describedby="email-helper-text"
-          defaultValue={formValues.email}
-          placeholder="Email"
-          {...register("email", {
-            required: true,
-            validate: {
-              inCorrect: (value) => {
-                return validateService.validateEmail(value);
-              },
-            }
-          })}
-        />
-        <div className="form-control-feedback">
-          <span className="arrow"></span>
-          <img src={imgError} />
-          {errors.email && errors.email.type !== "inCorrect" && <span id="email-helper-text">Email is required.</span>}
-          {errors.email && errors.email.type === "inCorrect" && <span id="email-helper-text">Email is incorrect.</span>}
-        </div>
-      </div>
+
 
       <div className={`form-group ${errors.password ? 'has-error' : ''}`}>
-        <label className="label-config" htmlFor="password">Password</label>
-        <input type="password" className="form-control" id="password" aria-describedby="password-helper-text"
+        <input type={passwordShown ? "text" : "password"} className="form-control bg-gray" id="password" aria-describedby="password-helper-text"
           defaultValue={formValues.passWord}
-          placeholder="Password"
+          placeholder="Nhập mật khẩu"
           {...register("password", {
             required: true
           })}
         />
+        <button className="btn-show-hide-password" onClick={togglePassword} type="button">
+            <img src= {passwordShown ? showPassImage : hidePassImage} alt="icon-show-hide-pass"></img>
+        </button>
+
         <div className="form-control-feedback">
           <span className="arrow"></span>
           <img src={imgError} />
-          {errors.password && <span id="password-helper-text">Password is required.</span>}
+          {errors.password && <span id="password-helper-text">Mật khẩu là bắt buộc.</span>}
         </div>
       </div>
 
       <div className={`form-group ${errors.confirmPassword ? 'has-error' : ''}`}>
-        <label className="label-config" htmlFor="confirmPassword">Confirm Password</label>
-        <input type="password" className="form-control" id="confirmPassword" aria-describedby="confirm-password-helper-text"
+        <input type={confirmPasswordShown ? "text" : "password"} className="form-control bg-gray" id="confirmPassword" aria-describedby="confirm-password-helper-text"
           defaultValue={formValues.confirmPassword}
-          placeholder="Confirm Password"
+          placeholder="Nhập lại mật khẩu"
           {...register("confirmPassword", {
             required: true,
             validate: {
@@ -104,34 +107,35 @@ function SignUp() {
             }
           })}
         />
+        <button className="btn-show-hide-password" onClick={togglePasswordConfirm} type="button">
+            <img src= {confirmPasswordShown ? showPassImage : hidePassImage} alt="icon-show-hide-pass"></img>
+        </button>
         <div className="form-control-feedback">
           <span className="arrow"></span>
           <img src={imgError} />
-          {errors.confirmPassword && errors.confirmPassword.type !== 'inCorrect' && <span id="confirm-password-helper-text">Confirm password is required.</span>}
-          {errors.confirmPassword && errors.confirmPassword.type === 'inCorrect' && <span id="confirm-password-helper-text">Confirm password not matched.</span>}
+          {errors.confirmPassword && errors.confirmPassword.type !== 'inCorrect' && <span id="confirm-password-helper-text">Mật khẩu xác nhận là bắt buộc.</span>}
+          {errors.confirmPassword && errors.confirmPassword.type === 'inCorrect' && <span id="confirm-password-helper-text">Mật khẩu xác nhận chưa đúng.</span>}
         </div>
       </div>
 
 
-      <div className={`form-group ${errors.phoneNumber ? 'has-error' : ''}`}>
-        <label className="label-config" htmlFor="phoneNumber">Phone number</label>
-        <input type="tel" className="form-control" id="phoneNumber" aria-describedby="phone-number-helper-text"
-          defaultValue={formValues.phoneNumber}
-          placeholder="Phone number"
-          {...register("phoneNumber", {
-            required: true
+      <div className="form-group">
+        <input type="text" className="form-control bg-gray" id="codeIntroduce" aria-describedby="code-introduce-helper-text"
+          defaultValue={formValues.codeIntroduce}
+          placeholder="Nhập mã giới thiệu (nếu có)"
+          {...register("codeIntroduce", {
+            required: false
           })}
         />
-        <div className="form-control-feedback">
-          <span className="arrow"></span>
-          <img src={imgError} />
-          {errors.phoneNumber && <span id="phone-number-helper-text">Phone number is required.</span>}
-        </div>
       </div>
 
 
-      <Button variant="contained" color="primary" type="submit">
-        Sign up
+      <div className="text-confirm">
+        <span>Bằng việc đăng ký, bạn đã đồng ý với chúng tôi về</span><br/>&nbsp;<a target="_blank" href="/">Quy định sử dụng</a>&nbsp;và&nbsp;<a target="_blank" href="/">chính sách bảo mật</a>
+      </div>
+
+      <Button variant="contained" color="primary" type="submit" className="my-btn btn-login">
+        Hoàn tất đăng ký
       </Button>
     </form>
   );
