@@ -13,7 +13,7 @@ function Login() {
     formState: { errors }
   } = useForm();
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    navigate('/login-authention')
   };
   const formValues = {
     phoneNumber: ''

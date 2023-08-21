@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SignupAuthention.scss";
+import "./LoginAuthention.scss";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
@@ -7,7 +7,7 @@ import vnGlag from "../../assets/images/vietnam-flag.png";
 import AuthCode from "react-auth-code-input";
 import { useNavigate } from "react-router-dom";
 
-function SignupAuthention() {
+function LoginAuthention() {
   const navigate = useNavigate();
   const {
     register,
@@ -27,13 +27,13 @@ function SignupAuthention() {
   };
 
   return (
-    <form className="signup-auth-form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="login-auth-form" onSubmit={handleSubmit(onSubmit)}>
       <div className="phone-input">
         <label htmlFor="phoneNumber">
           Nhập mã OTP đã gửi về số điện thoại
         </label>
         <div className={`form-group phone-input-glag ${errors.phoneNumber ? 'has-error' : ''}`}>
-          <input type="tel" className="form-control bg-gray" id="phoneNumber" aria-describedby="phone-number-helper-text"
+          <input disabled type="tel" className="form-control bg-gray" id="phoneNumber" aria-describedby="phone-number-helper-text"
             defaultValue={formValues.phoneNumber}
             placeholder="Số điện thoại"
             {...register("phoneNumber", {
@@ -62,4 +62,4 @@ function SignupAuthention() {
   );
 }
 
-export default SignupAuthention;
+export default LoginAuthention;

@@ -11,7 +11,7 @@ import SignUp from './containers/signup/SignUp';
 import UserPage from './containers/user/User';
 import UserDetailPage from './containers/user/UserDetail';
 import UseState from './containers/UseState';
-import SignupAuthention from './containers/signup-authention/SignupAuthention';
+import LoginAuthention from './containers/login-authention/LoginAuthention';
 function App() {
   return (
     <div className="wrapper-app">
@@ -38,9 +38,9 @@ function App() {
             <SignUp></SignUp>
           </PublicRoute>} >
         </Route>
-        <Route path="/sign-up-authention" element={
+        <Route path="/login-authention" element={
           <PublicRoute >
-            <SignupAuthention></SignupAuthention>
+            <LoginAuthention></LoginAuthention>
           </PublicRoute>} >
         </Route>
         <Route path="/demo-hook-use-state" element={
