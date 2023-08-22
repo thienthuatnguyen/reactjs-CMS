@@ -4,7 +4,7 @@ import AddMore from './containers/AddMore';
 import Home from './containers/Home';
 import NotFoundPage from './containers/NotFoundPage';
 import PublicRoute from './containers/public-router/PublicRoute';
-import PrivateRoute from './containers/PrivateRoute';
+import PrivateRoute from './containers/private-router/PrivateRoute';
 import { Header } from './components/header/Header';
 import Login from './containers/login/Login';
 import SignUp from './containers/signup/SignUp';
@@ -49,6 +49,12 @@ function App() {
           </PublicRoute>} >
         </Route>
         <Route path="/add" element={
+          <PrivateRoute >
+            <AddMore></AddMore>
+          </PrivateRoute>} >
+        </Route>
+
+        <Route path="/ho-so-benh-nhan" element={
           <PrivateRoute >
             <AddMore></AddMore>
           </PrivateRoute>} >

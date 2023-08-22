@@ -8,10 +8,11 @@
   .box-wrapper {
     width: 1170px;
     @include border-radius(20px);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 12px;
     padding: 20px;
     display: flex;
-    height: 675px;
+    height: 650px;
+
     .left-content {
       flex: 1 1 50%;
       max-width: 50%;
@@ -36,6 +37,7 @@
       img {
         width: 100%;
         object-fit: cover;
+        height: 100%;
       }
     }
   }
@@ -48,4 +50,46 @@
     width: 300px;
     box-shadow: none !important;
   }
+
+  img.display-mobile {
+    display: none;
+  }
+}
+@media only screen and (max-width: 678px) {
+  .main-page.public-page {
+    overflow: auto;
+    .login-form {
+      margin-bottom: 40px;
+    }
+    img.display-mobile {
+      display: inline-block;
+    }
+    img.display-pc {
+      display: none;
+    }
+    .signup-form {
+      margin-bottom: 40px;
+    }
+    .login-auth-form {
+      margin-bottom: 40px;
+    }
+    .box-wrapper {
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 0;
+      .left-content {
+        background-color: $bg-gray;
+      }
+      .left-content,
+      .right-content {
+        flex: 1 1 100%;
+        max-width: 100%;
+        min-width: 100%;
+      }
+    }
+  }
+
 }

@@ -1,5 +1,7 @@
 import { Navigate } from "react-router-dom";
 import bgSignUp from "../../assets/images/bg-signup.png";
+import bgSignUpMobile from "../../assets/images/bg-signup-mobile.png";
+
 import logo from "../../assets/images/logo.png";
 import "./PublicRoute.scss";
 function PublicRoute({ children }) {
@@ -16,7 +18,8 @@ function PublicRoute({ children }) {
           {children}
         </div>
         <div className="right-content">
-          <img src={bgSignUp} alt="baner-signup"></img>
+          <img className="display-pc" src={bgSignUp} alt="baner-signup"></img>
+          <img className="display-mobile" src={bgSignUpMobile} alt="baner-signup"></img>
         </div>
       </div>
     </div> : <Navigate to="/login" />;
