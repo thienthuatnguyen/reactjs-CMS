@@ -1,0 +1,13 @@
+@import '../../assets/scss/variables.scss';
+
+.wrapper-banner {
+    .carousel .control-dots .dot {
+        box-shadow: none;
+        background-color: transparent;
+        border: 1px solid $blue-dark;
+        opacity: 1 !important;
+        &.selected {
+            background-color: $blue-dark;
+        }
+    }
+}

@@ -71,6 +71,28 @@ footer.footer-app {
     margin: 0;
     margin-bottom: 20px;
   }
+  .feedback-form {
+    button.btn-send-feedback {
+      background-color: #fff !important;
+      color: $body-color !important;
+      text-transform: none;
+    }
+    .form-group {
+      margin-bottom: 10px !important;
+    }
+    .form-group input.form-control, .form-group textarea.form-control {
+      border-radius: 0 !important;
+      border: none !important;
+      border-bottom: 1px solid #fff !important;
+      color: #fff !important;
+      padding: 5px 0 !important;
+      
+    }
+    .form-group input.form-control {
+      height: 30px !important;
+      line-height: 30px !important;
+    }
+  }
 
   @media only screen and (max-width: 1024px) {}
 }

@@ -209,3 +209,10 @@ div#root {
 .container-app {
     width: 1320px;
 }
+@media only screen and (max-width: 768px) {
+
+    .container-app {
+        max-width: 768px;
+        padding: 0 10px;
+    }
+}

@@ -17,7 +17,7 @@ export function Footer() {
   const formValues = {
     userName: "",
     phoneNumber: '',
-    comment: ''
+    message: ''
   };
   return (
     <footer className="footer-app">
@@ -60,9 +60,12 @@ export function Footer() {
             </h2>
             <form onSubmit={handleSubmit(onSubmit)} className="feedback-form">
               <div className={`form-group ${errors.userName ? 'has-error' : ''}`}>
-                <input type="text" className="form-control bg-gray" id="userName" aria-describedby="user-name-helper-text"
+                <label className="label-config" htmlFor="userName">
+                  Tên:
+                </label>
+                <input type="text" className="form-control" id="userName" aria-describedby="user-name-helper-text"
                   defaultValue={formValues.userName}
-                  placeholder="Nhập họ và tên"
+                  placeholder=""
                   {...register("userName", {
                     required: true
                   })}
@@ -70,13 +73,16 @@ export function Footer() {
                 <div className="form-control-feedback">
                   <span className="arrow"></span>
                   <img src={imgError} />
-                  {errors.userName && <span id="user-name-helper-text">Họ và tên là bắt buộc.</span>}
+                  {errors.userName && <span id="user-name-helper-text">Tên là bắt buộc.</span>}
                 </div>
               </div>
               <div className={`form-group  ${errors.phoneNumber ? 'has-error' : ''}`}>
-                <input type="tel" className="form-control bg-gray" id="phoneNumber" aria-describedby="phone-number-helper-text"
+                <label className="label-config" htmlFor="phoneNumber">
+                  Số điện thoại:
+                </label>
+                <input type="tel" className="form-control" id="phoneNumber" aria-describedby="phone-number-helper-text"
                   defaultValue={formValues.phoneNumber}
-                  placeholder="Số điện thoại"
+                  placeholder=""
                   {...register("phoneNumber", {
                     required: true
                   })}
@@ -87,19 +93,19 @@ export function Footer() {
                   {errors.phoneNumber && <span id="phone-number-helper-text">Số điện thoại là bắt buộc.</span>}
                 </div>
               </div>
-              
-              <div className={`form-group  ${errors.phoneNumber ? 'has-error' : ''}`}>
-                <input type="tel" className="form-control bg-gray" id="phoneNumber" aria-describedby="phone-number-helper-text"
-                  defaultValue={formValues.phoneNumber}
-                  placeholder="Số điện thoại"
-                  {...register("phoneNumber", {
+
+              <div className={`form-group`}>
+                <label className="label-config" htmlFor="message">
+                  Lời nhắn:
+                </label>
+                <textarea className="form-control" id="message" aria-describedby="message-helper-text"
+                  defaultValue={formValues.message}
+                  placeholder=""
+                  {...register("message", {
                     required: false
                   })}
                 />
               </div>
-
-
-
               <Button variant="contained" color="primary" type="submit" className="my-btn btn-send-feedback">
                 Gửi đi
               </Button>

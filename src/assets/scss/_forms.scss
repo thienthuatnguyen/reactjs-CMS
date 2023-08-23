@@ -27,7 +27,7 @@
     margin-bottom: 5px;
    
     .label-config {
-        font-weight: bold;
+        // font-weight: bold;
         margin-bottom: 0 !important;
     }
     img {
@@ -128,7 +128,7 @@
         width: 100%;
     }
     .label-config {
-        font-weight: bold;
+        // font-weight: bold;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -220,6 +220,9 @@
         color: $body-color;
         box-sizing: border-box;
         border-radius: 5px !important;
+    }
+    textarea.form-control {
+        width: 100%;
     }
     input.form-control.bg-gray {
         background-color: #f0f0f0 !important;
