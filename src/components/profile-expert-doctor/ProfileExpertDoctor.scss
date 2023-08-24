@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
+    margin-bottom: 30px;
     .wave-box {
         background-image: url('../../assets/images/wave-1.svg'), url('../../assets/images/wave-2.svg'), url('../../assets/images/wave-3.svg'), url('../../assets/images/wave-bg.svg');
         background-repeat: repeat-x, repeat-x, repeat-x;

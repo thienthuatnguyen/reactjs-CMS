@@ -1,5 +1,7 @@
 import "./BannerDepartment.scss";
 import icon from "../../assets/images/icon-khoasan.svg";
+import doctorIcon from "../../assets/images/icon-doctor.png";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -12,17 +14,21 @@ export function BannerDepartment() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    arrows: false
+    arrows: false,
+    className: 'my-department-slider'
   };
   const getBanner = images => images.map((item, index) => (
-    <div key={index} className="item-banner">
-      <div className="top-content">
-        <img src={icon} alt="image-banner" />
-      </div>
-      <div className="bottom-content">
-        <div className="title">Khoa chấn thương chỉnh hình</div>
-        <div className="number-doctor">
-          1 Bác sĩ
+    <div key={index} className="wrapper-item-slider">
+      <div  className="item-banner">
+        <div className="top-content">
+          <img src={icon} alt="image-banner" />
+        </div>
+        <div className="bottom-content">
+          <div className="title">Khoa chấn thương</div>
+          <div className="number-doctor">
+            <img src= {doctorIcon} alt="icon"></img>
+            <span>1 Bác sĩ</span>
+          </div>
         </div>
       </div>
     </div>
@@ -32,7 +38,7 @@ export function BannerDepartment() {
   return (
     <div className="wrapper-banner-department">
       <div className="container-app">
-        <h2 className="title">Chuyên khoa y tế</h2>
+        <h1 className="title">Chuyên khoa y tế</h1>
         <Slider {...settings}>
           {getBanner(images)}
         </Slider>

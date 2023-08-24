@@ -2,8 +2,9 @@ import "./Banner.scss";
 import banner1 from "../../assets/images/banner-1.jpg";
 import banner2 from "../../assets/images/banner-2.jpg";
 import banner3 from "../../assets/images/banner-3.jpg";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 export function Banner() {
   const images = [banner1, banner2, banner3]
@@ -13,11 +14,23 @@ export function Banner() {
     </div>
   ));
 
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+    fade: true,
+    className : 'my-top-slider'
+  };
+
   return (
     <div className="wrapper-banner">
-      <Carousel autoPlay = {true} infiniteLoop = {true} showThumbs = {false} showArrows = {false} showStatus = {false}>
+      <Slider {...settings}>
         {getBanner(images)}
-      </Carousel>
+        </Slider>
     </div>
   )
 }

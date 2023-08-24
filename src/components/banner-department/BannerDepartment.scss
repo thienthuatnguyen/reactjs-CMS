@@ -3,15 +3,76 @@
 .wrapper-banner-department {
     display: flex;
     justify-content: center;
-    .carousel .control-dots .dot {
-        box-shadow: none;
-        background-color: transparent;
-        border: 1px solid $blue-dark;
-        opacity: 1 !important;
-        width: 10px;
-        height: 10px;
-        &.selected {
-            background-color: $blue-dark;
+    margin-bottom: 30px;
+    h1.title {
+        text-align: center;
+        font-size: 30px;
+        color: $blue-dark;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+    }
+    .my-department-slider {
+        padding-bottom: 80px;
+        ul.slick-dots {
+            bottom: 20px !important;
+            li {
+                button {
+                    box-shadow: none;
+                    background-color: transparent;
+                    border: 1px solid $blue-dark !important;
+                    opacity: 1 !important;
+                    width: 10px;
+                    height: 10px;
+                    @include border-radius(50%);
+                    &::before {
+                        display: none;
+                    }
+                }
+                &.slick-active {
+                    button {
+                        background-color: $blue-dark;
+                    }
+                }
+            }
         }
     }
+    .wrapper-item-slider {
+        .item-banner {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            .top-content {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                img {
+                    width: 60px;
+                }
+            }
+            .bottom-content {
+                margin-top: 60px;
+                .title {
+                    font-size: 24px;
+                    color: $blue-dark;
+                    font-weight: bold;
+                    text-align: center;
+                }
+                .number-doctor {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 10px;
+                    img {
+                        margin-right: 30px;
+                    }
+                }
+            }
+        }
+    }
+    
 }

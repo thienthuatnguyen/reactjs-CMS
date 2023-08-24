@@ -3,54 +3,67 @@
 .wrapper-banner-doctor {
     display: flex;
     justify-content: center;
+    margin-bottom: 30px;
     .item-banner {
         display: flex;
         padding: 0 120px;
+
         .left-content {
             flex: 1 1 40%;
             min-width: 40%;
+
             img {
                 width: 100%;
                 object-fit: cover;
             }
         }
+
         .right-content {
             flex: 1 1 auto;
             padding-left: 70px;
             text-align: left;
+
             .title {
                 font-size: 28px;
                 font-weight: normal;
                 margin: 0;
                 margin-bottom: 10px;
             }
+
             .description {
                 font-size: 20px;
                 margin-top: 15px;
             }
+
             p.job-title {
                 padding: 5px 0 5px 40px;
+
                 &.certificate {
                     background: url('../../assets/images/edu-ico.png') no-repeat left center;
                     background-size: 26px 26px;
                     margin-bottom: 10px;
 
                 }
+
                 &.location-work {
                     background: url('../../assets/images/pin-ico.png') no-repeat left center;
                     background-size: 26px 26px;
 
                 }
             }
+
             .group-btn {
                 margin-top: 50px;
+
                 button.my-btn {
                     font-size: 24px !important;
                     height: 54px;
                     padding-left: 20px;
                     padding-right: 20px;
+
                     &:first-child {
                         margin-right: 50px;
+
                         &::before {
                             position: absolute;
                             content: '';
@@ -66,15 +79,64 @@
             }
         }
     }
-    .carousel .control-dots .dot {
-        box-shadow: none;
-        background-color: transparent;
-        border: 1px solid $blue-dark;
-        opacity: 1 !important;
-        width: 10px;
-        height: 10px;
-        &.selected {
-            background-color: $blue-dark;
+
+    .my-doctor-slider {
+        padding-bottom: 80px;
+        ul.slick-dots {
+            bottom: 20px !important;
+            li {
+                button {
+                    box-shadow: none;
+                    background-color: transparent;
+                    border: 1px solid $blue-dark !important;
+                    opacity: 1 !important;
+                    width: 10px;
+                    height: 10px;
+                    @include border-radius(50%);
+                    &::before {
+                        display: none;
+                    }
+                }
+                &.slick-active {
+                    button {
+                        background-color: $blue-dark;
+                    }
+                }
+            }
+        }
+        button.slick-arrow.slick-prev {
+            width: 30px;
+            height: 42px;
+            background: url('../../assets/images/slider-left-arow.svg');
+            background-size: 17px 23px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 0;
+            border: none;
+            left: 0;
+            opacity: 1;
+            z-index: 1;
+            &::before {
+                display: none;
+            }
+        }
+
+        button.slick-arrow.slick-next {
+            width: 30px;
+            height: 42px;
+            background: url('../../assets/images/slider-left-arow.svg');
+            background-size: 17px 23px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 0;
+            border: none;
+            right: 0;
+            opacity: 1;
+            z-index: 1;
+            transform: rotate(180deg);
+            &::before {
+                display: none;
+            }
         }
     }
 }
