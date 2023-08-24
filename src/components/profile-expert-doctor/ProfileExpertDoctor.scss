@@ -1,0 +1,94 @@
+@import '../../assets/scss/variables.scss';
+
+.wrapper-profile-expert-doctor {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .wave-box {
+        background-image: url('../../assets/images/wave-1.svg'), url('../../assets/images/wave-2.svg'), url('../../assets/images/wave-3.svg'), url('../../assets/images/wave-bg.svg');
+        background-repeat: repeat-x, repeat-x, repeat-x;
+        height: 155px;
+        background-size: 2103.5px 135.5px, 2099.5px 144.5px, 2103.5px 143.5px, 120.5px 155.5px;
+        background-position-y: 15px, 0, 11px, 0;
+        -webkit-animation: wave 10s linear infinite;
+        animation: wave 10s linear infinite;
+        width: 100%;
+
+        h1.title {
+            text-align: center;
+            font-size: 30px;
+            color: #fff;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    @-webkit-keyframes wave {
+        from {
+            -webkit-background-position-x: 0, 0, 0, 0;
+        }
+
+        to {
+            -webkit-background-position-x: 3156px, 2102px, 1052px, 0;
+        }
+    }
+
+    @keyframes wave {
+        from {
+            background-position-x: 0, 0, 0, 0;
+        }
+
+        to {
+            background-position-x: 3156px, 2102px, 1052px, 0;
+        }
+    }
+
+    .wrapper-column {
+        background-color: #fff;
+        padding: 0 15px 15px 15px;
+        @include border-radius(5px);
+        img {
+            max-width: 100%;
+        }
+
+        .name {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0 15px 0;
+        }
+        .info-job {
+            margin-bottom: 40px;
+            li {
+                font-size: 16px;
+                padding: 10px 0 10px 30px;
+                &.department {
+                    background: url('../../assets/images/chuyen-khoa-icon.svg') no-repeat left center;
+                    background-size: 17px 20px;
+
+                }
+                &.hospital {
+                    background: url('../../assets/images/pin-gray-icon.svg') no-repeat left center;
+                    background-size: 17px 26px;
+
+                }
+                &.experience {
+                    background: url('../../assets/images/badge-gray-icon.svg') no-repeat left center;
+                    background-size: 17px 20px;
+
+                }
+            }
+        }
+        button.btn-green {
+            width: 100%;
+        }
+    }
+
+    .list-data {
+        margin-top: 30px;
+    }
+}

@@ -62,12 +62,12 @@ export function Header() {
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-vn">Bác sĩ VN</NavLink>
               </li>
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-singapore">Bác sĩ Singapore</NavLink>
-              </li>
+              </li> */}
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/tam-nhin-su-menh">Tầm nhìn sứ mệnh</NavLink>
               </li>

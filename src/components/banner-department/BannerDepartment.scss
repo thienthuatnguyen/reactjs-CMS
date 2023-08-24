@@ -1,6 +1,8 @@
 @import '../../assets/scss/variables.scss';
 
-.wrapper-banner {
+.wrapper-banner-department {
+    display: flex;
+    justify-content: center;
     .carousel .control-dots .dot {
         box-shadow: none;
         background-color: transparent;

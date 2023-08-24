@@ -12,6 +12,7 @@ import UserPage from './containers/user/User';
 import UserDetailPage from './containers/user/UserDetail';
 import UseState from './containers/UseState';
 import LoginAuthention from './containers/login-authention/LoginAuthention';
+import HomePage from './containers/home-page/HomePage';
 function App() {
   return (
     <div className="wrapper-app">
@@ -23,10 +24,10 @@ function App() {
               <UserPage />
             </PrivateRoute>} />
         </Route>
-        <Route path="/home" element={
-          <PublicRoute >
-            <Home></Home>
-          </PublicRoute>} >
+        <Route path="/" element={
+          <PrivateRoute >
+            <HomePage></HomePage>
+          </PrivateRoute>} >
         </Route>
         <Route path="/login" element={
           <PublicRoute >

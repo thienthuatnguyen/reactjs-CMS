@@ -34,7 +34,7 @@ body {
 }
 html, body {
     height: 100%;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: normal;
     scroll-behavior: smooth;
     overflow: hidden;
@@ -215,4 +215,33 @@ div#root {
         max-width: 768px;
         padding: 0 10px;
     }
+}
+button.my-btn {
+    height: 36px;
+    box-sizing: border-box;
+    text-transform: none;
+}
+button.my-btn.btn-green.btn-contained {
+    background-color: $green;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+}
+button.my-btn.btn-blue.btn-contained {
+    background-color: $blue-dark;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+}
+button.my-btn.btn-blue.btn-outlined {
+    background-color: #fff;
+    color: $blue-dark;
+    border: 1px solid $blue-dark;
+    box-shadow: none;
+}
+button.my-btn.btn-green.btn-outlined {
+    background-color: #fff;
+    color: $blue-dark;
+    border: 1px solid $green;
+    box-shadow: none;
 }
