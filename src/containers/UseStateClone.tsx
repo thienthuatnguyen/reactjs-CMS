@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import demoReducer, { shareState } from "../reducers/demoReducer";
 
 function UseStateClone(props: any) {
-    const [state, dispatch] = useReducer(demoReducer, shareState);
+    const [state] = useReducer(demoReducer, shareState);
     return (
       <>
       at other component

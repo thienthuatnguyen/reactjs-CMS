@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import "./HomePage.scss";
-import { useForm } from "react-hook-form";
 import iconDoctor from "../../assets/images/icon-bacsi.png";
 import iconYta from "../../assets/images/icon-yta.png";
 import iconPartner from "../../assets/images/icon-contact.png";
 
 import { Button, FormControl, MenuItem, Select } from "@material-ui/core";
-import vnGlag from "../../assets/images/vietnam-flag.png";
-import AuthCode from "react-auth-code-input";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { BannerDoctor } from "../../components/banner-doctor/BannerDoctor";
 import { BannerDepartment } from "../../components/banner-department/BannerDepartment";
 import { ProfileExpertDoctor } from "../../components/profile-expert-doctor/ProfileExpertDoctor";
 
 function HomePage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     console.log('change')
   }

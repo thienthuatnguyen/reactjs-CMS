@@ -21,7 +21,7 @@ export function BannerDepartment() {
     <div key={index} className="wrapper-item-slider">
       <div  className="item-banner">
         <div className="top-content">
-          <img src={icon} alt="image-banner" />
+          <img src={icon} alt="banner" />
         </div>
         <div className="bottom-content">
           <div className="title">Khoa chấn thương</div>

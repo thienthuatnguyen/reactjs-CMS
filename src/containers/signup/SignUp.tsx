@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./SignUp.scss";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
-import validateService from '../../services/validateService';
-import authService from "../../services/authService";
 import showPassImage from "../../assets/images/show-pass.png";
 import hidePassImage from "../../assets/images/hide-pass.png";
 import vnGlag from "../../assets/images/vietnam-flag.png";
@@ -49,10 +47,10 @@ function SignUp() {
             required: true
           })}
         />
-        <img className="glag" src={vnGlag}></img>
+        <img className="glag" src={vnGlag} alt="icon-glag"></img>
         <div className="form-control-feedback">
           <span className="arrow"></span>
-          <img src={imgError} />
+          <img src={imgError} alt="error"/>
           {errors.phoneNumber && <span id="phone-number-helper-text">Số điện thoại là bắt buộc.</span>}
         </div>
       </div>
@@ -68,7 +66,7 @@ function SignUp() {
         />
         <div className="form-control-feedback">
           <span className="arrow"></span>
-          <img src={imgError} />
+          <img src={imgError} alt="error"/>
           {errors.userName && <span id="user-name-helper-text">Họ và tên là bắt buộc.</span>}
         </div>
       </div>
@@ -89,7 +87,7 @@ function SignUp() {
 
         <div className="form-control-feedback">
           <span className="arrow"></span>
-          <img src={imgError} />
+          <img src={imgError} alt="error"/>
           {errors.password && <span id="password-helper-text">Mật khẩu là bắt buộc.</span>}
         </div>
       </div>
@@ -112,7 +110,7 @@ function SignUp() {
         </button>
         <div className="form-control-feedback">
           <span className="arrow"></span>
-          <img src={imgError} />
+          <img src={imgError} alt="error"/>
           {errors.confirmPassword && errors.confirmPassword.type !== 'inCorrect' && <span id="confirm-password-helper-text">Mật khẩu xác nhận là bắt buộc.</span>}
           {errors.confirmPassword && errors.confirmPassword.type === 'inCorrect' && <span id="confirm-password-helper-text">Mật khẩu xác nhận chưa đúng.</span>}
         </div>

@@ -6,7 +6,7 @@ export function ProfileExpertDoctor() {
   const getItem = data => data.map((item, index) => (
     <Grid key = {index} item xs={12} sm={4} md={3}>
       <div className="wrapper-column">
-        <img src={imgDoctor} alt="image"></img>
+        <img src={imgDoctor} alt="img"></img>
         <div className="name">GS BS Nguyen Thien Thuat</div>
         <ul className="info-job">
           <li className="department">Sản khoa</li>

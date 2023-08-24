@@ -72,7 +72,7 @@ export function Footer() {
                 />
                 <div className="form-control-feedback">
                   <span className="arrow"></span>
-                  <img src={imgError} />
+                  <img src={imgError} alt="error" />
                   {errors.userName && <span id="user-name-helper-text">Tên là bắt buộc.</span>}
                 </div>
               </div>
@@ -89,7 +89,7 @@ export function Footer() {
                 />
                 <div className="form-control-feedback">
                   <span className="arrow"></span>
-                  <img src={imgError} />
+                  <img src={imgError} alt="error"/>
                   {errors.phoneNumber && <span id="phone-number-helper-text">Số điện thoại là bắt buộc.</span>}
                 </div>
               </div>

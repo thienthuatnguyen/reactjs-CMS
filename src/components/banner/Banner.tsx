@@ -10,7 +10,7 @@ export function Banner() {
   const images = [banner1, banner2, banner3]
   const getBanner = images => images.map((item, index) => (
     <div key={index} className="item-banner">
-      <img src={item} alt="image-banner" />
+      <img src={item} alt="banner" />
     </div>
   ));
 

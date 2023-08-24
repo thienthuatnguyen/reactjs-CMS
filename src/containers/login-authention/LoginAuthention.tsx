@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./LoginAuthention.scss";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
@@ -21,7 +20,7 @@ function LoginAuthention() {
     phoneNumber: ''
   };
 
-  const [result, setResult] = useState();
+  // const [result, setResult] = useState();
   const handleOnChange = (res: string) => {
     // setResult(res);
   };
@@ -40,10 +39,10 @@ function LoginAuthention() {
               required: true
             })}
           />
-          <img className="glag" src={vnGlag}></img>
+          <img className="glag" src={vnGlag} alt="icon-glag"></img>
           <div className="form-control-feedback">
             <span className="arrow"></span>
-            <img src={imgError} />
+            <img src={imgError} alt="error" />
             {errors.phoneNumber && <span id="phone-number-helper-text">Số điện thoại là bắt buộc.</span>}
           </div>
         </div>
@@ -56,7 +55,7 @@ function LoginAuthention() {
       </Button>
       <div className="text-otp">&gt; Bạn không nhận được mã OTP ?</div>
       <div className="link-signup">
-        <span>Nếu bạn đã có tài khoản,</span>&nbsp;vui lòng đăng nhập&nbsp;<a href="javascript:void(0)" onClick={() => navigate("/login")}>tại đây</a>
+        <span>Nếu bạn đã có tài khoản,</span>&nbsp;vui lòng đăng nhập&nbsp;<a href="/login" onClick={() => navigate("/login")}>tại đây</a>
       </div>
     </form>
   );

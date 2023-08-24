@@ -20,7 +20,7 @@ export function BannerDoctor() {
     <div key={index} className="wrapper-item-slider">
       <div  className="item-banner">
         <div className="left-content">
-          <img src={bannerDoctor} alt="image-banner" />
+          <img src={bannerDoctor} alt="banner" />
         </div>
         <div className="right-content">
           <h1 className="title">GS.TS Nguyễn Thiện Thuật</h1>

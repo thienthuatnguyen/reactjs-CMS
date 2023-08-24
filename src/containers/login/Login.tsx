@@ -39,7 +39,7 @@ function Login() {
             />
             <div className="form-control-feedback">
               <span className="arrow"></span>
-              <img src={imgError} />
+              <img src={imgError} alt="error"/>
               {errors.phoneNumber && <span id="phone-number-helper-text">Số điện thoại là bắt buộc.</span>}
             </div>
           </div>
@@ -50,7 +50,7 @@ function Login() {
         Đăng nhập
       </Button>
       <div className="link-signup">
-        <span>Bạn chưa có tài khoản?</span>&nbsp;<a href="javascript:void(0)" onClick={() => navigate("/sign-up")}>Đăng ký</a>
+        <span>Bạn chưa có tài khoản?</span>&nbsp;<a href="/sign-up" onClick={() => navigate("/sign-up")}>Đăng ký</a>
       </div>
     </form>
   );
