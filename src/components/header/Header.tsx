@@ -24,11 +24,12 @@ export function Header() {
       <div className="wrapper-menu-mobile">
         <div className="container-app">
           <div className="logo">
-            <a href="/ho-so-benh-nhan">
+            <NavLink to="/">
               <img alt="logo" src={logoMobile}></img>
-            </a>
+            </NavLink>
           </div>
           <Menu id={"sidebar"} className={"side-menu-mobile"} burgerButtonClassName={"button-menu-mobile"}>
+            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/">Trang chủ</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/ho-so-benh-nhan">Hồ sơ bệnh nhân</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
@@ -45,20 +46,23 @@ export function Header() {
       <div className="wrapper-menu-pc">
         <div className="container-app">
           <div className="logo">
-            <a href="/ho-so-benh-nhan">
+            <NavLink to="/">
               <img alt="logo" src={logo}></img>
-            </a>
+            </NavLink>
 
           </div>
           <div className="right-content">
             <ul className="menu-pc">
+              <li>
+                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/">Trang chủ</NavLink>
+              </li>
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/ho-so-benh-nhan">Hồ sơ bệnh nhân</NavLink>
               </li>
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
               </li>
-              
+
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
               </li>

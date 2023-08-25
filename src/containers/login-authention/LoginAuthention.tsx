@@ -1,10 +1,9 @@
 import "./LoginAuthention.scss";
 import { useForm } from "react-hook-form";
-import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
 import vnGlag from "../../assets/images/vietnam-flag.png";
 import AuthCode from "react-auth-code-input";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function LoginAuthention() {
   const navigate = useNavigate();
@@ -14,11 +13,13 @@ function LoginAuthention() {
     formState: { errors }
   } = useForm();
   const onSubmit = (data) => {
-    alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
+    handleContinue();
   };
   const formValues = {
-    phoneNumber: ''
+    phoneNumber: '0938225141'
   };
+  const handleContinue = () => navigate(`/`);
 
   // const [result, setResult] = useState();
   const handleOnChange = (res: string) => {
@@ -31,20 +32,15 @@ function LoginAuthention() {
         <label htmlFor="phoneNumber">
           Nhập mã OTP đã gửi về số điện thoại
         </label>
-        <div className={`form-group phone-input-glag ${errors.phoneNumber ? 'has-error' : ''}`}>
-          <input disabled type="tel" className="form-control bg-gray" id="phoneNumber" aria-describedby="phone-number-helper-text"
+        <div className={`form-group phone-input-glag`}>
+          <input disabled type="tel" className="form-control bg-gray" id="phoneNumber" 
             defaultValue={formValues.phoneNumber}
             placeholder="Số điện thoại"
             {...register("phoneNumber", {
-              required: true
+              required: false
             })}
           />
           <img className="glag" src={vnGlag} alt="icon-glag"></img>
-          <div className="form-control-feedback">
-            <span className="arrow"></span>
-            <img src={imgError} alt="error" />
-            {errors.phoneNumber && <span id="phone-number-helper-text">Số điện thoại là bắt buộc.</span>}
-          </div>
         </div>
       </div>
       <div className="wrapper-input-code">
@@ -55,7 +51,7 @@ function LoginAuthention() {
       </Button>
       <div className="text-otp">&gt; Bạn không nhận được mã OTP ?</div>
       <div className="link-signup">
-        <span>Nếu bạn đã có tài khoản,</span>&nbsp;vui lòng đăng nhập&nbsp;<a href="/login" onClick={() => navigate("/login")}>tại đây</a>
+        <span>Nếu bạn đã có tài khoản,</span>&nbsp;vui lòng đăng nhập&nbsp;<NavLink className= "link" to="/login">tại đây</NavLink>        
       </div>
     </form>
   );

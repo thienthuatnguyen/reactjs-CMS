@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
     .wave-box {
         background-image: url('../../assets/images/wave-1.svg'), url('../../assets/images/wave-2.svg'), url('../../assets/images/wave-3.svg'), url('../../assets/images/wave-bg.svg');
         background-repeat: repeat-x, repeat-x, repeat-x;
@@ -90,5 +90,13 @@
 
     .list-data {
         margin-top: 30px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .wrapper-profile-expert-doctor .wave-box h1.title {
+        font-size: 26px;
+    }
+    .wrapper-profile-expert-doctor .wrapper-column .name {
+        font-size: 20px;
     }
 }

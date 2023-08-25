@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import bgSignUp from "../../assets/images/bg-signup.png";
 import bgSignUpMobile from "../../assets/images/bg-signup-mobile.png";
 
@@ -13,7 +13,9 @@ function PublicRoute({ children }) {
         <div className="left-content">
           <h1 className="title">Welcome to</h1>
           <div className="logo">
-            <img src={logo} alt="logo"></img>
+            <NavLink to="/login">
+              <img src={logo} alt="logo"></img>
+            </NavLink>
           </div>
           {children}
         </div>

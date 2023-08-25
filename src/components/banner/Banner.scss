@@ -1,28 +1,15 @@
 @import '../../assets/scss/variables.scss';
 
 .wrapper-banner {
-    .my-top-slider {
-        ul.slick-dots {
-            bottom: 20px !important;
-            li {
-                button {
-                    box-shadow: none;
-                    background-color: transparent;
-                    border: 1px solid $blue-dark !important;
-                    opacity: 1 !important;
-                    width: 10px;
-                    height: 10px;
-                    @include border-radius(50%);
-                    &::before {
-                        display: none;
-                    }
-                }
-                &.slick-active {
-                    button {
-                        background-color: $blue-dark;
-                    }
-                }
-            }
+    .carousel .control-dots .dot {
+        box-shadow: none;
+        background-color: transparent;
+        border: 1px solid $blue-dark;
+        opacity: 1 !important;
+        width: 10px;
+        height: 10px;
+        &.selected {
+            background-color: $blue-dark;
         }
     }
 }

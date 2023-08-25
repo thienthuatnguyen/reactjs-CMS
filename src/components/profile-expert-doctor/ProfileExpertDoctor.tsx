@@ -2,7 +2,7 @@ import { Button, Grid } from "@material-ui/core";
 import "./ProfileExpertDoctor.scss";
 import imgDoctor from "../../assets/images/doctor-slider.jpg";
 export function ProfileExpertDoctor() {
-  const data = [1, 2, 3, 4, 5, 6, 6];
+  const data = [1, 2, 3, 4, 5, 6, 6,6];
   const getItem = data => data.map((item, index) => (
     <Grid key = {index} item xs={12} sm={4} md={3}>
       <div className="wrapper-column">

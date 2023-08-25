@@ -3,12 +3,15 @@ import "./HomePage.scss";
 import iconDoctor from "../../assets/images/icon-bacsi.png";
 import iconYta from "../../assets/images/icon-yta.png";
 import iconPartner from "../../assets/images/icon-contact.png";
-
+import addIcon from "../../assets/images/icon-user-create.png";
 import { Button, FormControl, MenuItem, Select } from "@material-ui/core";
 // import { useNavigate } from "react-router-dom";
 import { BannerDoctor } from "../../components/banner-doctor/BannerDoctor";
 import { BannerDepartment } from "../../components/banner-department/BannerDepartment";
 import { ProfileExpertDoctor } from "../../components/profile-expert-doctor/ProfileExpertDoctor";
+import Avatar from "@material-ui/core/Avatar";
+
+
 
 function HomePage() {
   // const navigate = useNavigate();
@@ -18,8 +21,24 @@ function HomePage() {
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
   };
+
   return (
     <div className="wrapper-home-page">
+      <div className="wrapper-create-profile">
+        <div className="container-app">
+          <Button
+            variant="contained"
+            className="my-btn btn-yellow btn-contained large-size btn-create-profile"
+            startIcon={<Avatar
+              src={
+                addIcon
+              }
+            />}
+          >
+            Tạo hồ sơ của bạn
+          </Button>
+        </div>
+      </div>
       <div className="wrapper-search-box">
         <div className="wrapper-item info-total">
           <div className="row-info-total">
@@ -51,6 +70,13 @@ function HomePage() {
             <form className="search-form" onSubmit={onSubmit}>
               <FormControl className={'my-wrapper-select'}>
                 <Select
+                  MenuProps={{
+                    anchorOrigin: {
+                      vertical: "bottom",
+                      horizontal: "left"
+                    },
+                    getContentAnchorEl: null
+                  }}
                   value={""}
                   onChange={handleChange}
                   displayEmpty
@@ -82,3 +108,4 @@ function HomePage() {
 }
 
 export default HomePage;
+

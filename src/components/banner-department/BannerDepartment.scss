@@ -76,3 +76,12 @@
     }
     
 }
+
+@media only screen and (max-width: 768px) {
+    .wrapper-banner-department h1.title {
+        font-size: 26px;
+    }
+    .wrapper-banner-department .wrapper-item-slider .item-banner .bottom-content .title {
+        font-size: 22px;
+    }
+}

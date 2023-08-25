@@ -56,8 +56,8 @@
                 margin-top: 50px;
 
                 button.my-btn {
-                    font-size: 24px !important;
-                    height: 54px;
+                    font-size: 20px !important;
+                    height: 46px;
                     padding-left: 20px;
                     padding-right: 20px;
 
@@ -138,5 +138,31 @@
                 display: none;
             }
         }
+    }
+}
+
+@media only screen and (max-width: 678px) {
+    .wrapper-banner-doctor .item-banner .left-content {
+        flex: 1 1 100%;
+        min-width: 100%;
+        img {
+            max-width: 100%;
+        }
+    }
+    .wrapper-banner-doctor .item-banner .right-content {
+        flex: 1 1 100%;
+        min-width: 100%;
+        padding: 0;
+        margin-top: 20px;
+    }
+    .wrapper-banner-doctor .item-banner {
+        flex-wrap: wrap;
+        padding: 0;
+    }
+    .wrapper-banner-doctor .item-banner .right-content .title {
+        font-size: 24px;
+    }
+    .wrapper-banner-doctor .item-banner .right-content .description {
+        font-size: 18px;
     }
 }

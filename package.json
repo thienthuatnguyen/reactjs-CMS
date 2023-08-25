@@ -5,34 +5,35 @@
     "author": "Thuat",
     "private": true,
     "dependencies": {
-      "@material-ui/core": "^4.12.4",
-      "@reduxjs/toolkit": "^1.9.5",
-      "@testing-library/jest-dom": "^5.16.5",
-      "@testing-library/react": "^13.4.0",
-      "@testing-library/user-event": "^13.5.0",
-      "@types/jest": "^27.5.2",
-      "@types/node": "^16.18.37",
-      "@types/react": "^18.2.14",
-      "@types/react-dom": "^18.2.6",
-      "axios": "^1.4.0",
-      "cross-env": "^7.0.3",
-      "history": "^5.3.0",
-      "i18next-browser-languagedetector": "^7.0.2",
-      "react": "^18.2.0",
-      "react-auth-code-input": "^3.2.1",
-      "react-burger-menu": "^3.0.9",
-      "react-device-detect": "^2.2.3",
-      "react-dom": "^18.2.0",
-      "react-hook-form": "^7.45.4",
-      "react-i18next": "^13.0.1",
-      "react-redux": "^8.1.1",
-      "react-router-dom": "^6.14.0",
-      "react-scripts": "5.0.1",
-      "react-slick": "^0.29.0",
-      "slick-carousel": "^1.8.1",
-      "styled-components": "^6.0.0-rc.5",
-      "typescript": "^4.9.5",
-      "web-vitals": "^2.1.4"
+        "@material-ui/core": "^4.12.4",
+        "@reduxjs/toolkit": "^1.9.5",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@types/jest": "^27.5.2",
+        "@types/node": "^16.18.37",
+        "@types/react": "^18.2.14",
+        "@types/react-dom": "^18.2.6",
+        "axios": "^1.4.0",
+        "cross-env": "^7.0.3",
+        "history": "^5.3.0",
+        "i18next-browser-languagedetector": "^7.0.2",
+        "react": "^18.2.0",
+        "react-auth-code-input": "^3.2.1",
+        "react-burger-menu": "^3.0.9",
+        "react-device-detect": "^2.2.3",
+        "react-dom": "^18.2.0",
+        "react-hook-form": "^7.45.4",
+        "react-i18next": "^13.0.1",
+        "react-redux": "^8.1.1",
+        "react-responsive-carousel": "^3.2.23",
+        "react-router-dom": "^6.14.0",
+        "react-scripts": "5.0.1",
+        "react-slick": "^0.29.0",
+        "slick-carousel": "^1.8.1",
+        "styled-components": "^6.0.0-rc.5",
+        "typescript": "^4.9.5",
+        "web-vitals": "^2.1.4"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -41,25 +42,24 @@
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
-      "extends": [
-        "react-app",
-        "react-app/jest"
-      ]
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
     },
     "browserslist": {
-      "production": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all"
-      ],
-      "development": [
-        "last 1 chrome version",
-        "last 1 firefox version",
-        "last 1 safari version"
-      ]
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     },
     "devDependencies": {
-      "sass": "^1.64.2"
+        "sass": "^1.64.2"
     }
-  }
-  
+}

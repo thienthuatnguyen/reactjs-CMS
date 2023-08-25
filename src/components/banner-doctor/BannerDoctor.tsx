@@ -14,7 +14,32 @@ export function BannerDoctor() {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
-    className: 'my-doctor-slider'
+    className: 'my-doctor-slider',
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 678,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false
+        }
+      }
+    ]
   };
   const getBanner = images => images.map((item, index) => (
     <div key={index} className="wrapper-item-slider">

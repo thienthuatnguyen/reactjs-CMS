@@ -214,10 +214,17 @@ div#root {
     .container-app {
         max-width: 768px;
         padding: 0 10px;
+        width: 100%;
+        box-sizing: border-box;
     }
 }
 button.my-btn {
     height: 36px;
+    box-sizing: border-box;
+    text-transform: none;
+}
+button.my-btn.large-size {
+    height: 46px;
     box-sizing: border-box;
     text-transform: none;
 }
@@ -244,4 +251,15 @@ button.my-btn.btn-green.btn-outlined {
     color: $blue-dark;
     border: 1px solid $green;
     box-shadow: none;
+}
+
+button.my-btn.btn-yellow.btn-contained {
+    background-color: $yellow;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    img {
+        width: 65%;
+        height: 65%;
+    }
 }

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
 import phoneLogo from "../../assets/images/icon-phone.png";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Login() {
   const {
@@ -50,7 +50,7 @@ function Login() {
         Đăng nhập
       </Button>
       <div className="link-signup">
-        <span>Bạn chưa có tài khoản?</span>&nbsp;<a href="/sign-up" onClick={() => navigate("/sign-up")}>Đăng ký</a>
+        <span>Bạn chưa có tài khoản?</span>&nbsp;<NavLink className= "link" to="/sign-up">Đăng ký</NavLink>        
       </div>
     </form>
   );
