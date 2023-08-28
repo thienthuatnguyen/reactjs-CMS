@@ -114,7 +114,8 @@ export function Header() {
               >
                 <div className="content-dropdown-account">
                   <div className="user-name">Thuat Nguyen</div>
-                  <button type="button" className="btn-logout">Log Out</button>
+                  <button type="button" className="btn-logout">Tạo hồ sơ</button>
+                  <button type="button" className="btn-logout">Đăng xuất</button>
                 </div>
               </Popover>
             </div>
