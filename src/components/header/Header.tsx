@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { slide as Menu } from 'react-burger-menu'
 import "./Header.scss";
 import logo from "../../assets/images/logo-pc.png";
@@ -7,6 +7,8 @@ import { useParams } from 'react-router';
 import { Button, Popover } from "@material-ui/core";
 import React from "react";
 export function Header() {
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -17,6 +19,9 @@ export function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const logOut = ()=> {
+    navigate("/login")
+  } 
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -115,7 +120,7 @@ export function Header() {
                 <div className="content-dropdown-account">
                   <div className="user-name">Thuat Nguyen</div>
                   <button type="button" className="btn-logout">Tạo hồ sơ</button>
-                  <button type="button" className="btn-logout">Đăng xuất</button>
+                  <button type="button" className="btn-logout" onClick={()=> {logOut()}}>Đăng xuất</button>
                 </div>
               </Popover>
             </div>
