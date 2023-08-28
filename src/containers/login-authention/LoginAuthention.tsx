@@ -9,8 +9,7 @@ function LoginAuthention() {
   const navigate = useNavigate();
   const {
     register,
-    handleSubmit,
-    formState: { errors }
+    handleSubmit
   } = useForm();
   const onSubmit = (data) => {
     // alert(JSON.stringify(data));
