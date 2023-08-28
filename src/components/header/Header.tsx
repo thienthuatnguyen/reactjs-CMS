@@ -3,7 +3,7 @@ import { slide as Menu } from 'react-burger-menu'
 import "./Header.scss";
 import logo from "../../assets/images/logo-pc.png";
 import logoMobile from "../../assets/images/logo-mobi.png";
-
+import { useParams } from 'react-router';
 import { Button, Popover } from "@material-ui/core";
 import React from "react";
 export function Header() {
@@ -12,7 +12,8 @@ export function Header() {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
+  const params = useParams()
+  console.log(params)
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -39,7 +40,6 @@ export function Header() {
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/doi-tac">Đối tác</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/lien-he">Liên hệ</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/tai-ung-dung">Tải ứng dụng</NavLink>
-
           </Menu>
         </div>
       </div>
@@ -66,17 +66,27 @@ export function Header() {
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
               </li>
-              {/* <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-vn">Bác sĩ VN</NavLink>
+              <li className="parent-menu">
+                <span className="name-parent">Bác sĩ</span>
+                <ul className="child-menu">
+                  <li>
+                    <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-singapore">Bác sĩ Singapore</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-vietnam">Bác sĩ Việt Nam</NavLink>
+                  </li>
+                </ul>
               </li>
-              <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-singapore">Bác sĩ Singapore</NavLink>
-              </li> */}
-              <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/tam-nhin-su-menh">Tầm nhìn sứ mệnh</NavLink>
-              </li>
-              <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/doi-tac">Đối tác</NavLink>
+              <li className="parent-menu">
+                <span className="name-parent">Về chúng tôi</span>
+                <ul className="child-menu">
+                  <li>
+                    <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/tam-nhin-su-menh">Tầm nhìn sứ mệnh</NavLink>
+                  </li>
+                  <li>
+                    <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/doi-tac">Đối tác</NavLink>
+                  </li>
+                </ul>
               </li>
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/lien-he">Liên hệ</NavLink>

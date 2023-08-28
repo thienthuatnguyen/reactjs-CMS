@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     .wave-box {
         background-image: url('../../assets/images/wave-1.svg'), url('../../assets/images/wave-2.svg'), url('../../assets/images/wave-3.svg'), url('../../assets/images/wave-bg.svg');
         background-repeat: repeat-x, repeat-x, repeat-x;
@@ -51,15 +51,15 @@
     .wrapper-column {
         background-color: #fff;
         padding: 0 15px 15px 15px;
-        @include border-radius(5px);
+        @include border-radius(0px);
         img {
             max-width: 100%;
         }
 
         .name {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
-            margin: 10px 0 15px 0;
+            margin: 15px 0 10px 0;
         }
         .info-job {
             margin-bottom: 40px;

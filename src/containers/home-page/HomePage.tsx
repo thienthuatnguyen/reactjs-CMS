@@ -10,9 +10,6 @@ import { BannerDoctor } from "../../components/banner-doctor/BannerDoctor";
 import { BannerDepartment } from "../../components/banner-department/BannerDepartment";
 import { ProfileExpertDoctor } from "../../components/profile-expert-doctor/ProfileExpertDoctor";
 import Avatar from "@material-ui/core/Avatar";
-
-
-
 function HomePage() {
   // const navigate = useNavigate();
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {

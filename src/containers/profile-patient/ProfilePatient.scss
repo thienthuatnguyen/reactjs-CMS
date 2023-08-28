@@ -1,0 +1,101 @@
+@import '../../assets/scss/variables.scss';
+
+.wrapper-profile-patient-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    h1.title {
+        text-align: center;
+        font-size: 30px;
+        color: #1C508A;
+        padding: 0;
+        margin: 40px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+    }
+    .top-title-page {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+       
+        h2 {
+            font-size: 22px;
+            margin: 0;
+            color: $blue-dark;
+        }
+    }
+    .list-profile {
+        .box-profile {
+            background-color: #fff;
+            padding: 20px;
+            .top-info {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 10px;
+                .name {
+                    background: url('../../assets/images/user-blue.png') no-repeat left center;
+                    font-size: 18px;
+                    color: $blue-dark;
+                    font-weight: bold;
+                    padding-left: 40px;
+                    height: 30px;
+                    display: inline-flex;
+                    align-items: center;
+                }
+                button {
+                    height: 30px;
+                }
+            }
+            .content-info {
+                .row-content-info {
+                    display: flex;
+                    margin-bottom: 10px;
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                    .col-content-info {
+                        height: 30px;
+                        display: inline-flex;
+                        align-items: center;
+                        &:first-child {
+                            padding-left: 40px;
+                            flex:1 1 auto;
+                            max-width: 180px;
+                            min-width: 180px;
+                            width: 180px;
+                        }
+                        &.birthday {
+                            background: url('../../assets/images/birthday-icon.png') no-repeat left center;
+                            background-size: 22px;
+
+                        }
+                        &.code {
+                            background: url('../../assets/images/code-icon.png') no-repeat left center;
+                            background-size: 24px;
+
+                        }
+                        &.phone {
+                            background: url('../../assets/images/phone-icon.png') no-repeat left center;
+                            background-size: 18px;
+                        }
+                        &.address {
+                            background: url('../../assets/images/address-icon.png') no-repeat left center;
+                            background-size: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+   
+}
+
+@media only screen and (max-width: 768px) {
+    
+
+}

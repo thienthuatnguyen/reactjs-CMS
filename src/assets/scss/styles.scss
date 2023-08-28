@@ -263,3 +263,14 @@ button.my-btn.btn-yellow.btn-contained {
         height: 65%;
     }
 }
+
+button.my-btn.btn-blue-dash.btn-contained {
+    background-color: $blue;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    img {
+        width: 65%;
+        height: 65%;
+    }
+}

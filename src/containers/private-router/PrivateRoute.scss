@@ -2,6 +2,20 @@
 
 .main-page.private-page {
     background-color: $bg-gray;
+    .btn-scroll-page {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        @include border-radius(50%);
+        background: url("../../assets/images/to-top-circle.svg") no-repeat center center;
+        width: 46px;
+        height: 46px;
+        border: none;
+        box-shadow: none;
+        background-color: #fff;
+        cursor: pointer;
+        z-index: 1;
+    }
     
 }
 @media only screen and (max-width: 768px) {

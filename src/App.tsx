@@ -11,6 +11,7 @@ import UserDetailPage from './containers/user/UserDetail';
 import UseState from './containers/UseState';
 import LoginAuthention from './containers/login-authention/LoginAuthention';
 import HomePage from './containers/home-page/HomePage';
+import ProfilePatientPage from './containers/profile-patient/ProfilePatient';
 function App() {
   return (
     <div className="wrapper-app">
@@ -55,7 +56,7 @@ function App() {
 
         <Route path="/ho-so-benh-nhan" element={
           <PrivateRoute >
-            <AddMore></AddMore>
+            <ProfilePatientPage></ProfilePatientPage>
           </PrivateRoute>} >
         </Route>
 
