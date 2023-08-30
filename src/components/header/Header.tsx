@@ -3,7 +3,7 @@ import { slide as Menu } from 'react-burger-menu'
 import "./Header.scss";
 import logo from "../../assets/images/logo-pc.png";
 import logoMobile from "../../assets/images/logo-mobi.png";
-import { useParams } from 'react-router';
+// import { useParams } from 'react-router';
 import { Button, Popover } from "@material-ui/core";
 import React from "react";
 export function Header() {
