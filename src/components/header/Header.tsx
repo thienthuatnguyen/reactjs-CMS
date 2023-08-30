@@ -14,7 +14,7 @@ export function Header() {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const params = useParams()
+  // const params = useParams()
   const handleClose = () => {
     setAnchorEl(null);
   };
