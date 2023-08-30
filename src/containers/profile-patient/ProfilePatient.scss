@@ -96,6 +96,24 @@
 }
 
 @media only screen and (max-width: 768px) {
-    
+    .wrapper-profile-patient-page h1.title {
+        font-size: 26px;
+    }
+    .wrapper-profile-patient-page .top-title-page {
+        flex-direction: column;
+    }
+    .wrapper-profile-patient-page .top-title-page h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .wrapper-profile-patient-page .list-profile .box-profile .content-info .row-content-info {
+        flex-direction: column;
+    }
+    .wrapper-profile-patient-page .list-profile .box-profile .content-info .row-content-info .col-content-info {
+        &:last-child {
+            padding-left: 40px;
+            height: auto;
+        }       
+    }
 
 }

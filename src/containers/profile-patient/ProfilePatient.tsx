@@ -1,8 +1,10 @@
 import { Avatar, Button, Grid } from "@material-ui/core";
 import "./ProfilePatient.scss";
 import addIcon from "../../assets/images/icon-user-create.png";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePatientPage() {
+  const navigate = useNavigate();
   const profiles = [1, 2, 3, 4];
   const getProfile = profiles => profiles.map((item, index) => (
     <Grid key={index} item xs={12} sm={6} md={6}>
@@ -39,7 +41,7 @@ function ProfilePatientPage() {
         <h1 className="title">Hồ sơ bệnh nhân</h1>
         <div className="top-title-page">
           <h2>Danh sách hồ sơ của bạn</h2>
-          <Button
+          <Button onClick={()=> {navigate("/tao-ho-so")}}
             variant="contained"
             className="my-btn btn-blue-dash btn-contained large-size btn-create-profile"
             startIcon={<Avatar

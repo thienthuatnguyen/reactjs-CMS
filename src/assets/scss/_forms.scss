@@ -133,6 +133,10 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         margin-bottom: 5px;
+        font-size: 16px;
+        font-family: "Averta";
+        color: $body-color;
+        line-height: normal;
         &.label-config-icon {
             display: inline-flex;
             align-items: center;
@@ -199,16 +203,58 @@
         }
 
     }
-   
+
+    .my-wrapper-select {
+        .my-select {
+            background-color: #fff;
+            @include border-radius(5px);
+            border: 1px solid $border-input;
+            box-sizing: border-box;
+            &.Mui-focused {
+                border: 1px solid $body-color;
+                background-color: #fff !important;
+            }
+            .MuiSelect-select {
+                background-color: #fff !important;
+                @include border-radius(5px);
+
+            }
+        }
+        height: 36px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    &.required {
+        .label-config {
+            span {
+                position: relative;
+                &::before {
+                    content: '';
+                    background: url('../images/required.png') no-repeat center center;
+                    position: absolute;
+                    right: -20px;
+                    top: 0;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
     
 }
 .items-inline {
     display: flex;
-    margin: 0 -5px;
+    margin: 0 -20px;
+    .items-inline-child {
+        display: flex;
+        flex: 1 1 100%;
+        max-width: 50%;
+        min-width: 50%;
+    }
     .item-input {
         flex: 1 1 100%;
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
         max-width: 50%;
     }
 }
@@ -223,9 +269,13 @@
     }
     textarea.form-control {
         width: 100%;
+        box-sizing: border-box;
     }
-    input.form-control.bg-gray {
+    textarea.form-control.bg-gray, input.form-control.bg-gray {
         background-color: #f0f0f0 !important;
+    }
+    textarea.form-control.bg-white, input.form-control.bg-white {
+        background-color: #fff !important;
     }
     button.btn-show-hide-password {
         border: 0 !important;
@@ -296,3 +346,16 @@
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .items-inline {
+        flex-wrap: wrap;
+        .item-input {
+            max-width: 100%;
+        }
+    }
+    .items-inline .items-inline-child {
+        max-width: 100%;
+        min-width: 100%;
+        flex-wrap: wrap;
+    }
+}

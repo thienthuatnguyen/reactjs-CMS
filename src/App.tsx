@@ -12,6 +12,7 @@ import UseState from './containers/UseState';
 import LoginAuthention from './containers/login-authention/LoginAuthention';
 import HomePage from './containers/home-page/HomePage';
 import ProfilePatientPage from './containers/profile-patient/ProfilePatient';
+import CreateProfilePage from './containers/create-profile/CreateProfile';
 function App() {
   return (
     <div className="wrapper-app">
@@ -57,6 +58,11 @@ function App() {
         <Route path="/ho-so-benh-nhan" element={
           <PrivateRoute >
             <ProfilePatientPage></ProfilePatientPage>
+          </PrivateRoute>} >
+        </Route>
+        <Route path="/tao-ho-so" element={
+          <PrivateRoute >
+            <CreateProfilePage></CreateProfilePage>
           </PrivateRoute>} >
         </Route>
 

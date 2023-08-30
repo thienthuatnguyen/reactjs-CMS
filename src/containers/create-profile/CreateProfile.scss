@@ -1,0 +1,97 @@
+@import '../../assets/scss/variables.scss';
+
+.wrapper-create-profile-page {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    min-height: 500px;
+    h1.title {
+        text-align: center;
+        font-size: 30px;
+        color: #1C508A;
+        padding: 0;
+        margin: 40px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+    }
+    .button-submit-center {
+        text-align: center;
+        margin-top: 30px;
+        button {
+            min-width: 130px;
+        }
+    }
+    .form-create-profile {
+        .title {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 30px 0;
+        }
+        .text-description {
+            background-color: #c7e5f5;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+    }
+    .form-search-profile {
+        text-align: center;
+        .content-align {
+            width: 410px;
+            display: inline-block;
+            text-align: left;
+        }
+        form {
+            button.btn-search {
+                width: 100%;
+            }
+           
+        }
+        button.btn-revert-code {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            text-decoration: underline;
+            margin-top: 10px;
+            cursor: pointer;
+            
+        }
+        .title {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 30px 0;
+        }
+    }
+    .form-revert-code {
+        .title {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 30px 0;
+        }
+    }
+
+
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper-create-profile-page h1.title {
+        font-size: 26px;
+    }
+    .wrapper-create-profile-page {
+        .form-search-profile .title, .form-revert-code .title, .form-create-profile .title {
+            font-size: 16px;
+        }
+    }
+    .wrapper-create-profile-page .form-search-profile .content-align {
+        width: 100%;
+    }
+}

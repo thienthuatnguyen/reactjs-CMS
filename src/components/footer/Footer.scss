@@ -79,6 +79,9 @@ footer.footer-app {
     }
     .form-group {
       margin-bottom: 10px !important;
+      .label-config {
+        color: #fff;
+      }
     }
     .form-group input.form-control, .form-group textarea.form-control {
       border-radius: 0 !important;

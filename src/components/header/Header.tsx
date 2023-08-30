@@ -15,7 +15,6 @@ export function Header() {
     setAnchorEl(event.currentTarget);
   };
   const params = useParams()
-  console.log(params)
   const handleClose = () => {
     setAnchorEl(null);
   };

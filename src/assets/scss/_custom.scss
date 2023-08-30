@@ -268,3 +268,54 @@ textarea {
   color: $body-color;
   font-family: "Averta";
 }
+
+.my-tab {
+  button.MuiTab-root {
+    font-size: 16px !important;
+    text-transform: none;
+    font-family: "Averta";
+    font-weight: bold;
+    &.Mui-selected {
+      color: $blue-dark;
+    }
+  }
+  span.MuiTabs-indicator {
+    background-color: $blue-dark;
+    bottom: 5px;
+  }
+}
+
+.my-datetime-picker {
+  width: 100%;
+  label.MuiFormLabel-root {
+    display: none;
+  }
+  .MuiInput-root {
+    height: 36px;
+    font-size: 16px;
+    border: 1px solid $border-input;
+    @include border-radius(5px);
+    background-color: #fff;
+    font-family: "Averta" !important;
+    margin-top: 0px;
+    &::before {
+      display: none;
+    }
+    &::after {
+      display: none;
+    }
+    &.Mui-focused {
+      border: 1px solid $body-color;
+      input.MuiInputBase-input {
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+  input.MuiInputBase-input {
+    font-family: "Averta" !important;
+    font-size: 16px !important;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
