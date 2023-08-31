@@ -21,7 +21,9 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 40px;
-       
+        .btn-delete-profile {
+            margin-right: 15px;
+        }
         h2 {
             font-size: 22px;
             margin: 0;
@@ -43,6 +45,14 @@
                     color: $blue-dark;
                     font-weight: bold;
                     padding-left: 40px;
+                    height: 30px;
+                    display: inline-flex;
+                    align-items: center;
+                }
+                .title {
+                    font-size: 18px;
+                    color: $blue-dark;
+                    font-weight: bold;
                     height: 30px;
                     display: inline-flex;
                     align-items: center;
@@ -86,6 +96,25 @@
                         &.address {
                             background: url('../../assets/images/address-icon.png') no-repeat left center;
                             background-size: 18px;
+                        }
+                    }
+                }
+            }
+            &.box-profile-schedule {
+                margin-top: 15px;
+                .row-schedule {
+                    display: flex;
+                    border-bottom: 1px solid $border-input;
+                    padding: 10px 0;
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                    .col-item {
+                        flex: 1 1  50%;
+                        min-width: 50%;
+                        max-width: 50%;
+                        &.col-status {
+                            color: $blue;
                         }
                     }
                 }

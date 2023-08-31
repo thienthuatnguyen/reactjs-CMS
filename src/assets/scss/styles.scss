@@ -239,6 +239,10 @@ button.my-btn.btn-blue.btn-contained {
     color: #fff;
     border: none;
     box-shadow: none;
+    img {
+        width: 65%;
+        height: 65%;
+    }
 }
 button.my-btn.btn-blue.btn-outlined {
     background-color: #fff;
@@ -255,6 +259,17 @@ button.my-btn.btn-green.btn-outlined {
 
 button.my-btn.btn-yellow.btn-contained {
     background-color: $yellow;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    img {
+        width: 65%;
+        height: 65%;
+    }
+}
+
+button.my-btn.btn-red.btn-contained {
+    background-color: $red;
     color: #fff;
     border: none;
     box-shadow: none;

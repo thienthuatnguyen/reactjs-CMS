@@ -12,7 +12,7 @@ function ProfilePatientPage() {
         <div className="top-info">
           <div className="name">Huỳnh Khang</div>
           <Button variant="contained"
-            className="my-btn btn-blue-dash btn-contained">Chọn hồ sơ</Button>
+            className="my-btn btn-blue-dash btn-contained" onClick={()=> {navigate('/ho-so-benh-nhan/1')}}>Xem hồ sơ</Button>
         </div>
         <div className="content-info">
           <div className="row-content-info">

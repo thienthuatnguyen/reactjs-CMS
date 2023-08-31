@@ -13,6 +13,7 @@ import LoginAuthention from './containers/login-authention/LoginAuthention';
 import HomePage from './containers/home-page/HomePage';
 import ProfilePatientPage from './containers/profile-patient/ProfilePatient';
 import CreateProfilePage from './containers/create-profile/CreateProfile';
+import ProfilePatientDetailPage from './containers/profile-patient-detail/ProfilePatientDetail';
 function App() {
   return (
     <div className="wrapper-app">
@@ -55,11 +56,21 @@ function App() {
           </PrivateRoute>} >
         </Route>
 
-        <Route path="/ho-so-benh-nhan" element={
-          <PrivateRoute >
-            <ProfilePatientPage></ProfilePatientPage>
-          </PrivateRoute>} >
+        <Route path="/ho-so-benh-nhan">
+          <Route path="/ho-so-benh-nhan" element={
+            <PrivateRoute >
+              <ProfilePatientPage></ProfilePatientPage>
+            </PrivateRoute>} >
+          </Route>
+          <Route path=":patentId" element={
+            <PrivateRoute >
+              <ProfilePatientDetailPage></ProfilePatientDetailPage>
+            </PrivateRoute>} >
+          </Route>
         </Route>
+
+
+
         <Route path="/tao-ho-so" element={
           <PrivateRoute >
             <CreateProfilePage></CreateProfilePage>
