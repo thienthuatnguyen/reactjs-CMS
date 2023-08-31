@@ -3,11 +3,11 @@ import "../profile-patient/ProfilePatient.scss";
 import deleteIcon from "../../assets/images/delete.svg";
 import editIcon from "../../assets/images/edit.svg";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '../../assets/images/arrow-accordion.svg';
 import { UploadFileImage } from "../../components/uploadFileImage/UploadFileImage";
 function ProfilePatientDetailPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   function getData(val) {
     console.log(val)
   }
