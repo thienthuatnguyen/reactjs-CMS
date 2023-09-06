@@ -1,0 +1,22 @@
+@import '../../assets/scss/variables.scss';
+.wrapper-booking-time {
+    .title {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .row-button {
+        margin-bottom: 30px;
+        button {
+            margin-right: 15px;
+            min-width: 152px;
+            &.active {
+                background-color: $green;
+                color: #fff;
+                border: none;
+            }
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

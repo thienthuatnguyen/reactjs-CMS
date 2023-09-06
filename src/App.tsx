@@ -14,6 +14,7 @@ import HomePage from './containers/home-page/HomePage';
 import ProfilePatientPage from './containers/profile-patient/ProfilePatient';
 import CreateProfilePage from './containers/create-profile/CreateProfile';
 import ProfilePatientDetailPage from './containers/profile-patient-detail/ProfilePatientDetail';
+import BookingSchedulePage from './containers/booking-schedule/BookingSchedule';
 function App() {
   return (
     <div className="wrapper-app">
@@ -74,6 +75,12 @@ function App() {
         <Route path="/tao-ho-so" element={
           <PrivateRoute >
             <CreateProfilePage></CreateProfilePage>
+          </PrivateRoute>} >
+        </Route>
+
+        <Route path="/dat-lich-kham" element={
+          <PrivateRoute >
+            <BookingSchedulePage></BookingSchedulePage>
           </PrivateRoute>} >
         </Route>
 
