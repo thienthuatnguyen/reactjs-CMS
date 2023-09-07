@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Avatar, Button, Grid } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, Backdrop, Button, Fade, Grid, Modal, Theme, createStyles, makeStyles } from "@material-ui/core";
 import "../profile-patient/ProfilePatient.scss";
 import deleteIcon from "../../assets/images/delete.svg";
 import editIcon from "../../assets/images/edit.svg";
@@ -6,11 +6,41 @@ import editIcon from "../../assets/images/edit.svg";
 // import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '../../assets/images/arrow-accordion.svg';
 import { UploadFileImage } from "../../components/uploadFileImage/UploadFileImage";
+import React from "react";
+import ProfileUpsert from "../../components/profile-upsert/ProfileUpsert";
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }),
+
+);
 function ProfilePatientDetailPage() {
   // const navigate = useNavigate();
   function getData(val) {
     console.log(val)
   }
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+  const classes = useStyles();
+
   return (
     <div className="wrapper-profile-patient-page">
       <div className="container-app">
@@ -18,7 +48,7 @@ function ProfilePatientDetailPage() {
         <div className="top-title-page">
           <h2>Chi tiết hồ sơ của bạn</h2>
           <div className="group-action">
-            <Button 
+            <Button
               variant="contained"
               className="my-btn btn-red btn-contained large-size btn-delete-profile"
               startIcon={<Avatar
@@ -29,7 +59,8 @@ function ProfilePatientDetailPage() {
             >
               Xóa hồ sơ
             </Button>
-            <Button 
+            <Button
+              onClick={handleOpen}
               variant="contained"
               className="my-btn btn-blue btn-contained large-size btn-edit-profile"
               startIcon={<Avatar
@@ -141,7 +172,26 @@ function ProfilePatientDetailPage() {
           </Grid>
         </div>
       </div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className="wrapper-my-modal">
+            <ProfileUpsert isEdit={true}></ProfileUpsert>
+          </div>
+        </Fade>
+      </Modal>
     </div>
+
   );
 }
 

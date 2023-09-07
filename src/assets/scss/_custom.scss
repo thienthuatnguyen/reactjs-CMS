@@ -441,3 +441,12 @@ textarea {
   }
   
 }
+
+.wrapper-my-modal {
+  opacity: 1;
+    background-color: #fff;
+    padding: 30px;
+    max-width: 80%;
+    max-height: 90vh;
+    overflow: auto;
+}
