@@ -34,6 +34,7 @@
         .box-profile {
             background-color: #fff;
             padding: 20px;
+            
             .top-info {
                 display: flex;
                 align-items: center;
@@ -57,7 +58,7 @@
                     display: inline-flex;
                     align-items: center;
                 }
-                button {
+                button.btn-view-detail {
                     height: 30px;
                 }
             }

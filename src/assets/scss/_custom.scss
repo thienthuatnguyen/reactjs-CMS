@@ -241,11 +241,13 @@ textarea {
 
 .my-wrapper-select {
   height: 100%;
+
   .my-select {
     font-size: 16px;
     color: $body-color;
     font-family: "Averta";
     height: 100%;
+
     &::before,
     &::after {
       display: none;
@@ -275,10 +277,12 @@ textarea {
     text-transform: none;
     font-family: "Averta";
     font-weight: bold;
+
     &.Mui-selected {
       color: $blue-dark;
     }
   }
+
   span.MuiTabs-indicator {
     background-color: $blue-dark;
     bottom: 5px;
@@ -287,9 +291,11 @@ textarea {
 
 .my-datetime-picker {
   width: 100%;
+
   label.MuiFormLabel-root {
     display: none;
   }
+
   .MuiInput-root {
     height: 36px;
     font-size: 16px;
@@ -298,20 +304,25 @@ textarea {
     background-color: #fff;
     font-family: "Averta" !important;
     margin-top: 0px;
+
     &::before {
       display: none;
     }
+
     &::after {
       display: none;
     }
+
     &.Mui-focused {
       border: 1px solid $body-color;
+
       input.MuiInputBase-input {
         border: none !important;
         box-shadow: none !important;
       }
     }
   }
+
   input.MuiInputBase-input {
     font-family: "Averta" !important;
     font-size: 16px !important;
@@ -321,32 +332,38 @@ textarea {
 }
 
 .my-accordion.MuiPaper-root {
-    box-shadow: none;
-    border-bottom: 1px solid #c8c8c8;
-    .MuiAccordionSummary-root {
-      padding: 0;
-      min-height: 40px;
-      height: 40px;
-      .header-content {
-        display: flex;
-        .date-text {
-          margin-right: 30px;
-        }
+  box-shadow: none;
+  border-bottom: 1px solid #c8c8c8;
+
+  .MuiAccordionSummary-root {
+    padding: 0;
+    min-height: 40px;
+    height: 40px;
+
+    .header-content {
+      display: flex;
+
+      .date-text {
+        margin-right: 30px;
       }
-      
     }
-    .MuiAvatar-img {
-      width: 14px;
-      height: 14px;
-      object-fit: contain;
-    }
+
+  }
+
+  .MuiAvatar-img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+  }
 }
+
 .my-accordion.MuiAccordion-root {
   &::before {
     background-color: #c8c8c8;
     display: none;
   }
 }
+
 .my-accordion.MuiAccordion-root.Mui-expanded {
   margin: 0;
   border-radius: 0;
@@ -358,13 +375,17 @@ textarea {
     font-size: 18px;
     color: $blue-dark;
     font-family: "Averta";
-    border-radius: 0; 
-    width: 100%;   
+    border-radius: 0;
+    width: 100%;
+
     .react-datepicker__month-container {
       width: 100%;
     }
   }
-  .react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+
+  .react-datepicker__day-name,
+  .react-datepicker__day,
+  .react-datepicker__time-name {
     color: $blue-dark;
     display: inline-block;
     width: 50px;
@@ -376,54 +397,93 @@ textarea {
     font-size: 18px;
 
   }
-  .react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
+
+  .react-datepicker__current-month,
+  .react-datepicker-time__header,
+  .react-datepicker-year-header {
     font-size: 18px;
     color: $blue-dark;
     padding-bottom: 15px;
     padding-top: 5px;
 
   }
+
   .react-datepicker__day-names {
     background-color: $gray;
     border-top: 1px solid $border-input;
     border-bottom: 1px solid $border-input;
   }
-  .react-datepicker__day--selected:hover, .react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover, .react-datepicker__month-text--selected:hover, .react-datepicker__month-text--in-selecting-range:hover, .react-datepicker__month-text--in-range:hover, .react-datepicker__quarter-text--selected:hover, .react-datepicker__quarter-text--in-selecting-range:hover, .react-datepicker__quarter-text--in-range:hover, .react-datepicker__year-text--selected:hover, .react-datepicker__year-text--in-selecting-range:hover, .react-datepicker__year-text--in-range:hover {
+
+  .react-datepicker__day--selected:hover,
+  .react-datepicker__day--in-selecting-range:hover,
+  .react-datepicker__day--in-range:hover,
+  .react-datepicker__month-text--selected:hover,
+  .react-datepicker__month-text--in-selecting-range:hover,
+  .react-datepicker__month-text--in-range:hover,
+  .react-datepicker__quarter-text--selected:hover,
+  .react-datepicker__quarter-text--in-selecting-range:hover,
+  .react-datepicker__quarter-text--in-range:hover,
+  .react-datepicker__year-text--selected:hover,
+  .react-datepicker__year-text--in-selecting-range:hover,
+  .react-datepicker__year-text--in-range:hover {
     background-color: $green !important;
     color: #fff;
   }
-  .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range, .react-datepicker__month-text--selected, .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--selected, .react-datepicker__year-text--in-selecting-range, .react-datepicker__year-text--in-range {
+
+  .react-datepicker__day--selected,
+  .react-datepicker__day--in-selecting-range,
+  .react-datepicker__day--in-range,
+  .react-datepicker__month-text--selected,
+  .react-datepicker__month-text--in-selecting-range,
+  .react-datepicker__month-text--in-range,
+  .react-datepicker__quarter-text--selected,
+  .react-datepicker__quarter-text--in-selecting-range,
+  .react-datepicker__quarter-text--in-range,
+  .react-datepicker__year-text--selected,
+  .react-datepicker__year-text--in-selecting-range,
+  .react-datepicker__year-text--in-range {
     background-color: $green !important;
     color: #fff;
   }
-  .react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected, .react-datepicker__year-text--keyboard-selected {
+
+  .react-datepicker__day--keyboard-selected,
+  .react-datepicker__month-text--keyboard-selected,
+  .react-datepicker__quarter-text--keyboard-selected,
+  .react-datepicker__year-text--keyboard-selected {
     background-color: $green !important;
     color: #fff;
   }
-  .react-datepicker__day--disabled, .react-datepicker__month-text--disabled {
+
+  .react-datepicker__day--disabled,
+  .react-datepicker__month-text--disabled {
     color: $yellow;
 
   }
-  .react-datepicker__header  {
+
+  .react-datepicker__header {
     background-color: transparent;
     border: none;
   }
+
   .react-datepicker__navigation--next {
     right: 50%;
     margin-right: -120px;
     top: 12px
   }
+
   .react-datepicker__navigation--previous {
     left: 50%;
     margin-left: -120px;
     top: 12px
   }
+
   .react-datepicker__navigation--next {
     background: url('../images/arrow-right.svg') no-repeat center center;
     background-color: $blue-dark;
     width: 26px;
     height: 26px;
     @include border-radius(50%);
+
     .react-datepicker__navigation-icon--next {
       display: none;
     }
@@ -435,18 +495,54 @@ textarea {
     width: 26px;
     height: 26px;
     @include border-radius(50%);
+
     .react-datepicker__navigation-icon--previous {
       display: none;
     }
   }
-  
+
 }
 
 .wrapper-my-modal {
   opacity: 1;
-    background-color: #fff;
-    padding: 30px;
-    max-width: 80%;
-    max-height: 90vh;
-    overflow: auto;
+  background-color: #fff;
+  padding: 30px;
+  max-width: 80%;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.my-breadcrumb {
+  li {
+    a {
+      font-weight: bold;
+      color: $blue-dark;
+      cursor: pointer;
+    }
+  }
+}
+
+.MuiDialog-container {
+  font-family: "Averta" !important;
+  .MuiTypography-h6 {
+    color: $body-color;
+    font-family: "Averta" !important;
+    font-weight: bold;
+  }
+  .MuiDialogContentText-root {
+    font-family: "Averta" !important;
+    color: $body-color;
+  }
+  .MuiDialogActions-root {
+    button.btn-reject {
+      text-transform: none;
+      color: $body-color;
+      font-weight: bold;
+    }
+    button.btn-accept {
+      text-transform: none;
+      color: $blue-dark;
+      font-weight: bold;
+    }
+  }
 }

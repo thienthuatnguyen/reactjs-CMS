@@ -1,13 +1,19 @@
-import { Accordion, AccordionDetails, AccordionSummary, Avatar, Backdrop, Button, Fade, Grid, Modal, Theme, createStyles, makeStyles } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, Backdrop, Breadcrumbs, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fade, Grid, IconButton, Link, Modal, Theme, createStyles, makeStyles } from "@material-ui/core";
 import "../profile-patient/ProfilePatient.scss";
-import deleteIcon from "../../assets/images/delete.svg";
-import editIcon from "../../assets/images/edit.svg";
+import deleteIcon from "../../assets/images/delete-red.svg";
+import editIcon from "../../assets/images/edit-black.svg";
+import addIcon from "../../assets/images/icon-user-create.png";
 
 // import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from '../../assets/images/arrow-accordion.svg';
 import { UploadFileImage } from "../../components/uploadFileImage/UploadFileImage";
 import React from "react";
 import ProfileUpsert from "../../components/profile-upsert/ProfileUpsert";
+import { useNavigate } from "react-router-dom";
+
+const DeleteIcon = () => (<img src={deleteIcon} alt="delete-icon"></img>);
+const EditIcon = () => (<img src={editIcon} alt="edit-icon"></img>);
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal: {
@@ -25,11 +31,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 );
 function ProfilePatientDetailPage() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+ 
+  const [open, setOpen] = React.useState(false);
+  const [openConfirm, setOpenConfirm] = React.useState(false);
+
   function getData(val) {
     console.log(val)
   }
-  const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -38,40 +48,44 @@ function ProfilePatientDetailPage() {
     setOpen(false);
   };
 
+  const handleCloseConfirm = () => {
+    setOpenConfirm(false);
+  };
+
+  const handleClickOpenConfirm = () => {
+    setOpenConfirm(true);
+  };
 
   const classes = useStyles();
+
+  function handleDelete() {
+
+  }
 
   return (
     <div className="wrapper-profile-patient-page">
       <div className="container-app">
         <h1 className="title">Hồ sơ bệnh nhân</h1>
         <div className="top-title-page">
-          <h2>Chi tiết hồ sơ của bạn</h2>
-          <div className="group-action">
-            <Button
-              variant="contained"
-              className="my-btn btn-red btn-contained large-size btn-delete-profile"
-              startIcon={<Avatar
-                src={
-                  deleteIcon
-                }
-              />}
-            >
-              Xóa hồ sơ
-            </Button>
-            <Button
-              onClick={handleOpen}
-              variant="contained"
-              className="my-btn btn-blue btn-contained large-size btn-edit-profile"
-              startIcon={<Avatar
-                src={
-                  editIcon
-                }
-              />}
-            >
-              Sửa hồ sơ
-            </Button>
-          </div>
+
+          <Breadcrumbs aria-label="breadcrumb" className="my-breadcrumb">
+            <Link onClick={() => { navigate("/ho-so-benh-nhan") }}>
+              Hồ sơ bệnh nhân
+            </Link>
+            <h2>Chi tiết hồ sơ của bạn</h2>
+
+          </Breadcrumbs>
+          <Button onClick={() => { navigate("/tao-ho-so") }}
+            variant="contained"
+            className="my-btn btn-blue-dash btn-contained large-size btn-create-profile"
+            startIcon={<Avatar
+              src={
+                addIcon
+              }
+            />}
+          >
+            Tạo hồ sơ của bạn
+          </Button>
 
         </div>
         <div className="list-profile">
@@ -81,6 +95,14 @@ function ProfilePatientDetailPage() {
               <div className="box-profile">
                 <div className="top-info">
                   <div className="name">Huỳnh Khang</div>
+                  <div className="group-action">
+                    <IconButton onClick={handleClickOpenConfirm} aria-label="delete" className="btn-delete-profile">
+                      <DeleteIcon />
+                    </IconButton>
+                    <IconButton onClick={handleOpen} aria-label="delete" className="btn-edit-profile">
+                      <EditIcon />
+                    </IconButton>
+                  </div>
                 </div>
                 <div className="content-info">
                   <div className="row-content-info">
@@ -190,8 +212,28 @@ function ProfilePatientDetailPage() {
           </div>
         </Fade>
       </Modal>
+      <Dialog
+        open={openConfirm}
+        onClose={handleCloseConfirm}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Xóa hồ sơ</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Bạn có chắc là muốn xóa hồ sơ này ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button className="btn-reject" onClick={handleCloseConfirm} color="primary">
+            Từ chối
+          </Button>
+          <Button className="btn-accept" onClick={handleCloseConfirm} color="primary" autoFocus>
+            Đồng ý
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
-
   );
 }
 
