@@ -1,19 +1,13 @@
-import { Avatar, Breadcrumbs, Button, Grid, Link } from "@material-ui/core";
+import { Avatar, Breadcrumbs, Button, Link } from "@material-ui/core";
 import "../profile-patient/ProfilePatient.scss";
 import addIcon from "../../assets/images/icon-user-create.png";
 // import { useNavigate } from "react-router-dom";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
 
 function SearchProfilePage() {
   const navigate = useNavigate();
-
-  function getData(val) {
-    console.log(val)
-  }
-
   return (
     <div className="wrapper-profile-patient-page search-profile-page">
       <div className="container-app">
