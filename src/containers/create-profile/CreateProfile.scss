@@ -4,7 +4,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: $margin-bottom-page;
     min-height: 500px;
     h1.title {
         text-align: center;
@@ -80,6 +80,7 @@
         font-size: 26px;
     }
     .wrapper-create-profile-page {
+        margin-bottom: 40px;
         .form-search-profile .title, .form-revert-code .title, .form-create-profile .title {
             font-size: 16px;
         }

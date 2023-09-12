@@ -2,6 +2,7 @@
 
 .wrapper-home-page {
     width: 100%;
+    margin-bottom: $margin-bottom-page;
     .wrapper-search-box {
         text-align: center;
         padding-top: 30px;
@@ -138,6 +139,9 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .wrapper-home-page {
+        margin-bottom: 40px;
+    }
     .wrapper-home-page .wrapper-search-box .wrapper-item .row-info-total {
         width: 100%;
     }

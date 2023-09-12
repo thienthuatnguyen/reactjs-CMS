@@ -210,7 +210,17 @@ div#root {
     width: 1320px;
 }
 @media only screen and (max-width: 768px) {
-
+    div#root {
+        .wrapper-app {
+            .main-page {
+                .page-content {
+                   overflow-x: hidden;
+                }
+               
+            }
+        }
+        
+    }
     .container-app {
         max-width: 768px;
         padding: 0 10px;

@@ -4,7 +4,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: $margin-bottom-page;
 
     h1.title {
         text-align: center;
@@ -162,12 +162,56 @@
                 min-width: 200px;
             }
         }
+        
+    }
+    .booking-confirm {
+       
+        &.display-mobile {
+            display: none;
+        }
+       
     }
 
 
 }
 
 @media only screen and (max-width: 768px) {
+    .wrapper-booking-schedule-page .wrapper-content .left-content .box-info .content-info .row-content-info .col-content-info, .wrapper-booking-schedule-page .wrapper-content .right-content .box-info .content-info .row-content-info .col-content-info {
+        height: auto;
+        min-height: 30px;
+        &:first-child {
+            width: 120px;
+            min-width: 120px;
+            max-width: 120px;
+        }
+    }
+    .wrapper-booking-schedule-page .wrapper-content .booking-confirm {
+       display: none;
+       
+    }
+    .booking-confirm {
+        text-align: center;
+        &.display-mobile {
+            display: block !important;
+           }
+    }
+    .wrapper-booking-time .row-button button {
+        margin-bottom: 15px;
+    }
+    .wrapper-booking-schedule-page .wrapper-content {
+        flex-wrap: wrap;
+        .left-content, .right-content {
+            margin: 0;
+            padding: 0;
+            flex: 1 1 100%;
+            min-width: 100%;
+            max-width: 100%;
+        }
+    }
+    
+    .wrapper-booking-schedule-page {
+        margin-bottom: 40px;
+    }
     .wrapper-booking-schedule-page h1.title {
         font-size: 26px;
     }

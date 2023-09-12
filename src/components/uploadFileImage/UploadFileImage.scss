@@ -36,3 +36,13 @@
         }
     }
 }
+@media only screen and (max-width: 768px) {
+    .upload-image {
+        .btn-upload-img {
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}

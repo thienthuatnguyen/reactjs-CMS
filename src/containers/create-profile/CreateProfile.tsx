@@ -4,6 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import ProfileUpsert from "../../components/profile-upsert/ProfileUpsert";
+import { useNavigate } from "react-router-dom";
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -31,6 +32,7 @@ function a11yProps(index: any) {
 function CreateProfilePage() {
   const [value, setValue] = React.useState(0);
   const [displayRevertCode, setDisplayRevertCode] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -41,6 +43,7 @@ function CreateProfilePage() {
     formState: { errors }
   } = useForm();
   const onSubmit = (data) => {
+    navigate(`/ho-so-benh-nhan/search?id=${data.code}`)
   };
   const formValues = {
     code: ''

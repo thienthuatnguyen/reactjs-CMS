@@ -15,6 +15,7 @@ import ProfilePatientPage from './containers/profile-patient/ProfilePatient';
 import CreateProfilePage from './containers/create-profile/CreateProfile';
 import ProfilePatientDetailPage from './containers/profile-patient-detail/ProfilePatientDetail';
 import BookingSchedulePage from './containers/booking-schedule/BookingSchedule';
+import SearchProfilePage from './containers/search-profile/SearchProfile';
 function App() {
   return (
     <div className="wrapper-app">
@@ -68,7 +69,13 @@ function App() {
               <ProfilePatientDetailPage></ProfilePatientDetailPage>
             </PrivateRoute>} >
           </Route>
+          <Route path="search" element={
+          <PrivateRoute >
+            <SearchProfilePage></SearchProfilePage>
+          </PrivateRoute>} >
         </Route>
+        </Route>
+        
 
 
 

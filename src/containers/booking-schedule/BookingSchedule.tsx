@@ -69,7 +69,7 @@ function BookingSchedulePage() {
             <div className="box-info no-padding">
               <div className="box-title">Vui lòng chọn ngày khám</div>
               <div className="wrapper-my-datepicker">
-                <DatePicker  locale="vi" selected={startDate} inline onChange={handleDateChange}       filterDate={filterWeekends}/>
+                <DatePicker locale="vi" selected={startDate} inline onChange={handleDateChange} filterDate={filterWeekends} />
               </div>
             </div>
             <div className="box-info">
@@ -176,6 +176,13 @@ function BookingSchedulePage() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="booking-confirm display-mobile">
+          <Button
+            variant="contained"
+            className="my-btn btn-blue-dash btn-contained large-size btn-booking-confirm">
+            Xác nhận
+          </Button>
         </div>
       </div>
     </div>

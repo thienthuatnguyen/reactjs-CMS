@@ -4,7 +4,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: $margin-bottom-page;
     h1.title {
         text-align: center;
         font-size: 30px;
@@ -122,10 +122,67 @@
             }
         }
     }
+    &.search-profile-page {
+        .wrapper-result {
+            background-color: #fff;
+            padding: 20px 30px;
+            .content-wrapper {
+                display: flex;
+                .content-item {
+                    flex: 1 1 50%;
+                    min-width: 50%;
+                    max-width: 50%;
+                }
+            }
+            .title {
+                text-align: center;
+                text-transform: uppercase;
+                font-size: 20px;
+                font-weight: bold;
+                color: $blue-dark;
+            }
+            .name {
+                background: url('../../assets/images/user-blue.png') no-repeat left center;
+                font-size: 18px;
+                color: $blue-dark;
+                font-weight: bold;
+                padding-left: 40px;
+                height: 30px;
+                display: inline-flex;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+            .row-result {
+                display: flex;
+                padding: 5px 0;
+                .col-item {
+                    flex: 1 1 100%;
+                    &:first-child {
+                        flex: 1 1 auto;
+                        padding-right: 60px;
+                        min-width: 120px;
+                    }
+                }
+            }
+            .btn-pre-book {
+                text-align: center;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            
+        }
+        h3.result-text {
+            font-size: 18px;
+            color: $blue-dark;
+        }
+    }
    
 }
 
 @media only screen and (max-width: 768px) {
+    .wrapper-profile-patient-page {
+        margin-bottom: 40px;
+    }
     .wrapper-profile-patient-page h1.title {
         font-size: 26px;
     }
