@@ -1,10 +1,19 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import { Button, FormControl, InputLabel, MenuItem, Select, Snackbar, TextField } from "@material-ui/core";
 import "./ProfileUpsert.scss";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
+import Stack from '@mui/material/Stack';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import React from "react";
 
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref,
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 function ProfileUpsert({isEdit}) {
-
+  const [open, setOpen] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -12,6 +21,7 @@ function ProfileUpsert({isEdit}) {
   } = useForm();
 
   const onSubmitCreateProfile = (data) => {
+    setOpen(true);
   };
 
   const formValuesProfile = {
@@ -40,6 +50,14 @@ function ProfileUpsert({isEdit}) {
   function handleSexChange() {
 
   }
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
   return (
     <div className="form-create-profile">
       {isEdit && <div className="title">Sửa thông tin bệnh nhân</div> }
@@ -400,6 +418,14 @@ function ProfileUpsert({isEdit}) {
           </Button>
         </div>
       </form>
+
+      <Stack spacing={2} sx={{ width: '100%' }}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Hồ sơ của bạn đã được tạo thành công !
+          </Alert>
+        </Snackbar>
+      </Stack>
     </div>
   );
 }
