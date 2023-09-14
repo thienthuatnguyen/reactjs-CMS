@@ -1,20 +1,36 @@
 @import '../../assets/scss/variables.scss';
+
 .login-form {
     display: flex;
     align-items: center;
     flex-direction: column;
     margin-top: 35px;
+
     .phone-input {
         margin-bottom: 30px;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
         .wrapper-input {
             width: 255px;
             position: relative;
             margin-top: 10px;
+            &.wrapper-input-password {
+                margin-top: 0;
+                .btn-show-hide-password {
+                    right: auto;
+                    left: 15px;
+                }
+            }
+
             img.icon-phone {
                 position: absolute;
                 left: 15px;
                 top: 10px;
             }
+
             input {
                 @include border-radius(50%);
                 border-radius: 18px !important;
@@ -22,11 +38,16 @@
                 border: 1px solid $green !important;
             }
         }
-        
+
     }
-   
+
     .link-signup {
         margin-top: 20px;
+        width: 300px;
+        text-align: left;
+        text-transform: initial;
+        font-style: italic;
+        font-size: 15px;
         .link {
             font-weight: bold;
             color: $blue;

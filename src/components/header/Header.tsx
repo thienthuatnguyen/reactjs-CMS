@@ -18,9 +18,9 @@ export function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const logOut = ()=> {
+  const logOut = () => {
     navigate("/login")
-  } 
+  }
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -36,14 +36,8 @@ export function Header() {
           <Menu id={"sidebar"} className={"side-menu-mobile"} burgerButtonClassName={"button-menu-mobile"}>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/">Trang chủ</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/ho-so-benh-nhan">Hồ sơ bệnh nhân</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-vn">Bác sĩ VN</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-singapore">Bác sĩ Singapore</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/tam-nhin-su-menh">Tầm nhìn sứ mệnh</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/doi-tac">Đối tác</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/lien-he">Liên hệ</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/tai-ung-dung">Tải ứng dụng</NavLink>
+            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
           </Menu>
         </div>
       </div>
@@ -64,39 +58,10 @@ export function Header() {
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/ho-so-benh-nhan">Hồ sơ bệnh nhân</NavLink>
               </li>
               <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
-              </li>
-
-              <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
               </li>
-              <li className="parent-menu">
-                <span className="name-parent">Bác sĩ</span>
-                <ul className="child-menu">
-                  <li>
-                    <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-singapore">Bác sĩ Singapore</NavLink>
-                  </li>
-                  <li>
-                    <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/bac-si-vietnam">Bác sĩ Việt Nam</NavLink>
-                  </li>
-                </ul>
-              </li>
-              <li className="parent-menu">
-                <span className="name-parent">Về chúng tôi</span>
-                <ul className="child-menu">
-                  <li>
-                    <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/tam-nhin-su-menh">Tầm nhìn sứ mệnh</NavLink>
-                  </li>
-                  <li>
-                    <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/doi-tac">Đối tác</NavLink>
-                  </li>
-                </ul>
-              </li>
               <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/lien-he">Liên hệ</NavLink>
-              </li>
-              <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/tai-ung-dung">Tải ứng dụng</NavLink>
+                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
               </li>
             </ul>
             <div className="user-account">
@@ -119,7 +84,7 @@ export function Header() {
                 <div className="content-dropdown-account">
                   <div className="user-name">Thuat Nguyen</div>
                   <button type="button" className="btn-logout">Tạo hồ sơ</button>
-                  <button type="button" className="btn-logout" onClick={()=> {logOut()}}>Đăng xuất</button>
+                  <button type="button" className="btn-logout" onClick={() => { logOut() }}>Đăng xuất</button>
                 </div>
               </Popover>
             </div>

@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 35px;
+    margin-top: 25px;
     .title-form {
         margin-bottom: 10px;
     }
@@ -11,12 +11,21 @@
         width: 300px;
     }
     .text-confirm {
-        margin-top: 20px;
-        margin-bottom: 40px;
-        width: 100%;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        width: 300px;
+        font-size: 15px;
+        font-style: italic;
+        text-align: left;
         a {
             font-weight: bold;
             color: $blue;
+        }
+    }
+    &.forget-password {
+        .text-confirm-forget-pass {
+            width: 300px;
+            text-align: left;
         }
     }
 }

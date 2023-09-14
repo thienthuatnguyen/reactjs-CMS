@@ -33,7 +33,8 @@ function SignUp() {
     codeIntroduce: '',
     passWord: "",
     confirmPassword: "",
-    phoneNumber: ''
+    phoneNumber: '',
+    email: ''
   };
 
   return (
@@ -68,6 +69,21 @@ function SignUp() {
           <span className="arrow"></span>
           <img src={imgError} alt="error"/>
           {errors.userName && <span id="user-name-helper-text">Họ và tên là bắt buộc.</span>}
+        </div>
+      </div>
+
+      <div className={`form-group ${errors.email ? 'has-error' : ''}`}>
+        <input type="email" className="form-control bg-gray" id="email" aria-describedby="email-helper-text"
+          defaultValue={formValues.email}
+          placeholder="Nhập email"
+          {...register("email", {
+            required: false
+          })}
+        />
+        <div className="form-control-feedback">
+          <span className="arrow"></span>
+          <img src={imgError} alt="error"/>
+          {errors.email && <span id="email-name-helper-text">Email là bắt buộc.</span>}
         </div>
       </div>
 
@@ -129,7 +145,7 @@ function SignUp() {
 
 
       <div className="text-confirm">
-        <span>Bằng việc đăng ký, bạn đã đồng ý với chúng tôi về</span><br/>&nbsp;<a target="_blank" href="/">Quy định sử dụng</a>&nbsp;và&nbsp;<a target="_blank" href="/">chính sách bảo mật</a>
+        <span>Bằng việc đăng ký, bạn đã đồng ý với chúng tôi về</span>&nbsp;<a target="_blank" href="/">Quy định sử dụng</a>&nbsp;và&nbsp;<a target="_blank" href="/">chính sách bảo mật</a>
       </div>
 
       <Button variant="contained" color="primary" type="submit" className="my-btn btn-login">

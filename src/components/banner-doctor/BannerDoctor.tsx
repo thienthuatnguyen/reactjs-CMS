@@ -41,6 +41,9 @@ export function BannerDoctor() {
       }
     ]
   };
+  function viewDetail() {
+      
+  }
   const getBanner = images => images.map((item, index) => (
     <div key={index} className="wrapper-item-slider">
       <div  className="item-banner">
@@ -58,7 +61,7 @@ export function BannerDoctor() {
             <Button variant="contained" className="my-btn btn-green btn-contained">
               Đặt lịch hẹn
             </Button>
-            <Button variant="outlined" className="my-btn btn-blue btn-outlined">
+            <Button onClick={()=> viewDetail} variant="outlined" className="my-btn btn-blue btn-outlined">
               Xem chi tiết
             </Button>
           </div>

@@ -1,0 +1,15 @@
+@import '../../assets/scss/variables.scss';
+
+.wrapper-hospital-page {
+    width: 100%;
+    margin-bottom: $margin-bottom-page;
+    
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper-hospital-page {
+        margin-bottom: 40px;
+    }
+   
+
+}

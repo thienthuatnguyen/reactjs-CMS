@@ -1,14 +1,10 @@
 
 import { Routes, Route } from 'react-router-dom';
-import AddMore from './containers/AddMore';
 import NotFoundPage from './containers/NotFoundPage';
 import PublicRoute from './containers/public-router/PublicRoute';
 import PrivateRoute from './containers/private-router/PrivateRoute';
 import Login from './containers/login/Login';
 import SignUp from './containers/signup/SignUp';
-import UserPage from './containers/user/User';
-import UserDetailPage from './containers/user/UserDetail';
-import UseState from './containers/UseState';
 import LoginAuthention from './containers/login-authention/LoginAuthention';
 import HomePage from './containers/home-page/HomePage';
 import ProfilePatientPage from './containers/profile-patient/ProfilePatient';
@@ -16,17 +12,13 @@ import CreateProfilePage from './containers/create-profile/CreateProfile';
 import ProfilePatientDetailPage from './containers/profile-patient-detail/ProfilePatientDetail';
 import BookingSchedulePage from './containers/booking-schedule/BookingSchedule';
 import SearchProfilePage from './containers/search-profile/SearchProfile';
+import HospitalPage from './containers/hospital/HospitalPage';
+import HospitalDetailPage from './containers/hospital-detail/HospitalDetailPage';
+import ForgetPasswordPage from './containers/forget-password/ForgetPassword';
 function App() {
   return (
     <div className="wrapper-app">
       <Routes>
-        <Route path="/user">
-          <Route path=":userId" element={<UserDetailPage />} />
-          <Route path="/user" element={
-            <PrivateRoute>
-              <UserPage />
-            </PrivateRoute>} />
-        </Route>
         <Route path="/" element={
           <PrivateRoute >
             <HomePage></HomePage>
@@ -42,20 +34,15 @@ function App() {
             <SignUp></SignUp>
           </PublicRoute>} >
         </Route>
+        <Route path="/forget-password" element={
+          <PublicRoute >
+            <ForgetPasswordPage></ForgetPasswordPage>
+          </PublicRoute>} >
+        </Route>
         <Route path="/login-authention" element={
           <PublicRoute >
             <LoginAuthention></LoginAuthention>
           </PublicRoute>} >
-        </Route>
-        <Route path="/demo-hook-use-state" element={
-          <PublicRoute >
-            <UseState></UseState>
-          </PublicRoute>} >
-        </Route>
-        <Route path="/add" element={
-          <PrivateRoute >
-            <AddMore></AddMore>
-          </PrivateRoute>} >
         </Route>
 
         <Route path="/ho-so-benh-nhan">
@@ -70,14 +57,11 @@ function App() {
             </PrivateRoute>} >
           </Route>
           <Route path="search" element={
-          <PrivateRoute >
-            <SearchProfilePage></SearchProfilePage>
-          </PrivateRoute>} >
+            <PrivateRoute >
+              <SearchProfilePage></SearchProfilePage>
+            </PrivateRoute>} >
+          </Route>
         </Route>
-        </Route>
-        
-
-
 
         <Route path="/tao-ho-so" element={
           <PrivateRoute >
@@ -89,6 +73,17 @@ function App() {
           <PrivateRoute >
             <BookingSchedulePage></BookingSchedulePage>
           </PrivateRoute>} >
+        </Route>
+
+        <Route path="/benh-vien">
+          <Route path="/benh-vien" element={
+            <PrivateRoute>
+              <HospitalPage></HospitalPage>
+            </PrivateRoute>} />
+          <Route path=":id" element={
+            <PrivateRoute>
+              <HospitalDetailPage></HospitalDetailPage>
+            </PrivateRoute>} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />}>
