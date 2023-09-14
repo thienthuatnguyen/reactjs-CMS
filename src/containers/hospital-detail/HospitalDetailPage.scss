@@ -3,7 +3,8 @@
 .wrapper-hospital-detail-page {
     width: 100%;
     margin-bottom: $margin-bottom-page;
-    
+    display: flex;
+    justify-content: center;
 }
 
 @media only screen and (max-width: 768px) {
