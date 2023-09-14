@@ -83,7 +83,8 @@ export function Header() {
               >
                 <div className="content-dropdown-account">
                   <div className="user-name">Thuat Nguyen</div>
-                  <button type="button" className="btn-logout">Tạo hồ sơ</button>
+                  <button type="button" className="btn-logout" onClick={() => { navigate("/tao-ho-so") }}>Tạo hồ sơ</button>
+                  <button type="button" className="btn-logout" onClick={() => { navigate("/quan-ly-tai-khoan") }}>Quản lý tài khoản</button>
                   <button type="button" className="btn-logout" onClick={() => { logOut() }}>Đăng xuất</button>
                 </div>
               </Popover>

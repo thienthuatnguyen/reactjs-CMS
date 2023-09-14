@@ -15,6 +15,7 @@ import SearchProfilePage from './containers/search-profile/SearchProfile';
 import HospitalPage from './containers/hospital/HospitalPage';
 import HospitalDetailPage from './containers/hospital-detail/HospitalDetailPage';
 import ForgetPasswordPage from './containers/forget-password/ForgetPassword';
+import UserAccountPage from './containers/user-account/UserAccount';
 function App() {
   return (
     <div className="wrapper-app">
@@ -61,6 +62,12 @@ function App() {
               <SearchProfilePage></SearchProfilePage>
             </PrivateRoute>} >
           </Route>
+        </Route>
+
+        <Route path="/quan-ly-tai-khoan" element={
+          <PrivateRoute >
+            <UserAccountPage></UserAccountPage>
+          </PrivateRoute>} >
         </Route>
 
         <Route path="/tao-ho-so" element={
