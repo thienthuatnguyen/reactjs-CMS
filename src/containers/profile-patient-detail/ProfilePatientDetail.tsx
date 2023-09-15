@@ -208,7 +208,7 @@ function ProfilePatientDetailPage() {
       >
         <Fade in={open}>
           <div className="wrapper-my-modal">
-            <ProfileUpsert isEdit={true}></ProfileUpsert>
+            <ProfileUpsert isEdit={true} callBackCloseModal = {handleClose}></ProfileUpsert>
           </div>
         </Fade>
       </Modal>

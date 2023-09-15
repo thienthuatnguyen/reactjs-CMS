@@ -510,6 +510,32 @@ textarea {
   max-width: 80%;
   max-height: 90vh;
   overflow: auto;
+  min-width: 800px;
+  
+  .button-submit-right {
+    text-align: right;
+    margin: 10px 0;
+    button {
+      margin-right: 15px;
+      min-width: 100px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  .head-modal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 30px 0;
+    h1.title {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: left;
+      margin: 0;
+    }
+  }
 }
 
 .my-breadcrumb {
@@ -551,6 +577,9 @@ textarea {
   
 }
 @media only screen and (max-width: 768px) {
+  .wrapper-my-modal {
+    min-width: unset;
+  }
   .my-breadcrumb {
     margin-bottom: 30px !important;
     li {

@@ -245,7 +245,7 @@ function CreateProfilePage() {
             </div>}
           </TabPanel>
           <TabPanel value={value} index={1}>
-              <ProfileUpsert isEdit = {false}></ProfileUpsert>
+              <ProfileUpsert isEdit = {false} callBackCloseModal></ProfileUpsert>
           </TabPanel>
         </div>
       </div>

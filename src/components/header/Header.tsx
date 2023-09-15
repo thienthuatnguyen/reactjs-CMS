@@ -38,6 +38,9 @@ export function Header() {
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/ho-so-benh-nhan">Hồ sơ bệnh nhân</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
+            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/quan-ly-tai-khoan">Quản lý tài khoản</NavLink>
+            <button type="button" className="btn-logout" onClick={() => { handleClose(); logOut() }}>Đăng xuất</button>
+
           </Menu>
         </div>
       </div>
@@ -83,9 +86,9 @@ export function Header() {
               >
                 <div className="content-dropdown-account">
                   <div className="user-name">Thuat Nguyen</div>
-                  <button type="button" className="btn-logout" onClick={() => { navigate("/tao-ho-so") }}>Tạo hồ sơ</button>
-                  <button type="button" className="btn-logout" onClick={() => { navigate("/quan-ly-tai-khoan") }}>Quản lý tài khoản</button>
-                  <button type="button" className="btn-logout" onClick={() => { logOut() }}>Đăng xuất</button>
+                  <button type="button" className="btn-account" onClick={() => { handleClose(); navigate("/tao-ho-so") }}>Tạo hồ sơ</button>
+                  <button type="button" className="btn-account" onClick={() => { handleClose(); navigate("/quan-ly-tai-khoan") }}>Quản lý tài khoản</button>
+                  <button type="button" className="btn-account" onClick={() => { handleClose(); logOut() }}>Đăng xuất</button>
                 </div>
               </Popover>
             </div>

@@ -100,6 +100,12 @@ header.header-app {
 
   .wrapper-menu-mobile {
     display: none;
+    button.btn-logout {
+      background-color: transparent;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+    }
     .logo {
       display: inline-flex;
       height: 100%;
@@ -213,18 +219,22 @@ header.header-app {
 
 .content-dropdown-account {
   padding: 15px;
+  width: 200px;
   .user-name {
     font-weight: bold;
     padding-bottom: 10px;
     border-bottom: 1px solid;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
-  button.btn-logout {
+  button.btn-account {
     width: 100%;
     border: none;
     background: transparent;
     text-align: left;
     cursor: pointer;
     margin-bottom: 10px;
+    &:hover {
+      color: $blue;
+    }
   }
 }

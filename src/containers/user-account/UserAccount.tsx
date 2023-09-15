@@ -3,11 +3,14 @@ import "./UserAccount.scss";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import editIcon from "../../assets/images/edit-black.svg";
+import closeIcon from "../../assets/images/close.svg";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import showPassImage from "../../assets/images/show-pass.png";
 import hidePassImage from "../../assets/images/hide-pass.png";
 const EditIcon = () => (<img src={editIcon} alt="edit-icon"></img>);
+const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     modal: {
@@ -87,10 +90,12 @@ function UserAccountPage() {
         <h1 className="title">Tài khoản của bạn</h1>
         <div className="content-account">
           <div className="content-item">
-            <h2 className="title">Thông tin cá nhân</h2>
-            <IconButton onClick={handleEditInfo} aria-label="delete" className="btn-edit">
-              <EditIcon />
-            </IconButton>
+            <div className="top-head">
+              <h2 className="title">Thông tin cá nhân</h2>
+              <IconButton onClick={handleEditInfo} aria-label="edit" className="btn-edit">
+                <EditIcon />
+              </IconButton>
+            </div>
             <div className="row-info">
               <div className="col-info">Họ và tên:</div>
               <div className="col-info">Nguyễn Thiện Thuật</div>
@@ -109,14 +114,16 @@ function UserAccountPage() {
             </div>
 
           </div>
-          <div className="content-item">
-            <h2 className="title">Mật khẩu</h2>
-            <IconButton onClick={handleEditPass} aria-label="delete" className="btn-edit">
-              <EditIcon />
-            </IconButton>
+          <div className="content-item content-item-password">
+            <div className="top-head">
+              <h2 className="title">Mật khẩu</h2>
+              <IconButton onClick={handleEditPass} aria-label="edit" className="btn-edit">
+                <EditIcon />
+              </IconButton>
+            </div>
             <div className="row-info">
               <div className="col-info">Mật khẩu đăng nhập:</div>
-              <div className="col-info">********</div>
+              <div className="col-info">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</div>
             </div>
           </div>
         </div>
@@ -136,7 +143,12 @@ function UserAccountPage() {
       >
         <Fade in={openModalAccount}>
           <div className="wrapper-my-modal">
-            <div className="title">Sửa thông tin cá nhân</div>
+            <div className="head-modal">
+              <h1 className="title">Sửa thông tin cá nhân</h1>
+              <IconButton onClick={handleCloseModalAccount} aria-label="close">
+                <CloseIcon />
+              </IconButton>
+            </div>
             <form className="wrapper-form" onSubmit={handleSubmit(onSubmitEditAccount)}>
               <div className="items-inline">
                 <div className={`form-group item-input required ${errors.name ? 'has-error' : ''}`}>
@@ -144,7 +156,7 @@ function UserAccountPage() {
                     <span>Họ và tên</span></InputLabel>
                   <input type="text" className="form-control bg-white" id="name" aria-describedby="name-helper-text"
                     defaultValue={formAccount.name}
-                    placeholder=""
+                    placeholder="Họ và tên"
                     {...register("name", {
                       required: true
                     })}
@@ -161,7 +173,7 @@ function UserAccountPage() {
                     <span>Số điện thoại</span></InputLabel>
                   <input type="tel" className="form-control bg-white" id="phoneNumber" aria-describedby="phone-number-helper-text"
                     defaultValue={formAccount.phoneNumber}
-                    placeholder="Phone number"
+                    placeholder="Số điện thoại"
                     {...register("phoneNumber", {
                       required: true
                     })}
@@ -179,7 +191,7 @@ function UserAccountPage() {
                     <span>Email</span></InputLabel>
                   <input type="text" className="form-control bg-white" id="email" aria-describedby="email-helper-text"
                     defaultValue={formAccount.email}
-                    placeholder=""
+                    placeholder="Email"
                     {...register("email", {
                       required: false
                     })}
@@ -195,7 +207,7 @@ function UserAccountPage() {
                     <span>Mã giới thiệu</span></InputLabel>
                   <input type="text" className="form-control bg-white" id="code" aria-describedby="code-helper-text"
                     defaultValue={formAccount.code}
-                    placeholder=""
+                    placeholder="Mã giới thiệu"
                     {...register("code", {
                       required: false
                     })}
@@ -208,8 +220,8 @@ function UserAccountPage() {
                 </div>
               </div>
 
-              <div className="button-submit-center">
-                <Button variant="outlined" color="primary" type="submit" className="my-btn btn-outlined btn-black">
+              <div className="button-submit-right">
+                <Button onClick={()=> handleCloseModalAccount} variant="outlined" color="primary" type="submit" className="my-btn btn-outlined btn-black">
                   Hủy
                 </Button>
                 <Button variant="contained" color="primary" type="submit" className="my-btn btn-contained btn-blue-dash">
@@ -236,11 +248,16 @@ function UserAccountPage() {
       >
         <Fade in={openModalPass}>
           <div className="wrapper-my-modal">
-            <div className="title">Đổi mật khẩu</div>
+            <div className="head-modal">
+              <h1 className="title">Đổi mật khẩu</h1>
+              <IconButton onClick={handleCloseModalPass} aria-label="close">
+                <CloseIcon />
+              </IconButton>
+            </div>
             <form className="wrapper-form" onSubmit={handleSubmit(onSubmitEditPassword)}>
               <div className={`form-group ${errors.oldPassword ? 'has-error' : ''}`}>
-              <InputLabel htmlFor="oldPassword" className="label-config">
-              <span>Mật khẩu củ</span></InputLabel>
+                <InputLabel htmlFor="oldPassword" className="label-config">
+                  <span>Mật khẩu củ</span></InputLabel>
                 <input type={oldPasswordShown ? "text" : "password"} className="form-control bg-gray" id="oldPassword" aria-describedby="old-password-helper-text"
                   defaultValue={formPassword.oldPassword}
                   placeholder="Nhập mật khẩu củ"
@@ -260,8 +277,8 @@ function UserAccountPage() {
               </div>
 
               <div className={`form-group ${errors.newPassword ? 'has-error' : ''}`}>
-              <InputLabel htmlFor="newPassword" className="label-config">
-              <span>Mật khẩu mới</span></InputLabel>
+                <InputLabel htmlFor="newPassword" className="label-config">
+                  <span>Mật khẩu mới</span></InputLabel>
                 <input type={newPasswordShown ? "text" : "password"} className="form-control bg-gray" id="newPassword" aria-describedby="new-password-helper-text"
                   defaultValue={formPassword.newPassword}
                   placeholder="Nhập mật khẩu mới"
@@ -280,8 +297,8 @@ function UserAccountPage() {
               </div>
 
               <div className={`form-group ${errors.newConfirmPassword ? 'has-error' : ''}`}>
-              <InputLabel htmlFor="confirmNewPassword" className="label-config">
-              <span>Nhập lại mật khẩu mới</span></InputLabel>
+                <InputLabel htmlFor="confirmNewPassword" className="label-config">
+                  <span>Nhập lại mật khẩu mới</span></InputLabel>
                 <input type={confirmNewPasswordShown ? "text" : "password"} className="form-control bg-gray" id="confirmNewPassword" aria-describedby="confirm-new-password-helper-text"
                   defaultValue={formPassword.confirmNewPassword}
                   placeholder="Nhập lại mật khẩu mới"
@@ -304,8 +321,8 @@ function UserAccountPage() {
                   {errors.confirmNewPassword && errors.confirmNewPassword.type === 'inCorrect' && <span id="confirm-new-password-helper-text">Mật khẩu xác nhận chưa đúng.</span>}
                 </div>
               </div>
-              <div className="button-submit-center">
-                <Button variant="outlined" color="primary" type="submit" className="my-btn btn-outlined btn-black">
+              <div className="button-submit-right">
+                <Button onClick={()=> handleCloseModalPass} variant="outlined" color="primary" type="button" className="my-btn btn-outlined btn-black">
                   Hủy
                 </Button>
                 <Button variant="contained" color="primary" type="submit" className="my-btn btn-contained btn-blue-dash">

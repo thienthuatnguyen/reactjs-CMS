@@ -1,10 +1,13 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, Snackbar, TextField } from "@material-ui/core";
+import { Button, FormControl, IconButton, InputLabel, MenuItem, Select, Snackbar, TextField } from "@material-ui/core";
 import "./ProfileUpsert.scss";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import Stack from '@mui/material/Stack';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import React from "react";
+import closeIcon from "../../assets/images/close.svg";
+
+const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -12,7 +15,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 ) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-function ProfileUpsert({isEdit}) {
+function ProfileUpsert({ isEdit, callBackCloseModal }) {
   const [open, setOpen] = React.useState(false);
   const {
     register,
@@ -51,6 +54,10 @@ function ProfileUpsert({isEdit}) {
 
   }
 
+  function handleCloseModal() {
+    callBackCloseModal();
+  }
+
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -60,11 +67,18 @@ function ProfileUpsert({isEdit}) {
   };
   return (
     <div className="form-create-profile">
-      {isEdit && <div className="title">Sửa thông tin bệnh nhân</div> }
       {!isEdit && <div className="title">Nhập thông tin bệnh nhân</div>}
+      {isEdit && <div className="head-modal">
+        <h1 className="title">Sửa thông tin bệnh nhân</h1>
+        <IconButton onClick={handleCloseModal} aria-label="close">
+          <CloseIcon />
+        </IconButton>
+      </div>
+      }
+
       {!isEdit && <div className="text-description">
         Vui lòng cung cấp thông tin chính xác để được phục vụ tốt nhất. Trong trường hợp cung cấp sai thông tin bệnh nhân và số điện thoại việc xác nhận cuộc hẹn sẽ không thành công trước khi đặt lịch khám.
-      </div> }
+      </div>}
       <form className="wrapper-form" onSubmit={handleSubmit(onSubmitCreateProfile)}>
         <div className="items-inline">
           <div className={`form-group item-input`}>
@@ -412,11 +426,21 @@ function ProfileUpsert({isEdit}) {
 
         </div>
 
-        <div className="button-submit-center">
+        {!isEdit && <div className="button-submit-center">
           <Button variant="contained" color="primary" type="submit" className="my-btn btn-contained btn-blue-dash btn-search">
             Xác nhận
           </Button>
+        </div>}
+
+        {isEdit && <div className="button-submit-right">
+          <Button onClick={() => handleCloseModal()} variant="outlined" color="primary" type="button" className="my-btn btn-outlined btn-black">
+            Hủy
+          </Button>
+          <Button variant="contained" color="primary" type="submit" className="my-btn btn-contained btn-blue-dash">
+            Lưu
+          </Button>
         </div>
+        }
       </form>
 
       <Stack spacing={2} sx={{ width: '100%' }}>
