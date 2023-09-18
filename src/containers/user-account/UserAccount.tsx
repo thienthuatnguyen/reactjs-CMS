@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import showPassImage from "../../assets/images/show-pass.png";
 import hidePassImage from "../../assets/images/hide-pass.png";
+import { connect } from "react-redux";
+import { IUser, User } from "../../models/user.model";
 const EditIcon = () => (<img src={editIcon} alt="edit-icon"></img>);
 const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
 
@@ -27,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 
 );
-function UserAccountPage() {
+function UserAccountPage(props: any) {
   const navigate = useNavigate();
   const [openModalAccount, setOpenModalAccount] = useState(false);
   const [openModalPass, setOpenModalPass] = useState(false);
@@ -48,6 +50,17 @@ function UserAccountPage() {
     setConfirmNewPasswordShown(!confirmNewPasswordShown);
   };
 
+  let formAccount: IUser = new User();
+
+  if(props.user && props.user.data && props.user.data.profile) {
+    formAccount = {
+      full_name: props.user.data.profile.full_name,
+      email: props.user.data.profile.email,
+      phone_number: props.user.data.profile.phone_number
+    };
+  }
+  
+
   const {
     register,
     handleSubmit,
@@ -60,12 +73,7 @@ function UserAccountPage() {
   const onSubmitEditPassword = (data) => {
   };
 
-  const formAccount = {
-    name: '',
-    email: '',
-    phoneNumber: '',
-    code: ''
-  };
+ 
   const formPassword = {
     oldPassword: '',
     newPassword: '',
@@ -98,20 +106,20 @@ function UserAccountPage() {
             </div>
             <div className="row-info">
               <div className="col-info">Họ và tên:</div>
-              <div className="col-info">Nguyễn Thiện Thuật</div>
+              <div className="col-info">{formAccount.full_name}</div>
             </div>
             <div className="row-info">
               <div className="col-info">Số điện thoại:</div>
-              <div className="col-info">0938225141</div>
+              <div className="col-info">{formAccount.phone_number}</div>
             </div>
             <div className="row-info">
               <div className="col-info">Email:</div>
-              <div className="col-info">thienthuat.it.90@gmail.com</div>
+              <div className="col-info">{formAccount.email}</div>
             </div>
-            <div className="row-info">
+            {/* <div className="row-info">
               <div className="col-info">Mã giới thiệu:</div>
               <div className="col-info">ABSJDS67234234</div>
-            </div>
+            </div> */}
 
           </div>
           <div className="content-item content-item-password">
@@ -155,7 +163,7 @@ function UserAccountPage() {
                   <InputLabel htmlFor="name" className="label-config">
                     <span>Họ và tên</span></InputLabel>
                   <input type="text" className="form-control bg-white" id="name" aria-describedby="name-helper-text"
-                    defaultValue={formAccount.name}
+                    defaultValue={formAccount.full_name}
                     placeholder="Họ và tên"
                     {...register("name", {
                       required: true
@@ -172,7 +180,7 @@ function UserAccountPage() {
                   <InputLabel htmlFor="phoneNumber" className="label-config">
                     <span>Số điện thoại</span></InputLabel>
                   <input type="tel" className="form-control bg-white" id="phoneNumber" aria-describedby="phone-number-helper-text"
-                    defaultValue={formAccount.phoneNumber}
+                    defaultValue={formAccount.phone_number}
                     placeholder="Số điện thoại"
                     {...register("phoneNumber", {
                       required: true
@@ -202,7 +210,7 @@ function UserAccountPage() {
                     {errors.email && <span id="email-helper-text">Email là bắt buộc.</span>}
                   </div>
                 </div>
-                <div className={`form-group item-input ${errors.code ? 'has-error' : ''}`}>
+                {/* <div className={`form-group item-input ${errors.code ? 'has-error' : ''}`}>
                   <InputLabel htmlFor="code" className="label-config">
                     <span>Mã giới thiệu</span></InputLabel>
                   <input type="text" className="form-control bg-white" id="code" aria-describedby="code-helper-text"
@@ -217,11 +225,11 @@ function UserAccountPage() {
                     <img src={imgError} alt="error" />
                     {errors.code && <span id="code-helper-text">Mã giới thiệu là bắt buộc.</span>}
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div className="button-submit-right">
-                <Button onClick={()=> handleCloseModalAccount} variant="outlined" color="primary" type="submit" className="my-btn btn-outlined btn-black">
+                <Button onClick={()=> handleCloseModalAccount()} variant="outlined" color="primary" type="submit" className="my-btn btn-outlined btn-black">
                   Hủy
                 </Button>
                 <Button variant="contained" color="primary" type="submit" className="my-btn btn-contained btn-blue-dash">
@@ -337,5 +345,9 @@ function UserAccountPage() {
   );
 }
 
-export default UserAccountPage;
+const mapStateToProps = (state: any) => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(UserAccountPage);
 

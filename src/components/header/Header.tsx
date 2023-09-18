@@ -6,7 +6,10 @@ import logoMobile from "../../assets/images/logo-mobi.png";
 // import { useParams } from 'react-router';
 import { Button, Popover } from "@material-ui/core";
 import React from "react";
-export function Header() {
+import authService from "../../services/authService";
+import { connect } from "react-redux";
+import { IUser, User } from "../../models/user.model";
+function Header(props: any) {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -15,15 +18,24 @@ export function Header() {
     setAnchorEl(event.currentTarget);
   };
   // const params = useParams()
+  let user: IUser = new User();
+  if(props.user && props.user.data && props.user.data.profile) {
+    user = props.user.data.profile;
+  }
+  
   const handleClose = () => {
     setAnchorEl(null);
   };
   const logOut = () => {
-    navigate("/dang-nhap")
+    authService.logout().then(()=> {
+      localStorage.removeItem('o2fine');
+      navigate("/dang-nhap");
+    })
   }
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
   return (
     <header className="header-app">
       <div className="wrapper-menu-mobile">
@@ -85,7 +97,7 @@ export function Header() {
                 }}
               >
                 <div className="content-dropdown-account">
-                  <div className="user-name">Thuat Nguyen</div>
+                  <div className="user-name">{user.full_name}</div>
                   <button type="button" className="btn-account" onClick={() => { handleClose(); navigate("/tao-ho-so") }}>Tạo hồ sơ</button>
                   <button type="button" className="btn-account" onClick={() => { handleClose(); navigate("/quan-ly-tai-khoan") }}>Quản lý tài khoản</button>
                   <button type="button" className="btn-account" onClick={() => { handleClose(); logOut() }}>Đăng xuất</button>
@@ -98,3 +110,12 @@ export function Header() {
     </header>
   )
 }
+
+const mapStateToProps = (state: any) => ({
+  user: state.user
+})
+
+
+export default connect(
+  mapStateToProps
+)(Header)

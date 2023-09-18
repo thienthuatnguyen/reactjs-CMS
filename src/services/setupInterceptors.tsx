@@ -3,7 +3,7 @@ import { baseURL } from '../utils/config'
 function SetupInterceptors(http)  {
     http.interceptors.request.use(
         config => {
-            config.headers['token'] = `${localStorage.getItem('token')}`
+            config.headers['Authorization'] = `Bearer ${localStorage.getItem('o2fine')}`
             config.headers['content-type'] = 'application/json'
             return config
         },
@@ -13,22 +13,28 @@ function SetupInterceptors(http)  {
     )
 
     http.interceptors.response.use(function(response) {
-        return response
+        if(response.data.error) {
+            if(response.data.error_code === 403) {
+                localStorage.removeItem('o2fine');
+                window.location.href = '/dang-nhap';
+            }
+            if(response.data.error_code === 401) {
+                localStorage.removeItem('o2fine');
+                window.location.href = '/dang-nhap';
+            }
+        }
+        return response;
     }, function (error) {
         const status = error?.response?.status || 0
         const resBaseURL = error?.response?.config?.baseURL
         if (resBaseURL === baseURL && status === 401) {
-            if (localStorage.getItem('token')) {
+            if (localStorage.getItem('o2fine')) {
                 localStorage.clear()
-                window.location.assign('/')
+                window.location.assign('/dang-nhap')
                 return Promise.reject(error)
             } else {
                 return Promise.reject(error)
             }
-        }
-        if (resBaseURL === baseURL && status === 404) {
-            // window.location.href = '/404';
-
         }
         return Promise.reject(error)
     })

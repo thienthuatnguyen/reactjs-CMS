@@ -4,7 +4,6 @@ import http from '../services/httpConfig'
 
 function TodoList(state: any): JSX.Element {
   http.get('/abc').then(res=> {
-    console.log(res)
   }).catch(err=> {console.log(err.message)})
   return (
     <ul>

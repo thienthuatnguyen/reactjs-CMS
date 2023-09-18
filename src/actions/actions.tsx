@@ -27,4 +27,10 @@ export const addNewTodo = (text: string) => ({
     SHOW_COMPLETED: 'SHOW_COMPLETED',
     SHOW_ACTIVE: 'SHOW_ACTIVE'
   }
+
+  export const setUser = (data: any) => ({
+    type: 'SET_USER',
+    data
+  })
+  
   

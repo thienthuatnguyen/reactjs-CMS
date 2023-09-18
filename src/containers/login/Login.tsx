@@ -21,6 +21,7 @@ function Login() {
     handleSubmit,
     formState: { errors }
   } = useForm();
+
   const onSubmit = (data) => {
     let obj = {
       "phone_number": data.phoneNumber,
@@ -32,6 +33,7 @@ function Login() {
         setToastConfig({ type: 'error', isOpen: true, message: body.message });
 
       } else {
+        localStorage.setItem('o2fine', body.data.token);
         navigate("/");
       }
     });

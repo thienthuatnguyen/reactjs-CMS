@@ -8,7 +8,10 @@ const authService = {
         return http.post('/customer/register',data);
     },
     getUser: ()=> {
-        return http.get('/user');
+        return http.get('/customer/profile');
+    },
+    logout() {
+        return http.get('/customer/logout');
     }
 }
 
