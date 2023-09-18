@@ -43,11 +43,12 @@ function SignUp() {
       "ref_code": data.codeIntroduce
     }
     authService.signUp(obj).then((res: any) => {
-      if (res && res.data.error) {
-        setToastConfig({ type: 'error', isOpen: true, message: res.data.message });
+      let body = res.data;
+      if (body && body.error) {
+        setToastConfig({ type: 'error', isOpen: true, message: body.message });
 
       } else {
-        setToastConfig({ type: 'success', isOpen: true, message: res.data.message });
+        setToastConfig({ type: 'success', isOpen: true, message: body.data.message });
         setTimeout(() => {
           navigate("/dang-nhap");
         }, 1000)
