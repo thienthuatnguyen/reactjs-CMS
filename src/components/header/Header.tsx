@@ -19,7 +19,7 @@ export function Header() {
     setAnchorEl(null);
   };
   const logOut = () => {
-    navigate("/login")
+    navigate("/dang-nhap")
   }
 
   const open = Boolean(anchorEl);

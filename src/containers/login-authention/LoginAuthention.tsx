@@ -50,7 +50,7 @@ function LoginAuthention() {
       </Button>
       <div className="text-otp">&gt; Bạn không nhận được mã OTP ?</div>
       <div className="link-signup">
-        <span>Nếu bạn đã có tài khoản,</span>&nbsp;vui lòng đăng nhập&nbsp;<NavLink className= "link" to="/login">tại đây</NavLink>        
+        <span>Nếu bạn đã có tài khoản,</span>&nbsp;vui lòng đăng nhập&nbsp;<NavLink className= "link" to="/dang-nhap">tại đây</NavLink>        
       </div>
     </form>
   );

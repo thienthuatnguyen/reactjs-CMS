@@ -36,6 +36,6 @@ function PrivateRoute({ children }) {
         <Footer></Footer>
         {isVisible && <button className="btn-scroll-page" onClick={()=> {scrollToTop()}}></button>}
       </div>
-    </div> : <Navigate to="/login" />;
+    </div> : <Navigate to="/dang-nhap" />;
 }
 export default PrivateRoute;

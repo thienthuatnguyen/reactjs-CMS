@@ -1,7 +1,6 @@
 import { NavLink, Navigate } from "react-router-dom";
 import bgSignUp from "../../assets/images/bg-signup.png";
 import bgSignUpMobile from "../../assets/images/bg-signup-mobile.png";
-
 import logo from "../../assets/images/logo.png";
 import "./PublicRoute.scss";
 function PublicRoute({ children }) {
@@ -13,7 +12,7 @@ function PublicRoute({ children }) {
         <div className="left-content">
           <h1 className="title">Welcome to</h1>
           <div className="logo">
-            <NavLink to="/login">
+            <NavLink to="/dang-nhap">
               <img src={logo} alt="logo"></img>
             </NavLink>
           </div>
@@ -24,6 +23,6 @@ function PublicRoute({ children }) {
           <img className="display-mobile" src={bgSignUpMobile} alt="baner-signup"></img>
         </div>
       </div>
-    </div> : <Navigate to="/login" />;
+    </div> : <Navigate to="/dang-nhap" />;
 }
 export default PublicRoute;

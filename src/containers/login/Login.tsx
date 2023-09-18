@@ -78,8 +78,8 @@ function Login() {
         Đăng nhập
       </Button>
       <div className="link-signup">
-        <span>Bạn chưa có tài khoản?</span>&nbsp;<NavLink className="link" to="/sign-up">Đăng ký</NavLink><br/>
-        <span>Bạn đã quên mật khẩu?</span>&nbsp;<NavLink className="link" to="/forget-password">Lấy lại mật khẩu</NavLink>
+        <span>Bạn chưa có tài khoản?</span>&nbsp;<NavLink className="link" to="/dang-ky">Đăng ký</NavLink><br/>
+        <span>Bạn đã quên mật khẩu?</span>&nbsp;<NavLink className="link" to="/quen-mat-khau">Lấy lại mật khẩu</NavLink>
       </div>
       
     </form>

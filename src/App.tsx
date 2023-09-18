@@ -25,17 +25,17 @@ function App() {
             <HomePage></HomePage>
           </PrivateRoute>} >
         </Route>
-        <Route path="/login" element={
+        <Route path="/dang-nhap" element={
           <PublicRoute >
             <Login></Login>
           </PublicRoute>} >
         </Route>
-        <Route path="/sign-up" element={
+        <Route path="/dang-ky" element={
           <PublicRoute >
             <SignUp></SignUp>
           </PublicRoute>} >
         </Route>
-        <Route path="/forget-password" element={
+        <Route path="/quen-mat-khau" element={
           <PublicRoute >
             <ForgetPasswordPage></ForgetPasswordPage>
           </PublicRoute>} >
