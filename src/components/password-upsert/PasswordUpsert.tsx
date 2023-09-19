@@ -46,7 +46,7 @@ function PasswordUpsert({ closeModal, saveStatus }) {
       <div className={`form-group ${errors.password ? 'has-error' : ''}`}>
         <InputLabel htmlFor="Password" className="label-config">
           <span>Mật khẩu</span></InputLabel>
-        <input type={passwordShown ? "text" : "password"} className="form-control bg-gray" id="Password" aria-describedby="password-helper-text"
+        <input type={passwordShown ? "text" : "password"} className="form-control" id="Password" aria-describedby="password-helper-text"
           defaultValue={formPassword.password}
           placeholder="Nhập mật khẩu"
           {...register("password", {

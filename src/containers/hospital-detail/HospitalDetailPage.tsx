@@ -58,12 +58,12 @@ function HospitalDetailPage() {
         <div className="bottom">
           <Button
             variant="contained"
-            className="my-btn btn-blue btn-contained">
+            className="my-btn btn-blue-dash btn-contained">
             Lễ tân bệnh viện
           </Button>
           <Button
             variant="contained"
-            className="my-btn btn-blue btn-contained">
+            className="my-btn btn-blue-dash btn-contained">
             Đặt lịch hẹn
           </Button>
         </div>
@@ -74,7 +74,7 @@ function HospitalDetailPage() {
   const DetailInfo = () => (
     <div className="detail-info">
       <img src={imgHospitalDetail} alt="khoa" />
-      <p>
+      <div className="text-detail">
         When the modal dialog is displayed on the screen, the keyboard focus moves to the end of the modal dialog content instead of moving at the beginning of the modal dialog content.
         When the modal dialog is displayed on the screen, the keyboard focus moves to the end of the modal dialog content instead of moving at the beginning of the modal dialog content.
         When the modal dialog is displayed on the screen, the keyboard focus moves to the end of the modal dialog content instead of moving at the beginning of the modal dialog content.
@@ -82,13 +82,13 @@ function HospitalDetailPage() {
         When the modal dialog is displayed on the screen, the keyboard focus moves to the end of the modal dialog content instead of moving at the beginning of the modal dialog content.
         When the modal dialog is displayed on the screen, the keyboard focus moves to the end of the modal dialog content instead of moving at the beginning of the modal dialog content.
         When the modal dialog is displayed on the screen, the keyboard focus moves to the end of the modal dialog content instead of moving at the beginning of the modal dialog content.
-      </p>
+      </div>
     </div>
   )
 
   const TimeWork = () => (
     <div className="time-work">
-      <h2 className="title">Thời gian làm việc</h2>
+      <h2 className="title"><span>Thời gian làm việc</span></h2>
       <div className="table-schedule">
         <div className="row-item header">
           <div className="col-item col-date">

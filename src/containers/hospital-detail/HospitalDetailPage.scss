@@ -5,12 +5,163 @@
     margin-bottom: $margin-bottom-page;
     display: flex;
     justify-content: center;
+
+    .content-hospital {
+        display: flex;
+        margin-top: 30px;
+
+        .left-content {
+            flex: 1 1 auto;
+            background-color: #fff;
+            margin-right: 60px;
+            min-width: 266px;
+            max-width: 266px;
+            height: 240px;
+        }
+
+        .right-content {
+            flex: 1 1 100%;
+            background-color: #fff;
+            padding: 15px;
+        }
+
+        .my-vertical-tab {
+            button.MuiButtonBase-root {
+                text-transform: none;
+                font-family: "Averta";
+                color: $body-color;
+                font-size: 16px;
+                text-align: left;
+
+                span.MuiTab-wrapper {
+                    align-items: flex-start;
+                }
+
+                &.Mui-selected {
+                    background-color: $blue;
+                    color: #fff;
+                }
+            }
+        }
+
+        .wrapper-right-content {
+            .general-info {
+                display: flex;
+                margin-bottom: 60px;
+
+                .image-hospital {
+                    max-width: 400px;
+
+                    img {
+                        object-fit: cover;
+                        width: 100%;
+                    }
+                }
+
+                .info {
+                    padding-left: 30px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .top {
+                        .name {
+                            background: url('../../assets/images/icon-khoa.png') no-repeat left center;
+                            font-size: 18px;
+                            color: #1C508A;
+                            font-weight: bold;
+                            padding-left: 40px;
+                            height: 30px;
+                            display: inline-flex;
+                            align-items: center;
+                        }
+                        .address {
+                            background: url('../../assets/images/icon-location.png') no-repeat left center;
+                            font-size: 16px;
+                            color: #1C508A;
+                            padding-left: 40px;
+                            height: 40px;
+                            display: inline-flex;
+                            align-items: center;
+                            margin-top: 5px;
+                        }
+                    }
+
+                    .bottom {
+                        button {
+                            margin-right: 15px;
+
+                            &:last-child {
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+            }
+            .detail-info {
+                margin-bottom: 60px;
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                }
+                div.text-detail {
+                    margin-top: 30px;
+                }
+            }
+            .time-work {
+                padding-bottom: 30px;
+                
+                h2.title {
+                    text-align: center;
+                    font-size: 18px;
+                    color: $blue-dark;
+                    span {
+                        position: relative;
+                        &::before {
+                            position: absolute;
+                            left: 0;
+                            bottom: -5px;
+                            width: 100%;
+                            content: '';
+                            background-color: $blue-dark;
+                            height: 2px;
+                        }
+                    }
+                }
+                .table-schedule {
+                    .row-item {
+                        display: flex;
+                        align-items: center;
+                        &:nth-child(2n) {
+                            background-color: $gray;
+                        }
+                        &.header {
+                            font-weight: bold;
+                            border-bottom: 1px solid $border-input;
+                        }
+                        .col-item {
+                            padding: 10px 30px;
+                            &.col-date {
+                                flex: 1 1 25%;
+                            }
+                            &.col-time {
+                                flex: 1 1 25%;
+                            }
+                            &.col-action {
+                                flex: 1 1 50%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 768px) {
     .wrapper-hospital-detail-page {
         margin-bottom: 40px;
     }
-   
+
 
 }

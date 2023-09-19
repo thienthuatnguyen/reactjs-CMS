@@ -256,6 +256,12 @@ button.my-btn.btn-blue.btn-contained {
 }
 button.my-btn.btn-blue.btn-outlined {
     background-color: #fff;
+    color: $blue;
+    border: 1px solid $blue;
+    box-shadow: none;
+}
+button.my-btn.btn-blue-dash.btn-outlined {
+    background-color: #fff;
     color: $blue-dark;
     border: 1px solid $blue-dark;
     box-shadow: none;

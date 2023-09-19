@@ -1,0 +1,155 @@
+@import '../../assets/scss/variables.scss';
+
+.wrapper-banner-hospital {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    .general-info {
+        display: flex;
+        padding: 0 40px;
+        .image-hospital {
+            max-width: 440px;
+            min-width: 440px;
+            img {
+                object-fit: cover;
+                width: 100%;
+            }
+        }
+
+        .info {
+            margin-left: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 15px 20px;
+
+            .top {
+                display: flex;
+                flex-direction: column;
+                .name {
+                    background: url('../../assets/images/icon-khoa.png') no-repeat left center;
+                    font-size: 18px;
+                    color: #1C508A;
+                    font-weight: bold;
+                    padding-left: 40px;
+                    height: 30px;
+                    display: inline-flex;
+                    align-items: center;
+                }
+                .address {
+                    background: url('../../assets/images/icon-location.png') no-repeat left center;
+                    font-size: 16px;
+                    color: #1C508A;
+                    padding-left: 40px;
+                    height: 40px;
+                    display: inline-flex;
+                    align-items: center;
+                    margin-top: 5px;
+                }
+                .description {
+                    padding-left: 40px;
+                    margin-top: 10px;
+                }
+            }
+
+            .bottom {
+                padding-left: 40px;
+                button {
+                    margin-right: 15px;
+                    min-width: 180px;
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .my-hospital-slider {
+        padding-bottom: 80px;
+        ul.slick-dots {
+            bottom: 20px !important;
+            li {
+                button {
+                    box-shadow: none;
+                    background-color: transparent;
+                    border: 1px solid $blue-dark !important;
+                    opacity: 1 !important;
+                    width: 10px;
+                    height: 10px;
+                    @include border-radius(50%);
+                    &::before {
+                        display: none;
+                    }
+                }
+                &.slick-active {
+                    button {
+                        background-color: $blue-dark;
+                    }
+                }
+            }
+        }
+        button.slick-arrow.slick-prev {
+            width: 30px;
+            height: 42px;
+            background: url('../../assets/images/slider-left-arow.svg');
+            background-size: 17px 23px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 0;
+            border: none;
+            left: 0;
+            opacity: 1;
+            z-index: 1;
+            &::before {
+                display: none;
+            }
+        }
+
+        button.slick-arrow.slick-next {
+            width: 30px;
+            height: 42px;
+            background: url('../../assets/images/slider-left-arow.svg');
+            background-size: 17px 23px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            padding: 0;
+            border: none;
+            right: 0;
+            opacity: 1;
+            z-index: 1;
+            transform: rotate(180deg);
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 678px) {
+    .wrapper-banner-doctor .item-banner .left-content {
+        flex: 1 1 100%;
+        min-width: 100%;
+        img {
+            max-width: 100%;
+        }
+    }
+    .wrapper-banner-doctor .item-banner .right-content {
+        flex: 1 1 100%;
+        min-width: 100%;
+        padding: 0;
+        margin-top: 20px;
+    }
+    .wrapper-banner-doctor .item-banner {
+        flex-wrap: wrap;
+        padding: 0;
+    }
+    .wrapper-banner-doctor .item-banner .right-content .title {
+        font-size: 24px;
+    }
+    .wrapper-banner-doctor .item-banner .right-content .description {
+        font-size: 18px;
+    }
+}
