@@ -5,8 +5,8 @@ import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
 import phoneLogo from "../../assets/images/icon-phone.png";
 import { NavLink, useNavigate } from "react-router-dom";
-import showPassImage from "../../assets/images/show-pass.png";
-import hidePassImage from "../../assets/images/hide-pass.png";
+import showPassImage from "../../assets/images/show-pass-black.png";
+import hidePassImage from "../../assets/images/hide-pass-black.png";
 import authService from "../../services/authService";
 import ToastMessage from "../../components/toast-message/ToastMessage";
 

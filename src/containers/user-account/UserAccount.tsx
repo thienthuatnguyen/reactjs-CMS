@@ -11,6 +11,8 @@ import React from "react";
 import ToastMessage from "../../components/toast-message/ToastMessage";
 import authService from "../../services/authService";
 import PasswordUpsert from "../../components/password-upsert/PasswordUpsert";
+import { setUser } from "../../actions/actions";
+
 const EditIcon = () => (<img src={editIcon} alt="edit-icon"></img>);
 const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
 
@@ -67,6 +69,7 @@ function UserAccountPage(props: any) {
         setToastConfig({ type: 'error', isOpen: true, message: body.message });
 
       } else {
+        updateUser();
         setToastConfig({ type: 'success', isOpen: true, message: body.data.message });
         handleCloseModalAccount();
       }
@@ -93,6 +96,17 @@ function UserAccountPage(props: any) {
     } else {
       setToastConfig({ type: 'error', isOpen: true, message: val.message });
     }    
+  }
+
+  function updateUser() {
+    authService.getUser().then(
+      (res) => {
+        let body = res.data;
+        if ((body.error === false) && body.data) {
+          props.setUser(body);
+        } 
+      }
+    )
   }
   const classes = useStyles();
   return (
@@ -276,5 +290,9 @@ const mapStateToProps = (state: any) => ({
   user: state.user
 })
 
-export default connect(mapStateToProps)(UserAccountPage);
+const mapDispatchToProps = (dispatch: any) => ({
+  setUser: (data: any) => dispatch(setUser(data)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserAccountPage);
 
