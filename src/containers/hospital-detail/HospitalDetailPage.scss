@@ -23,6 +23,7 @@
             flex: 1 1 100%;
             background-color: #fff;
             padding: 15px;
+            box-sizing: border-box;
         }
 
         .my-vertical-tab {
@@ -40,6 +41,7 @@
                 &.Mui-selected {
                     background-color: $blue;
                     color: #fff;
+                    max-width: 100%;
                 }
             }
         }
@@ -84,6 +86,7 @@
                             display: inline-flex;
                             align-items: center;
                             margin-top: 5px;
+                            width: 100%;
                         }
                     }
 
@@ -161,6 +164,49 @@
 @media only screen and (max-width: 768px) {
     .wrapper-hospital-detail-page {
         margin-bottom: 40px;
+        .content-hospital {
+            flex-direction: column;
+            .left-content {
+                flex: 1 1 100%;
+                margin: 0;
+                min-width: 100%;
+                max-width: 100%;
+                margin-bottom: 30px;
+            }
+            .right-content {
+                flex: 1 1 100%;
+                margin: 0;
+                min-width: 100%;
+                max-width: 100%;
+                .time-work .table-schedule .row-item .col-item {
+                    padding: 10px 5px;
+                    &.col-time {
+                        flex: 1 1 35%;
+                        min-width: 100px;
+                        max-width: 200px;
+                    }
+                }
+            }
+            .wrapper-right-content .general-info {
+                flex-direction: column;
+                .image-hospital {
+                    max-width: 100%;
+                    margin-bottom: 15px;
+                }
+                .info {
+                    padding-left: 0;
+                    .bottom {
+                        display: flex;
+                        margin-top: 30px;
+                        justify-content: space-between;
+                        button {
+                            min-width: 45%;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 

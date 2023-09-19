@@ -2,8 +2,8 @@ import React from "react";
 import "./HospitalPage.scss";
 // import { useNavigate } from "react-router-dom";
 import { BannerDepartment } from "../../components/banner-department/BannerDepartment";
-import { ProfileExpertDoctor } from "../../components/profile-expert-doctor/ProfileExpertDoctor";
 import { BannerHospital } from "../../components/banner-hospital/BannerHospital";
+import { ProfileHospital } from "../../components/profile-hospital/ProfileHospital";
 function HospitalPage() {
   // const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ function HospitalPage() {
     <div className="wrapper-hospital-page">
       <BannerHospital></BannerHospital>
       <BannerDepartment></BannerDepartment>
-      <ProfileExpertDoctor></ProfileExpertDoctor>
+      <ProfileHospital></ProfileHospital>
     </div>
   );
 }

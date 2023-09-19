@@ -1,0 +1,123 @@
+@import '../../assets/scss/variables.scss';
+
+.wrapper-profile-hospital {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+
+    .wave-box {
+        background-image: url('../../assets/images/wave-1.svg'), url('../../assets/images/wave-2.svg'), url('../../assets/images/wave-3.svg'), url('../../assets/images/wave-bg.svg');
+        background-repeat: repeat-x, repeat-x, repeat-x;
+        height: 155px;
+        background-size: 2103.5px 135.5px, 2099.5px 144.5px, 2103.5px 143.5px, 120.5px 155.5px;
+        background-position-y: 15px, 0, 11px, 0;
+        -webkit-animation: wave 10s linear infinite;
+        animation: wave 10s linear infinite;
+        width: 100%;
+
+        h1.title {
+            text-align: center;
+            font-size: 30px;
+            color: #fff;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    @-webkit-keyframes wave {
+        from {
+            -webkit-background-position-x: 0, 0, 0, 0;
+        }
+
+        to {
+            -webkit-background-position-x: 3156px, 2102px, 1052px, 0;
+        }
+    }
+
+    @keyframes wave {
+        from {
+            background-position-x: 0, 0, 0, 0;
+        }
+
+        to {
+            background-position-x: 3156px, 2102px, 1052px, 0;
+        }
+    }
+
+    .wrapper-column {
+        background-color: #fff;
+        padding: 0 15px 15px 15px;
+        @include border-radius(0px);
+
+        img {
+            max-width: 100%;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            color: $blue-dark;
+            text-align: center;
+        }
+
+        .address {
+            font-size: 16px;
+            color: $blue-dark;
+            padding: 10px 0 10px 30px;
+            background: url('../../assets/images/pin-gray-icon.svg') no-repeat left center;
+            background-size: 17px 26px;
+            margin-bottom: 20px;
+        }
+
+        
+        .btn-detail {
+            text-align: center;
+            padding: 0 30px;
+            button.btn-detail {
+                width: 100%;
+            }
+        }
+        
+    }
+
+    .list-data {
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper-profile-hospital .wave-box h1.title {
+        font-size: 26px;
+    }
+
+    .wrapper-profile-hospital .wrapper-column .name {
+        font-size: 20px;
+    }
+    .wrapper-banner-hospital  {
+        .general-info {
+            padding: 0;
+            flex-direction: column;
+            .image-hospital {
+                min-width: 100%;
+                max-width: 100%;
+            }
+            .info {
+                margin: 15px 0 0 0;
+                .bottom {
+                    margin-top: 30px;
+                    display: flex;
+                    button {
+                        min-width: unset;
+                    }
+                }
+            }
+        }
+    }
+
+}
