@@ -9,6 +9,7 @@ import React from "react";
 import authService from "../../services/authService";
 import { connect } from "react-redux";
 import { IUser, User } from "../../models/user.model";
+import { SearchBox } from "../search-box/SearchBox";
 function Header(props: any) {
   const navigate = useNavigate();
 
@@ -46,8 +47,7 @@ function Header(props: any) {
             </NavLink>
           </div>
           <Menu id={"sidebar"} className={"side-menu-mobile"} burgerButtonClassName={"button-menu-mobile"}>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/">Trang chủ</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/ho-so-benh-nhan">Hồ sơ bệnh nhân</NavLink>
+            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/">Hồ sơ bệnh nhân</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/quan-ly-tai-khoan">Quản lý tài khoản</NavLink>
@@ -55,6 +55,7 @@ function Header(props: any) {
 
           </Menu>
         </div>
+        
       </div>
       <div className="wrapper-menu-pc">
         <div className="container-app">
@@ -65,12 +66,10 @@ function Header(props: any) {
 
           </div>
           <div className="right-content">
+            <SearchBox></SearchBox>
             <ul className="menu-pc">
               <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/">Trang chủ</NavLink>
-              </li>
-              <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/ho-so-benh-nhan">Hồ sơ bệnh nhân</NavLink>
+                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/">Hồ sơ bệnh nhân</NavLink>
               </li>
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>

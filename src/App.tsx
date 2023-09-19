@@ -6,7 +6,6 @@ import PrivateRoute from './containers/private-router/PrivateRoute';
 import Login from './containers/login/Login';
 import SignUp from './containers/signup/SignUp';
 import LoginAuthention from './containers/login-authention/LoginAuthention';
-import HomePage from './containers/home-page/HomePage';
 import ProfilePatientPage from './containers/profile-patient/ProfilePatient';
 import CreateProfilePage from './containers/create-profile/CreateProfile';
 import ProfilePatientDetailPage from './containers/profile-patient-detail/ProfilePatientDetail';
@@ -22,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={
           <PrivateRoute >
-            <HomePage></HomePage>
+            <ProfilePatientPage></ProfilePatientPage>
           </PrivateRoute>} >
         </Route>
         <Route path="/dang-nhap" element={
