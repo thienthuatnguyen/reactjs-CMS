@@ -58,9 +58,6 @@ function ProfilePatientDetailPage() {
 
   const classes = useStyles();
 
-  function handleDelete() {
-
-  }
 
   return (
     <div className="wrapper-profile-patient-page">

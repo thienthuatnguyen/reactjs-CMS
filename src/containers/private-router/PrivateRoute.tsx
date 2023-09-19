@@ -18,7 +18,7 @@ function PrivateRoute({ dispatch, children }) {
     authService.getUser().then(
       (res) => {
         let body = res.data;
-        if ((body.error == false) && body.data) {
+        if ((body.error === false) && body.data) {
           setAuth(true);
         } else {
           setAuth(false);

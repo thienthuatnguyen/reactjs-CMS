@@ -20,10 +20,10 @@ export function BookingTime({ callBackTimeMorningData, callBackTimeAfternonData 
   }
 
   const getMorningItem = morningTimes => morningTimes.map((item, index) => (
-    <Button key={index} variant="outlined" className={`my-btn  btn-blue btn-outlined btn-time-select ${item == morningTime ? 'active' : ''}`} onClick={()=> morningTimeCallback(item) } >{morningTime}</Button>
+    <Button key={index} variant="outlined" className={`my-btn  btn-blue btn-outlined btn-time-select ${item === morningTime ? 'active' : ''}`} onClick={()=> morningTimeCallback(item) } >{morningTime}</Button>
   ));
   const getAfternonItem = afternonTimes => afternonTimes.map((item, index) => (
-    <Button key={index} className={`my-btn btn-blue btn-outlined btn-time-select ${item == afternonTime ? 'active' : ''}`} onClick={()=> afternonTimeCallback(item) }>{afternonTime}</Button>
+    <Button key={index} className={`my-btn btn-blue btn-outlined btn-time-select ${item === afternonTime ? 'active' : ''}`} onClick={()=> afternonTimeCallback(item) }>{afternonTime}</Button>
   ));
   return (
     <div className="wrapper-booking-time">

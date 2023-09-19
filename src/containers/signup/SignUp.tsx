@@ -152,7 +152,7 @@ function SignUp() {
               required: true,
               validate: {
                 inCorrect: (value, formValues) => {
-                  return value == formValues.password;
+                  return value === formValues.password;
                 }
               }
             })}

@@ -1,21 +1,9 @@
-import { useState } from "react";
 import "../signup/SignUp.scss";
 import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import { Button } from "@material-ui/core";
 
-
 function ForgetPasswordPage() {
-  const [passwordShown, setPasswordShown] = useState(false);
-  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
-
-  const togglePassword = () => {
-    setPasswordShown(!passwordShown);
-  };
-
-  const togglePasswordConfirm = () => {
-    setConfirmPasswordShown(!confirmPasswordShown);
-  };
 
   const {
     register,
@@ -27,11 +15,6 @@ function ForgetPasswordPage() {
 
   };
   const formValues = {
-    userName: "",
-    codeIntroduce: '',
-    passWord: "",
-    confirmPassword: "",
-    phoneNumber: '',
     email: ''
   };
 
@@ -54,9 +37,6 @@ function ForgetPasswordPage() {
         </div>
       </div>
 
-
-
-      
       <div className="text-confirm text-confirm-forget-pass">
         <span>Nhập email của bạn và chúng tôi sẽ gửi email kèm theo hướng dẫn để đặt lại mật khẩu của bạn.</span>
       </div>

@@ -25,13 +25,13 @@ function ToastMessage({ message, type, isOpen, closeCallback }) {
  
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
-      {type == 'success' && <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+      {type === 'success' && <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           {message}
         </Alert>
       </Snackbar>}
 
-      {type == 'error' && <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+      {type === 'error' && <Snackbar open={isOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           {message}
         </Alert>
