@@ -7,6 +7,7 @@ export interface IUser {
 	ref_code?: string;
 	sponsor_id?: string;
 	last_login?: string;
+	password?: string;
 	status?: number;
 	created_at?: string;
 	updated_at?: string;
@@ -21,6 +22,7 @@ export class User implements IUser {
 		public ref_code?: string,
 		public sponsor_id?: string,
 		public last_login?: string,
+		public password?: string,
 		public status?: number,
 		public created_at?: string,
 		public updated_at?: string
@@ -32,6 +34,7 @@ export class User implements IUser {
 		this.ref_code = ref_code ? ref_code : '';
 		this.sponsor_id = sponsor_id ? sponsor_id : '';
 		this.last_login = last_login ? last_login : '';
+		this.password = password ? password : '';
 		this.status = status ? status : 0;
 		this.created_at = created_at ? created_at : '';
 		this.updated_at = updated_at ? updated_at : '';

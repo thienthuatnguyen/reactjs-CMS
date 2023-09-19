@@ -511,6 +511,10 @@ textarea {
   max-height: 90vh;
   overflow: auto;
   min-width: 800px;
+  &.small-size {
+    min-width: 400px;
+    max-width: 400px;
+  }
   
   .button-submit-right {
     text-align: right;
@@ -579,6 +583,9 @@ textarea {
 @media only screen and (max-width: 768px) {
   .wrapper-my-modal {
     min-width: unset;
+    &.small-size {
+      min-width: unset;
+    }
   }
   .my-breadcrumb {
     margin-bottom: 30px !important;
