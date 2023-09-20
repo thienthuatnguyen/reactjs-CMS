@@ -1,0 +1,88 @@
+@import '../../assets/scss/variables.scss';
+
+.wrapper-list-expert-doctor {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    h2.title {
+        font-size: 20px;
+        font-weight: bold;
+        color: $blue-dark;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        span.text {
+            flex: none;
+            padding-right: 15px;
+        }
+        span.line {
+            flex: 1 1 100%;
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                background-color: $green;
+                left: 0;
+                bottom: -8px;
+            }
+        }
+        
+    }
+   
+    .wrapper-column {
+        background-color: #fff;
+        padding: 0 15px 15px 15px;
+        border: 1px solid $green;
+        @include border-radius(0px);
+        img {
+            max-width: 100%;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            color: $blue-dark;
+        }
+        .info-job {
+            margin-bottom: 40px;
+            li {
+                font-size: 16px;
+                padding: 10px 0 10px 30px;
+                &.department {
+                    background: url('../../assets/images/chuyen-khoa-icon.svg') no-repeat left center;
+                    background-size: 17px 20px;
+
+                }
+                &.hospital {
+                    background: url('../../assets/images/pin-gray-icon.svg') no-repeat left center;
+                    background-size: 17px 26px;
+
+                }
+                &.experience {
+                    background: url('../../assets/images/badge-gray-icon.svg') no-repeat left center;
+                    background-size: 17px 20px;
+
+                }
+            }
+        }
+        button.btn-detail {
+            width: 100%;
+        }
+    }
+
+    .list-data {
+        margin-top: 30px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .wrapper-profile-expert-doctor .wave-box h1.title {
+        font-size: 26px;
+    }
+    .wrapper-profile-expert-doctor .wrapper-column .name {
+        font-size: 20px;
+    }
+}

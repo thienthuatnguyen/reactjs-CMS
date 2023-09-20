@@ -1,0 +1,42 @@
+@import '../../assets/scss/variables.scss';
+
+.wrapper-introduce-info {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    h2.title {
+        font-size: 20px;
+        font-weight: bold;
+        color: $blue-dark;
+        width: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        span.text {
+            flex: none;
+            padding-right: 15px;
+        }
+        span.line {
+            flex: 1 1 100%;
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                background-color: $green;
+                left: 0;
+                bottom: -8px;
+            }
+        }
+        
+    }
+    .text-introduce {
+        margin-top: 15px;
+    }
+   
+  
+}
+@media only screen and (max-width: 768px) {
+   
+}

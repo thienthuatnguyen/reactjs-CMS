@@ -7,6 +7,7 @@ import authService from "../../services/authService";
 import { connect } from "react-redux";
 import { setUser } from "../../actions/actions";
 import Header from "../../components/header/Header";
+import phone from "../../assets/images/phone-circle.svg";
 
 function PrivateRoute({ dispatch, children }) {
 
@@ -51,6 +52,11 @@ function PrivateRoute({ dispatch, children }) {
         {children}
         <Footer></Footer>
         {isVisible && <button className="btn-scroll-page" onClick={() => { scrollToTop() }}></button>}
+        <div className="support-bar">
+          <a className="phone-circle" href="tel:0356456789">
+            <img className="img-fluid" src={phone} />
+          </a>
+        </div>
       </div>
     </div> : <Navigate to="/dang-nhap" />;
 }

@@ -4,6 +4,8 @@ import { Button, Tab, Tabs } from "@material-ui/core";
 // import { useNavigate } from "react-router-dom";
 import imgHospital from "../../assets/images/khoa.png";
 import imgHospitalDetail from "../../assets/images/bv-detail.png";
+import { ListExpertDoctor } from "../../components/list-expert-doctor/ListExpertDoctor";
+import { IntroduceInfo } from "../../components/introduce-info/IntroduceInfo";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -205,23 +207,43 @@ function HospitalDetailPage() {
           <div className="right-content">
             <TabPanel value={value} index={0}>
               <div className="wrapper-right-content">
-                  {GeneralInfo()}
-                  {DetailInfo()}
-                  {TimeWork()}
+                {GeneralInfo()}
+                {DetailInfo()}
+                {TimeWork()}
               </div>
 
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Khoa nội thận - tiết niệu
+              <div className="wrapper-right-content">
+                {GeneralInfo()}
+                <IntroduceInfo></IntroduceInfo>
+                <ListExpertDoctor></ListExpertDoctor>
+                {TimeWork()}
+              </div>
             </TabPanel>
             <TabPanel value={value} index={2}>
-              Khoa tiêu hóa
+              <div className="wrapper-right-content">
+                {GeneralInfo()}
+                <IntroduceInfo></IntroduceInfo>
+                <ListExpertDoctor></ListExpertDoctor>
+                {TimeWork()}
+              </div>
             </TabPanel>
             <TabPanel value={value} index={3}>
-              Khoa cơ xương khớp
+              <div className="wrapper-right-content">
+                {GeneralInfo()}
+                <IntroduceInfo></IntroduceInfo>
+                <ListExpertDoctor></ListExpertDoctor>
+                {TimeWork()}
+              </div>
             </TabPanel>
             <TabPanel value={value} index={4}>
-              Khoa chấn thương chỉnh hình
+              <div className="wrapper-right-content">
+                {GeneralInfo()}
+                <IntroduceInfo></IntroduceInfo>
+                <ListExpertDoctor></ListExpertDoctor>
+                {TimeWork()}
+              </div>
             </TabPanel>
           </div>
         </div>
