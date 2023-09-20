@@ -54,7 +54,7 @@ function PrivateRoute({ dispatch, children }) {
         {isVisible && <button className="btn-scroll-page" onClick={() => { scrollToTop() }}></button>}
         <div className="support-bar">
           <a className="phone-circle" href="tel:0356456789">
-            <img className="img-fluid" src={phone} />
+            <img className="img-fluid" src={phone} alt="call phone" />
           </a>
         </div>
       </div>

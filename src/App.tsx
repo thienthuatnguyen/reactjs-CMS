@@ -39,11 +39,11 @@ function App() {
             <ForgetPasswordPage></ForgetPasswordPage>
           </PublicRoute>} >
         </Route>
-        <Route path="/login-authention" element={
+        {/* <Route path="/login-authention" element={
           <PublicRoute >
             <LoginAuthention></LoginAuthention>
           </PublicRoute>} >
-        </Route>
+        </Route> */}
 
         <Route path="/ho-so-benh-nhan">
           <Route path="/ho-so-benh-nhan" element={
