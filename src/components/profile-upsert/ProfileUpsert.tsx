@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import imgError from "../../assets/images/square-warning-validator.svg";
 import Stack from '@mui/material/Stack';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import closeIcon from "../../assets/images/close.svg";
+import profileService from "../../services/profileService";
+import ToastMessage from "../toast-message/ToastMessage";
+import { useNavigate } from "react-router-dom";
 
 const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
 
@@ -15,43 +18,133 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 ) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-function ProfileUpsert({ isEdit, callBackCloseModal }) {
+function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
   const [open, setOpen] = React.useState(false);
+  const [formValuesProfile, setFormValuesProfile] = React.useState({
+    code_insurance: '',
+    full_name: '',
+    birthday: '',
+    phone_number: '',
+    gender: '',
+    profession_id: '',
+    province_id: '',
+    district_id: '',
+    ward_id: '',
+    address: '',
+    info_relative: '',
+    reason: '',
+    height: '',
+    weight: '',
+    medical_history: '',
+    allergy: ''
+  });
+  const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
+  const [provinces, setProvinces] = useState([]);
+  const [districts, setDistricts] = useState([]);
+  const [professions, setProfessions] = useState([]);
+
+  const [wards, setWards] = useState([]);
+  const genders = [{ name: 'Nam', value: 0 }, { name: 'Nữ', value: 1 }];
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm();
-
+  useEffect(() => {
+    getProvince();
+    getProfessions();
+    if (isEdit) {
+      setFormValuesProfile({
+        code_insurance: profileInfo.code_insurance,
+        full_name: profileInfo.full_name,
+        birthday: profileInfo.birthday,
+        phone_number: profileInfo.phone_number,
+        gender: profileInfo.gender,
+        profession_id: profileInfo.profession_id,
+        province_id: profileInfo.province_id,
+        district_id: profileInfo.district_id,
+        ward_id: profileInfo.ward_id,
+        address: profileInfo.address,
+        info_relative: profileInfo.info_relative,
+        reason: profileInfo.reason,
+        height: profileInfo.height,
+        weight: profileInfo.weight,
+        medical_history: profileInfo.medical_history,
+        allergy: profileInfo.allergy
+      });
+      getDistrict(profileInfo.province_id);
+      getWard(profileInfo.district_id);
+    }
+  }, []);
+  useEffect(() => {
+    if(isEdit) {
+      reset(formValuesProfile);
+    }
+  }, [formValuesProfile]);
   const onSubmitCreateProfile = (data) => {
-    setOpen(true);
+    if (isEdit) {
+      profileService.updateMedicalProfile(profileInfo.id, data).then((res) => {
+        let body = res.data;
+        if (body && body.error) {
+          setToastConfig({ type: 'error', isOpen: true, message: body.message });
+        } else {
+          setToastConfig({ type: 'success', isOpen: true, message: 'Bạn đã cập nhật hồ sơ thành công!' });
+          setOpen(false);
+          handleCloseModal();
+        }
+      })
+    } else {
+      profileService.createMedicalProfile(data).then((res) => {
+        let body = res.data;
+        if (body && body.error) {
+          setToastConfig({ type: 'error', isOpen: true, message: body.message });
+        } else {
+          setToastConfig({ type: 'success', isOpen: true, message: 'Bạn đã tạo hồ sơ thành công!' });
+          setOpen(false);
+          navigate('/');
+        }
+      })
+    }
+
   };
 
-  const formValuesProfile = {
-    codeProfile: 'ADSFFSFD4234324',
-    codeInsurance: '',
-    name: '',
-    dateOfBirth: '',
-    phoneNumber: '',
-    sex: '',
-    job: '',
-    province: '',
-    district: '',
-    ward: '',
-    address: '',
-    family: '',
-    ression: '',
-    height: '',
-    weight: '',
-    history: '',
-    external: ''
-  };
+  function handleGenderChange(item) {
+    setFormValuesProfile(prevState => ({
+      ...prevState,
+      'gender': item.target.value
+    }));
+  }
 
-  const states = ["An Giang", "Bac Giang", "Bac Kan", "Bac Lieu", "Bac Ninh", "Ba Ria-Vung Tau", "Ben Tre", "Binh Dinh", "Binh Duong", "Binh Phuoc", "Binh Thuan", "Ca Mau", "Cao Bang", "Dac Lak", "Dac Nong", "Dien Bien", "Dong Nai", "Dong Thap", "Gia Lai", "Ha Giang", "Hai Duong", "Ha Nam", "Ha Tay", "Ha Tinh", "Hau Giang", "Hoa Binh", "Hung Yen", "Khanh Hoa", "Kien Giang", "Kon Tum", "Lai Chau", "Lam Dong", "Lang Son", "Lao Cai", "Long An", "Nam Dinh", "Nghe An", "Ninh Binh", "Ninh Thuan", "Phu Tho", "Phu Yen", "Quang Binh", "Quang Nam", "Quang Ngai", "Quang Ninh", "Quang Tri", "Soc Trang", "Son La", "Tay Ninh", "Thai Binh", "Thai Nguyen", "Thanh Hoa", "Thua Thien-Hue", "Tien Giang", "Tra Vinh", "Tuyen Quang", "Vinh Long", "Vinh Phuc", "Yen Bai", "Can Tho", "Da Nang", "Hai Phong", "Hanoi", "Ho Chi Minh"];
+  function handleProvinceChange(item) {
+    setFormValuesProfile(prevState => ({
+      ...prevState,
+      'province_id': item.target.value
+    }));
+    getDistrict(item.target.value);
+  }
 
+  function handleDistrictChange(item) {
+    setFormValuesProfile(prevState => ({
+      ...prevState,
+      'district_id': item.target.value
+    }));
+    getWard(item.target.value);
+  }
 
-  function handleSexChange() {
+  function handleProfessionChange(item) {
+    setFormValuesProfile(prevState => ({
+      ...prevState,
+      'profession_id': item.target.value
+    }));
+  }
 
+  function handleWardChange(item) {
+    setFormValuesProfile(prevState => ({
+      ...prevState,
+      'ward_id': item.target.value
+    }));
   }
 
   function handleCloseModal() {
@@ -65,160 +158,125 @@ function ProfileUpsert({ isEdit, callBackCloseModal }) {
 
     setOpen(false);
   };
-  return (
-    <div className="form-create-profile">
-      {!isEdit && <div className="title">Nhập thông tin bệnh nhân</div>}
-      {isEdit && <div className="head-modal">
-        <h1 className="title">Sửa thông tin bệnh nhân</h1>
-        <IconButton onClick={handleCloseModal} aria-label="close">
-          <CloseIcon />
-        </IconButton>
-      </div>
+  function closeToast() {
+    setToastConfig({ type: '', isOpen: false, message: '' });
+  }
+  function getProvince() {
+    profileService.getProvince().then((res) => {
+      let body = res.data;
+      if (body && body.error) {
+        setToastConfig({ type: 'error', isOpen: true, message: body.message });
+      } else {
+        setProvinces(body.data.provinces);
       }
-
-      {!isEdit && <div className="text-description">
-        Vui lòng cung cấp thông tin chính xác để được phục vụ tốt nhất. Trong trường hợp cung cấp sai thông tin bệnh nhân và số điện thoại việc xác nhận cuộc hẹn sẽ không thành công trước khi đặt lịch khám.
-      </div>}
-      <form className="wrapper-form" onSubmit={handleSubmit(onSubmitCreateProfile)}>
-        <div className="items-inline">
-          <div className={`form-group item-input`}>
-            <InputLabel htmlFor="codeProfile" className="label-config">
-              <span>Mã hồ sơ bệnh nhân</span></InputLabel>
-            <input type="text" disabled className="form-control bg-white" id="codeProfile" aria-describedby="code-profile-helper-text"
-              defaultValue={formValuesProfile.codeProfile}
-              placeholder=""
-              {...register("codeProfile", {
-                required: false
-              })}
-            />
-          </div>
-
-          <div className={`form-group item-input`}>
-            <InputLabel htmlFor="codeInsurance" className="label-config">
-              <span>Mã bảo hiểm y tế</span></InputLabel>
-            <input type="text" className="form-control bg-white" id="codeInsurance" aria-describedby="code-insurance-helper-text"
-              defaultValue={formValuesProfile.codeInsurance}
-              placeholder="Nhập mã bảo hiểm y tế"
-              {...register("codeInsurance", {
-                required: false
-              })}
-            />
-          </div>
-
+    });
+  }
+  function getProfessions() {
+    profileService.getProfessions().then((res) => {
+      let body = res.data;
+      if (body && body.error) {
+        setToastConfig({ type: 'error', isOpen: true, message: body.message });
+      } else {
+        setProfessions(body.data.professions);
+      }
+    });
+  }
+  function getDistrict(id) {
+    profileService.getDistrict(id).then((res) => {
+      let body = res.data;
+      if (body && body.error) {
+        setToastConfig({ type: 'error', isOpen: true, message: body.message });
+      } else {
+        setDistricts(body.data.districts);
+      }
+    });
+  }
+  function getWard(id) {
+    profileService.getWard(id).then((res) => {
+      let body = res.data;
+      if (body && body.error) {
+        setToastConfig({ type: 'error', isOpen: true, message: body.message });
+      } else {
+        setWards(body.data.wards);
+      }
+    });
+  }
+  return (
+    <React.Fragment>
+      <ToastMessage isOpen={configToast.isOpen} closeCallback={closeToast} type={configToast.type} message={configToast.message}></ToastMessage>
+      <div className="form-create-profile">
+        {!isEdit && <div className="title">Nhập thông tin bệnh nhân</div>}
+        {isEdit && <div className="head-modal">
+          <h1 className="title">Sửa thông tin bệnh nhân</h1>
+          <IconButton onClick={handleCloseModal} aria-label="close">
+            <CloseIcon />
+          </IconButton>
         </div>
-        <div className="items-inline">
-          <div className={`form-group item-input required ${errors.name ? 'has-error' : ''}`}>
-            <InputLabel htmlFor="name" className="label-config">
-              <span>Họ và tên (có dấu)</span></InputLabel>
-            <input type="text" className="form-control bg-white" id="name" aria-describedby="name-helper-text"
-              defaultValue={formValuesProfile.name}
-              placeholder="Nhập họ và tên"
-              {...register("name", {
-                required: true
-              })}
-            />
-            <div className="form-control-feedback">
-              <span className="arrow"></span>
-              <img src={imgError} alt="error" />
-              {errors.name && <span id="name-helper-text">Họ và tên là bắt buộc.</span>}
-            </div>
-          </div>
+        }
 
-          <div className={`form-group item-input required ${errors.dateOfBirth ? 'has-error' : ''}`}>
-            <InputLabel htmlFor="date" className="label-config"><span>Ngày sinh (ngày/tháng/năm)</span></InputLabel>
-            <TextField
-              id="date"
-              label="Birthday"
-              type="date"
-              defaultValue=""
-              className="my-datetime-picker"
-              InputLabelProps={{
-                shrink: false,
-              }}
-              {...register("dateOfBirth", {
-                required: true
-              })}
-            />
-            <div className="form-control-feedback">
-              <span className="arrow"></span>
-              <img src={imgError} alt="error" />
-              {errors.dateOfBirth && <span id="date-helper-text">Ngày tháng năm sinh là bắt buộc.</span>}
-            </div>
-          </div>
+        {!isEdit && <div className="text-description">
+          Vui lòng cung cấp thông tin chính xác để được phục vụ tốt nhất. Trong trường hợp cung cấp sai thông tin bệnh nhân và số điện thoại việc xác nhận cuộc hẹn sẽ không thành công trước khi đặt lịch khám.
+        </div>}
+        <form className="wrapper-form" onSubmit={handleSubmit(onSubmitCreateProfile)}>
+          <div className="items-inline">
 
-        </div>
-        <div className="items-inline">
-          <div className="items-inline-child">
-            <div className={`form-group item-input required ${errors.phoneNumber ? 'has-error' : ''}`}>
-              <InputLabel htmlFor="phoneNumber" className="label-config">
-                <span>Số điện thoại</span></InputLabel>
-              <input type="tel" className="form-control bg-white" id="phoneNumber" aria-describedby="phone-number-helper-text"
-                defaultValue={formValuesProfile.phoneNumber}
-                placeholder="Phone number"
-                {...register("phoneNumber", {
+
+            <div className={`form-group item-input`}>
+              <InputLabel htmlFor="code_insurance" className="label-config">
+                <span>Mã bảo hiểm y tế</span></InputLabel>
+              <input type="text" className="form-control bg-white" id="code_insurance" aria-describedby="code-insurance-helper-text"
+                defaultValue={formValuesProfile.code_insurance}
+                placeholder="Nhập mã bảo hiểm y tế"
+                {...register("code_insurance", {
+                  required: false
+                })}
+              />
+            </div>
+            <div className={`form-group item-input required ${errors.full_name ? 'has-error' : ''}`}>
+              <InputLabel htmlFor="name" className="label-config">
+                <span>Họ và tên (có dấu)</span></InputLabel>
+              <input type="text" className="form-control bg-white" id="name" aria-describedby="name-helper-text"
+                defaultValue={formValuesProfile.full_name}
+                placeholder="Nhập họ và tên"
+                {...register("full_name", {
                   required: true
                 })}
               />
               <div className="form-control-feedback">
                 <span className="arrow"></span>
                 <img src={imgError} alt="error" />
-                {errors.phoneNumber && <span id="phone-number-helper-text">Số điện thoại là bắt buộc.</span>}
+                {errors.full_name && <span id="name-helper-text">Họ và tên là bắt buộc.</span>}
               </div>
             </div>
-            <div className={`form-group item-input required ${errors.sex ? 'has-error' : ''}`}>
-              <InputLabel id="sex-label" className="label-config"><span>Giới tính</span></InputLabel>
-              <FormControl className={'my-wrapper-select'}>
-                <Select
-                  MenuProps={{
-                    anchorOrigin: {
-                      vertical: "bottom",
-                      horizontal: "left"
-                    },
-                    getContentAnchorEl: null
-                  }}
-                  labelId="sex-label"
-                  value={""}
-                  onChange={handleSexChange}
-                  displayEmpty
-                  className={'my-select'}
-                >
-                  <MenuItem value="" disabled>
-                    Chọn giới tính...
-                  </MenuItem>
-                  <MenuItem value={'male'}>Name</MenuItem>
-                  <MenuItem value={'female'}>Nữ</MenuItem>
-                </Select>
-              </FormControl>
+
+          </div>
+          <div className="items-inline">
+
+            <div className={`form-group item-input required ${errors.birthday ? 'has-error' : ''}`}>
+              <InputLabel htmlFor="date" className="label-config"><span>Ngày sinh (ngày/tháng/năm)</span></InputLabel>
+              <TextField
+                id="date"
+                label="Birthday"
+                type="date"
+                defaultValue={formValuesProfile.birthday}
+                className="my-datetime-picker"
+                InputLabelProps={{
+                  shrink: false,
+                }}
+                {...register("birthday", {
+                  required: true
+                })}
+              />
               <div className="form-control-feedback">
                 <span className="arrow"></span>
                 <img src={imgError} alt="error" />
-                {errors.sex && <span id="sex-helper-text">Giới tính là bắt buộc.</span>}
+                {errors.birthday && <span id="date-helper-text">Ngày tháng năm sinh là bắt buộc.</span>}
               </div>
             </div>
-          </div>
+            <div className={`form-group item-input required ${errors.profession_id ? 'has-error' : ''}`}>
 
-          <div className={`form-group item-input required ${errors.job ? 'has-error' : ''}`}>
-            <InputLabel htmlFor="job" className="label-config">
-              <span>Nghề nghiệp</span></InputLabel>
-            <input type="text" className="form-control bg-white" id="job" aria-describedby="job-helper-text"
-              defaultValue={formValuesProfile.job}
-              placeholder="Nhập nghề nghiệp"
-              {...register("job", {
-                required: true
-              })}
-            />
-            <div className="form-control-feedback">
-              <span className="arrow"></span>
-              <img src={imgError} alt="error" />
-              {errors.job && <span id="job-helper-text">Nghề nghiệp là bắt buộc.</span>}
-            </div>
-          </div>
-        </div>
-
-        <div className="items-inline">
-          <div className="items-inline-child">
-            <div className={`form-group item-input required ${errors.province ? 'has-error' : ''}`}>
-              <InputLabel id="province-label" className="label-config"><span>Tỉnh/thành</span></InputLabel>
+              <InputLabel id="profession-label" className="label-config">
+                <span>Nghề nghiệp</span></InputLabel>
               <FormControl className={'my-wrapper-select'}>
                 <Select
                   MenuProps={{
@@ -228,166 +286,301 @@ function ProfileUpsert({ isEdit, callBackCloseModal }) {
                     },
                     getContentAnchorEl: null
                   }}
-                  labelId="province-label"
-                  value={""}
-                  onChange={handleSexChange}
+                  inputProps={register("profession_id", {
+                    required: true
+                  })}
+                  labelId="profession-label"
+                  value={formValuesProfile.profession_id}
+                  onChange={handleProfessionChange}
                   displayEmpty
                   className={'my-select'}
                 >
                   <MenuItem value="" disabled>
-                    Chọn tỉnh thành...
+                    Chọn nghề nghiệp...
                   </MenuItem>
-                  <MenuItem value={'male'}>Name</MenuItem>
-                  <MenuItem value={'female'}>Nữ</MenuItem>
-                </Select>
-              </FormControl>
-              <div className="form-control-feedback">
-                <span className="arrow"></span>
-                <img src={imgError} alt="error" />
-                {errors.province && <span id="province-helper-text">Tỉnh/thành là bắt buộc.</span>}
-              </div>
-            </div>
-
-            <div className={`form-group item-input required ${errors.district ? 'has-error' : ''}`}>
-              <InputLabel className="label-config" id="district-label"><span>Quận/huyện </span></InputLabel>
-              <FormControl className={'my-wrapper-select'}>
-                <Select
-                  MenuProps={{
-                    anchorOrigin: {
-                      vertical: "bottom",
-                      horizontal: "left"
-                    },
-                    getContentAnchorEl: null
-                  }}
-                  labelId="district-label"
-                  value={""}
-                  onChange={handleSexChange}
-                  displayEmpty
-                  className={'my-select'}
-                >
-                  <MenuItem value="" disabled>
-                    Chọn quận/huyện...
-                  </MenuItem>
-                  {states.map((name) => (
-                    <MenuItem key={name} value={name}>
-                      {name}
-                    </MenuItem>
+                  {professions.map((el: any, index) => (
+                    <MenuItem key={index} value={el.id}>{el.title}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
+
+
               <div className="form-control-feedback">
                 <span className="arrow"></span>
                 <img src={imgError} alt="error" />
-                {errors.district && <span id="district-helper-text">Quận/huyện là bắt buộc.</span>}
-              </div>
-            </div>
-          </div>
-          <div className="items-inline-child">
-            <div className={`form-group item-input required ${errors.ward ? 'has-error' : ''}`}>
-              <InputLabel id="ward-label" className="label-config"><span>Phường/xã</span></InputLabel>
-              <FormControl className={'my-wrapper-select'}>
-                <Select
-                  MenuProps={{
-                    anchorOrigin: {
-                      vertical: "bottom",
-                      horizontal: "left"
-                    },
-                    getContentAnchorEl: null
-                  }}
-                  labelId="ward-label"
-                  value={""}
-                  onChange={handleSexChange}
-                  displayEmpty
-                  className={'my-select'}
-                >
-                  <MenuItem value="" disabled>
-                    Chọn phường/xã...
-                  </MenuItem>
-                  <MenuItem value={'male'}>Name</MenuItem>
-                  <MenuItem value={'female'}>Nữ</MenuItem>
-                </Select>
-              </FormControl>
-              <div className="form-control-feedback">
-                <span className="arrow"></span>
-                <img src={imgError} alt="error" />
-                {errors.ward && <span id="sex-helper-text">Phường/xã là bắt buộc.</span>}
+                {errors.profession_id && <span id="profession_id-helper-text">Nghề nghiệp là bắt buộc.</span>}
               </div>
             </div>
 
-            <div className={`form-group item-input required ${errors.address ? 'has-error' : ''}`}>
-              <InputLabel htmlFor="address" className="label-config">
-                <span>Địa chỉ</span></InputLabel>
-              <input type="text" className="form-control bg-white" id="address" aria-describedby="address-helper-text"
-                defaultValue={formValuesProfile.address}
-                placeholder="Nhập địa chỉ"
-                {...register("address", {
+          </div>
+          <div className="items-inline">
+            <div className="items-inline-child">
+              <div className={`form-group item-input required ${errors.phone_number ? 'has-error' : ''}`}>
+                <InputLabel htmlFor="phone_number" className="label-config">
+                  <span>Số điện thoại</span></InputLabel>
+                <input type="tel" className="form-control bg-white" id="phone_number" aria-describedby="phone-number-helper-text"
+                  defaultValue={formValuesProfile.phone_number}
+                  placeholder="Phone number"
+                  {...register("phone_number", {
+                    required: true
+                  })}
+                />
+                <div className="form-control-feedback">
+                  <span className="arrow"></span>
+                  <img src={imgError} alt="error" />
+                  {errors.phone_number && <span id="phone-number-helper-text">Số điện thoại là bắt buộc.</span>}
+                </div>
+              </div>
+              <div className={`form-group item-input required ${errors.gender ? 'has-error' : ''}`}>
+                <InputLabel id="gender-label" className="label-config"><span>Giới tính</span></InputLabel>
+                <FormControl className={'my-wrapper-select'}>
+                  <Select
+                    MenuProps={{
+                      anchorOrigin: {
+                        vertical: "bottom",
+                        horizontal: "left"
+                      },
+                      getContentAnchorEl: null
+                    }}
+                    inputProps={register("gender", {
+                      required: true
+                    })}
+                    labelId="gender-label"
+                    value={formValuesProfile.gender}
+                    onChange={handleGenderChange}
+                    displayEmpty
+                    className={'my-select'}
+                  >
+                    <MenuItem value="" disabled>
+                      Chọn giới tính...
+                    </MenuItem>
+                    {genders.map((el: any, index) => (
+                      <MenuItem key={index} value={el.value}>{el.name}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <div className="form-control-feedback">
+                  <span className="arrow"></span>
+                  <img src={imgError} alt="error" />
+                  {errors.gender && <span id="gender-helper-text">Giới tính là bắt buộc.</span>}
+                </div>
+              </div>
+            </div>
+            <div className="items-inline-child">
+
+              <div className={`form-group item-input`}>
+                <InputLabel htmlFor="height" className="label-config">
+                  <span>Chiều cao</span></InputLabel>
+                <input type="number" className="form-control bg-white" id="height" aria-describedby="height-helper-text"
+                  defaultValue={formValuesProfile.height}
+                  placeholder="Nhập chiều cao"
+                  {...register("height", {
+                    required: false,
+                    valueAsNumber: true
+                  })}
+                />
+
+              </div>
+              <div className={`form-group item-input`}>
+                <InputLabel htmlFor="weight" className="label-config">
+                  <span>Cân nặng</span></InputLabel>
+                <input type="number" className="form-control bg-white" id="weight" aria-describedby="weight-helper-text"
+                  defaultValue={formValuesProfile.weight}
+                  placeholder="Nhập cân nặng"
+                  {...register("weight", {
+                    required: false,
+                    valueAsNumber: true
+                  })}
+                />
+
+              </div>
+            </div>
+
+
+          </div>
+
+          <div className="items-inline">
+            <div className="items-inline-child">
+              <div className={`form-group item-input required ${errors.province_id ? 'has-error' : ''}`}>
+                <InputLabel id="province_id-label" className="label-config"><span>Tỉnh/thành</span></InputLabel>
+                <FormControl className={'my-wrapper-select'}>
+                  <Select
+                    MenuProps={{
+                      anchorOrigin: {
+                        vertical: "bottom",
+                        horizontal: "left"
+                      },
+                      getContentAnchorEl: null
+                    }}
+                    inputProps={register("province_id", {
+                      required: true
+                    })}
+                    labelId="province_id-label"
+                    value={formValuesProfile.province_id}
+                    onChange={handleProvinceChange}
+                    displayEmpty
+                    className={'my-select'}
+                  >
+                    <MenuItem value="" disabled>
+                      Chọn tỉnh thành...
+                    </MenuItem>
+                    {provinces.map((el: any, index) => (
+                      <MenuItem key={index} value={el.id}>{el.name}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <div className="form-control-feedback">
+                  <span className="arrow"></span>
+                  <img src={imgError} alt="error" />
+                  {errors.province_id && <span id="province_id-helper-text">Tỉnh/thành là bắt buộc.</span>}
+                </div>
+              </div>
+
+              <div className={`form-group item-input required ${errors.district_id ? 'has-error' : ''}`}>
+                <InputLabel className="label-config" id="district-label"><span>Quận/huyện </span></InputLabel>
+                <FormControl className={'my-wrapper-select'}>
+                  <Select
+                    MenuProps={{
+                      anchorOrigin: {
+                        vertical: "bottom",
+                        horizontal: "left"
+                      },
+                      getContentAnchorEl: null
+                    }}
+                    inputProps={register("district_id", {
+                      required: true
+                    })}
+                    labelId="district-label"
+                    value={formValuesProfile.district_id}
+                    onChange={handleDistrictChange}
+                    displayEmpty
+                    className={'my-select'}
+                  >
+                    <MenuItem value="" disabled>
+                      Chọn quận/huyện...
+                    </MenuItem>
+                    {districts.map((el: any, index) => (
+                      <MenuItem key={index} value={el.id}>{el.name}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <div className="form-control-feedback">
+                  <span className="arrow"></span>
+                  <img src={imgError} alt="error" />
+                  {errors.district_id && <span id="district-helper-text">Quận/huyện là bắt buộc.</span>}
+                </div>
+              </div>
+            </div>
+            <div className="items-inline-child">
+              <div className={`form-group item-input required ${errors.ward_id ? 'has-error' : ''}`}>
+                <InputLabel id="ward-label" className="label-config"><span>Phường/xã</span></InputLabel>
+                <FormControl className={'my-wrapper-select'}>
+                  <Select
+                    MenuProps={{
+                      anchorOrigin: {
+                        vertical: "bottom",
+                        horizontal: "left"
+                      },
+                      getContentAnchorEl: null
+                    }}
+                    inputProps={register("ward_id", {
+                      required: true
+                    })}
+                    labelId="ward-label"
+                    value={formValuesProfile.ward_id}
+                    onChange={handleWardChange}
+                    displayEmpty
+                    className={'my-select'}
+                  >
+                    <MenuItem value="" disabled>
+                      Chọn phường/xã...
+                    </MenuItem>
+                    {wards.map((el: any, index) => (
+                      <MenuItem key={index} value={el.id}>{el.name}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <div className="form-control-feedback">
+                  <span className="arrow"></span>
+                  <img src={imgError} alt="error" />
+                  {errors.ward_id && <span id="ward-helper-text">Phường/xã là bắt buộc.</span>}
+                </div>
+              </div>
+
+              <div className={`form-group item-input required ${errors.address ? 'has-error' : ''}`}>
+                <InputLabel htmlFor="address" className="label-config">
+                  <span>Địa chỉ</span></InputLabel>
+                <input type="text" className="form-control bg-white" id="address" aria-describedby="address-helper-text"
+                  defaultValue={formValuesProfile.address}
+                  placeholder="Nhập địa chỉ"
+                  {...register("address", {
+                    required: true
+                  })}
+                />
+                <div className="form-control-feedback">
+                  <span className="arrow"></span>
+                  <img src={imgError} alt="error" />
+                  {errors.address && <span id="address-helper-text">Địa chỉ là bắt buộc.</span>}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="items-inline">
+
+            <div className={`form-group item-input required ${errors.info_relative ? 'has-error' : ''}`}>
+              <InputLabel htmlFor="info_relative" className="label-config">
+                <span>Người thân(Họ tên, số điện thoại, địa chỉ...)</span></InputLabel>
+              <textarea rows={3} className="form-control bg-white" id="info_relative" aria-describedby="info_relative-helper-text"
+                defaultValue={formValuesProfile.info_relative}
+                placeholder="Nhập thông tin người thân"
+                {...register("info_relative", {
                   required: true
                 })}
               />
               <div className="form-control-feedback">
                 <span className="arrow"></span>
                 <img src={imgError} alt="error" />
-                {errors.address && <span id="address-helper-text">Địa chỉ là bắt buộc.</span>}
+                {errors.info_relative && <span id="info_relative-helper-text">Thông tin người thân là bắt buộc.</span>}
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="items-inline">
-
-          <div className={`form-group item-input required ${errors.family ? 'has-error' : ''}`}>
-            <InputLabel htmlFor="family" className="label-config">
-              <span>Người thân(Họ tên, số điện thoại, địa chỉ...)</span></InputLabel>
-            <textarea rows={3} className="form-control bg-white" id="family" aria-describedby="family-helper-text"
-              defaultValue={formValuesProfile.family}
-              placeholder="Nhập thông tin người thân"
-              {...register("family", {
-                required: true
-              })}
-            />
-            <div className="form-control-feedback">
-              <span className="arrow"></span>
-              <img src={imgError} alt="error" />
-              {errors.family && <span id="family-helper-text">Thông tin người thân là bắt buộc.</span>}
-            </div>
-          </div>
-
-          <div className={`form-group item-input`}>
-            <InputLabel htmlFor="ression" className="label-config">
-              <span>Lý do khám và triệu trứng</span></InputLabel>
-            <textarea rows={3} className="form-control bg-white" id="ression" aria-describedby="ression-helper-text"
-              defaultValue={formValuesProfile.ression}
-              placeholder="Nhập lý do khám, triệu trứng..."
-              {...register("ression", {
-                required: false
-              })}
-            />
-
-          </div>
-        </div>
-        <div className="items-inline">
-
-          <div className="items-inline-child">
 
             <div className={`form-group item-input`}>
-              <InputLabel htmlFor="height" className="label-config">
-                <span>Chiều cao</span></InputLabel>
-              <input type="text" className="form-control bg-white" id="height" aria-describedby="height-helper-text"
-                defaultValue={formValuesProfile.height}
-                placeholder="Nhập chiều cao"
-                {...register("height", {
+              <InputLabel htmlFor="reason" className="label-config">
+                <span>Lý do khám và triệu trứng</span></InputLabel>
+              <textarea rows={3} className="form-control bg-white" id="reason" aria-describedby="reason-helper-text"
+                defaultValue={formValuesProfile.reason}
+                placeholder="Nhập lý do khám, triệu trứng..."
+                {...register("reason", {
+                  required: false
+                })}
+              />
+
+            </div>
+          </div>
+          <div className="items-inline">
+
+
+
+            <div className={`form-group item-input`}>
+              <InputLabel htmlFor="history" className="label-config">
+                <span>Tiểu sử bệnh lý nền</span></InputLabel>
+              <textarea rows={3} className="form-control bg-white" id="history" aria-describedby="history-helper-text"
+                defaultValue={formValuesProfile.medical_history}
+                placeholder="Nhập tiểu sử bệnh lý..."
+                {...register("medical_history", {
                   required: false
                 })}
               />
 
             </div>
             <div className={`form-group item-input`}>
-              <InputLabel htmlFor="weight" className="label-config">
-                <span>Cân nặng</span></InputLabel>
-              <input type="text" className="form-control bg-white" id="weight" aria-describedby="weight-helper-text"
-                defaultValue={formValuesProfile.weight}
-                placeholder="Nhập cân nặng"
-                {...register("weight", {
+              <InputLabel htmlFor="allergy" className="label-config">
+                <span>Dị ứng</span></InputLabel>
+              <textarea rows={3} className="form-control bg-white" id="allergy" aria-describedby="allergy-helper-text"
+                defaultValue={formValuesProfile.allergy}
+                placeholder="Nhập các dị ứng..."
+                {...register("allergy", {
                   required: false
                 })}
               />
@@ -395,62 +588,34 @@ function ProfileUpsert({ isEdit, callBackCloseModal }) {
             </div>
           </div>
 
-          <div className={`form-group item-input`}>
-            <InputLabel htmlFor="history" className="label-config">
-              <span>Tiểu sử bệnh lý nền</span></InputLabel>
-            <textarea rows={3} className="form-control bg-white" id="history" aria-describedby="history-helper-text"
-              defaultValue={formValuesProfile.history}
-              placeholder="Nhập tiểu sử bệnh lý..."
-              {...register("history", {
-                required: false
-              })}
-            />
 
+
+          {!isEdit && <div className="button-submit-center">
+            <Button variant="contained" color="primary" type="submit" className="my-btn btn-contained btn-blue-dash btn-search">
+              Xác nhận
+            </Button>
+          </div>}
+
+          {isEdit && <div className="button-submit-right">
+            <Button onClick={() => handleCloseModal()} variant="outlined" color="primary" type="button" className="my-btn btn-outlined btn-black">
+              Hủy
+            </Button>
+            <Button variant="contained" color="primary" type="submit" className="my-btn btn-contained btn-blue-dash">
+              Lưu
+            </Button>
           </div>
-        </div>
+          }
+        </form>
 
-        <div className="items-inline">
-          <div className={`form-group item-input`}>
-            <InputLabel htmlFor="external" className="label-config">
-              <span>Dị ứng</span></InputLabel>
-            <textarea rows={3} className="form-control bg-white" id="external" aria-describedby="external-helper-text"
-              defaultValue={formValuesProfile.external}
-              placeholder="Nhập các dị ứng..."
-              {...register("external", {
-                required: false
-              })}
-            />
-
-          </div>
-          <div className={`form-group item-input`}></div>
-
-        </div>
-
-        {!isEdit && <div className="button-submit-center">
-          <Button variant="contained" color="primary" type="submit" className="my-btn btn-contained btn-blue-dash btn-search">
-            Xác nhận
-          </Button>
-        </div>}
-
-        {isEdit && <div className="button-submit-right">
-          <Button onClick={() => handleCloseModal()} variant="outlined" color="primary" type="button" className="my-btn btn-outlined btn-black">
-            Hủy
-          </Button>
-          <Button variant="contained" color="primary" type="submit" className="my-btn btn-contained btn-blue-dash">
-            Lưu
-          </Button>
-        </div>
-        }
-      </form>
-
-      <Stack spacing={2} sx={{ width: '100%' }}>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-            Hồ sơ của bạn đã được tạo thành công !
-          </Alert>
-        </Snackbar>
-      </Stack>
-    </div>
+        <Stack spacing={2} sx={{ width: '100%' }}>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              Hồ sơ của bạn đã được tạo thành công !
+            </Alert>
+          </Snackbar>
+        </Stack>
+      </div>
+    </React.Fragment>
   );
 }
 

@@ -15,6 +15,7 @@ import HospitalPage from './containers/hospital/HospitalPage';
 import HospitalDetailPage from './containers/hospital-detail/HospitalDetailPage';
 import ForgetPasswordPage from './containers/forget-password/ForgetPassword';
 import UserAccountPage from './containers/user-account/UserAccount';
+import VerifyForgotPasswordPage from './containers/verify-forgot-password/VerifyForgotPassword';
 function App() {
   return (
     <div className="wrapper-app">
@@ -39,11 +40,11 @@ function App() {
             <ForgetPasswordPage></ForgetPasswordPage>
           </PublicRoute>} >
         </Route>
-        {/* <Route path="/login-authention" element={
+        <Route path="/xac-thuc-mat-khau" element={
           <PublicRoute >
-            <LoginAuthention></LoginAuthention>
+            <VerifyForgotPasswordPage></VerifyForgotPasswordPage>
           </PublicRoute>} >
-        </Route> */}
+        </Route>
 
         <Route path="/ho-so-benh-nhan">
           <Route path="/ho-so-benh-nhan" element={
@@ -58,7 +59,7 @@ function App() {
           </Route>
           <Route path="search" element={
             <PrivateRoute >
-              <SearchProfilePage></SearchProfilePage>
+              <ProfilePatientPage></ProfilePatientPage>
             </PrivateRoute>} >
           </Route>
         </Route>

@@ -420,3 +420,11 @@ button.my-btn.btn-blue-dash.btn-contained {
     height: 100%;
     width: 100%;
 }
+.my-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    li button {
+        font-family: "Averta" !important;
+    }
+}

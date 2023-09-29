@@ -28,7 +28,9 @@ function PrivateRoute({ dispatch, children }) {
         dispatch(setUser(body));
       }
     ).finally(() => { })
-  });
+  }, []);
+
+
 
   const scrollToTop = () => {
     if (myRef.current) {

@@ -15,7 +15,14 @@ const authService = {
     },
     logout() {
         return http.get('/customer/logout');
-    }
+    },
+    forgetPassword: (data) => {
+        return http.post('/customer/forgot-password',data);
+    },
+    verrifyForgetPassword: (data) => {
+        return http.post('/customer/verify-forgot-password',data);
+    },
+   
 }
 
 export default authService
