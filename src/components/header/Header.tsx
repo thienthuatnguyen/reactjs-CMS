@@ -9,7 +9,6 @@ import React from "react";
 import authService from "../../services/authService";
 import { connect } from "react-redux";
 import { IUser, User } from "../../models/user.model";
-import { SearchBox } from "../search-box/SearchBox";
 function Header(props: any) {
   const navigate = useNavigate();
 
@@ -20,15 +19,15 @@ function Header(props: any) {
   };
   // const params = useParams()
   let user: IUser = new User();
-  if(props.user && props.user.data && props.user.data.profile) {
+  if (props.user && props.user.data && props.user.data.profile) {
     user = props.user.data.profile;
   }
-  
+
   const handleClose = () => {
     setAnchorEl(null);
   };
   const logOut = () => {
-    authService.logout().then(()=> {
+    authService.logout().then(() => {
       localStorage.removeItem('o2fine');
       navigate("/dang-nhap");
     })
@@ -48,14 +47,16 @@ function Header(props: any) {
           </div>
           <Menu id={"sidebar"} className={"side-menu-mobile"} burgerButtonClassName={"button-menu-mobile"}>
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/">Hồ sơ bệnh nhân</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
-            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
+            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-kham-theo-bac-si">Đặt khám theo bác sĩ</NavLink>
+            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-kham-theo-benh-vien">Đặt khám theo bệnh viện</NavLink>
+            <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-cham-soc-tai-nha">Đặt chăm sóc tại nhà</NavLink>
+
             <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/quan-ly-tai-khoan">Quản lý tài khoản</NavLink>
             <button type="button" className="btn-logout" onClick={() => { handleClose(); logOut() }}>Đăng xuất</button>
 
           </Menu>
         </div>
-        
+
       </div>
       <div className="wrapper-menu-pc">
         <div className="container-app">
@@ -66,16 +67,18 @@ function Header(props: any) {
 
           </div>
           <div className="right-content">
-            <SearchBox></SearchBox>
             <ul className="menu-pc">
               <li>
                 <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/">Hồ sơ bệnh nhân</NavLink>
               </li>
               <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/benh-vien">Bệnh viện</NavLink>
+                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-kham-theo-bac-si">Đặt khám theo bác sĩ</NavLink>
               </li>
               <li>
-                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-lich-kham">Đặt lịch khám</NavLink>
+                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-kham-theo-benh-vien">Đặt khám theo bệnh viện</NavLink>
+              </li>
+              <li>
+                <NavLink className={(navData) => navData.isActive ? "active" : ""} to="/dat-cham-soc-tai-nha">Đặt chăm sóc tại nhà</NavLink>
               </li>
             </ul>
             <div className="user-account">

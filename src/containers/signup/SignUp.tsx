@@ -105,7 +105,7 @@ function SignUp() {
         <div className={`form-group ${errors.email ? 'has-error' : ''}`}>
           <input type="email" className="form-control bg-gray" id="email" aria-describedby="email-helper-text"
             defaultValue={formValues.email}
-            placeholder="Nhập email"
+            placeholder="Email (khôi phục mật khẩu khi quên)"
             {...register("email", {
               required: false
             })}
@@ -173,7 +173,7 @@ function SignUp() {
         <div className="form-group">
           <input type="text" className="form-control bg-gray" id="codeIntroduce" aria-describedby="code-introduce-helper-text"
             defaultValue={formValues.codeIntroduce}
-            placeholder="Nhập mã giới thiệu (nếu có)"
+            placeholder="Mã giới thiệu (nếu có)"
             {...register("codeIntroduce", {
               required: false
             })}

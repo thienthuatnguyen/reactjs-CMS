@@ -241,7 +241,22 @@ textarea {
 
 .my-wrapper-select {
   height: 100%;
-
+  .btn-clear {
+    position: absolute;
+    right: 15px;
+    top:0;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: transparent !important;
+    img {
+      width: 10px;
+    }
+  }
+  &.clear-button {
+    .MuiSelect-select.MuiSelect-select {
+      padding-right: 45px;
+    }
+  }
   .my-select {
     font-size: 16px;
     color: $body-color;
@@ -257,9 +272,6 @@ textarea {
     .MuiSelect-select {
       height: 100%;
       box-sizing: border-box;
-      display: inline-flex;
-      align-items: center;
-      justify-content: flex-start;
       padding-left: 15px;
     }
   }
@@ -579,6 +591,13 @@ textarea {
 .MuiSnackbar-anchorOriginTopRight {
   top: 18px !important;
   
+}
+.MuiFormControlLabel-root.my-checkbox {
+  margin-right: 0 !important;
+  align-items: flex-start !important;
+  .MuiIconButton-root.MuiCheckbox-root {
+    margin-top: -10px !important;
+  }
 }
 @media only screen and (max-width: 768px) {
   .wrapper-my-modal {

@@ -12,6 +12,8 @@ import ProfileUpsert from "../../components/profile-upsert/ProfileUpsert";
 import { useNavigate, useParams } from "react-router-dom";
 import profileService from "../../services/profileService";
 import ToastMessage from "../../components/toast-message/ToastMessage";
+import { setProfileId } from "../../actions/actions";
+import { connect } from "react-redux";
 
 const DeleteIcon = () => (<img src={deleteIcon} alt="delete-icon"></img>);
 const EditIcon = () => (<img src={editIcon} alt="edit-icon"></img>);
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 
 );
-function ProfilePatientDetailPage() {
+function ProfilePatientDetailPage({dispatch}) {
   const navigate = useNavigate();
   const params: any = useParams();
   const [open, setOpen] = React.useState(false);
@@ -44,22 +46,22 @@ function ProfilePatientDetailPage() {
     phone_number: '',
     address: '',
     id: ''
-    
+
   });
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
 
   useEffect(() => {
     if (params && params.patentId && params.patentId != '') {
-        profileService.findMedicalProfile(params.patentId).then(
-          (res) => {
-            let body = res.data;
-            if (body && body.error) {
-              setToastConfig({ type: 'error', isOpen: true, message: body.message });
-            } else {
-              setProfileInfo(body.data.profile);
-            }
+      profileService.findMedicalProfile(params.patentId).then(
+        (res) => {
+          let body = res.data;
+          if (body && body.error) {
+            setToastConfig({ type: 'error', isOpen: true, message: body.message });
+          } else {
+            setProfileInfo(body.data.profile);
           }
-        )
+        }
+      )
 
     } else {
       navigate('/404');
@@ -90,16 +92,21 @@ function ProfilePatientDetailPage() {
 
   const classes = useStyles();
   function handleDeleteConfirm(id) {
-    profileService.deleteMedicalProfile(id).then((res)=> {
+    profileService.deleteMedicalProfile(id).then((res) => {
       let body = res.data;
-            if (body && body.error) {
-              setToastConfig({ type: 'error', isOpen: true, message: body.message });
-            } else {
-              setToastConfig({ type: 'success', isOpen: true, message: 'Xóa hồ sơ thành công!' });
-              handleCloseConfirm();
-              navigate('/');
-            }
+      if (body && body.error) {
+        setToastConfig({ type: 'error', isOpen: true, message: body.message });
+      } else {
+        setToastConfig({ type: 'success', isOpen: true, message: 'Xóa hồ sơ thành công!' });
+        handleCloseConfirm();
+        navigate('/');
+      }
     });
+  }
+
+  function setProfile(id, url) {
+    dispatch(setProfileId(id));
+    navigate(url);
   }
 
   return (
@@ -164,6 +171,12 @@ function ProfilePatientDetailPage() {
                       <div className="col-content-info">{profileInfo.address}</div>
                     </div>
                   </div>
+                  <div className="btn-booking">
+                    <Button className="my-btn btn-text-blue" onClick={() => { setProfile(profileInfo.id, '/dat-kham-theo-bac-si')}}>Đặt khám theo bác sĩ</Button>
+                    <Button className="my-btn btn-text-blue" onClick={() => { setProfile(profileInfo.id, '/dat-kham-theo-benh-vien') }}>Đặt khám theo bệnh viện</Button>
+                    <Button className="my-btn btn-text-blue" onClick={() => { setProfile(profileInfo.id, '/dat-cham-soc-tai-nha') }}>Đặt chăm sóc tại nhà</Button>
+                  </div>
+
                 </div>
                 <div className="box-profile box-profile-schedule">
                   <div className="top-info">
@@ -250,7 +263,7 @@ function ProfilePatientDetailPage() {
         >
           <Fade in={open}>
             <div className="wrapper-my-modal">
-              <ProfileUpsert profileInfo = {profileInfo}  isEdit={true} callBackCloseModal={handleClose}></ProfileUpsert>
+              <ProfileUpsert profileInfo={profileInfo} isEdit={true} callBackCloseModal={handleClose}></ProfileUpsert>
             </div>
           </Fade>
         </Modal>
@@ -270,7 +283,7 @@ function ProfilePatientDetailPage() {
             <Button className="btn-reject" onClick={handleCloseConfirm} color="primary">
               Từ chối
             </Button>
-            <Button className="btn-accept" onClick={()=> handleDeleteConfirm(profileInfo.id)} color="primary" autoFocus>
+            <Button className="btn-accept" onClick={() => handleDeleteConfirm(profileInfo.id)} color="primary" autoFocus>
               Đồng ý
             </Button>
           </DialogActions>
@@ -280,5 +293,5 @@ function ProfilePatientDetailPage() {
   );
 }
 
-export default ProfilePatientDetailPage;
+export default connect()(ProfilePatientDetailPage);
 

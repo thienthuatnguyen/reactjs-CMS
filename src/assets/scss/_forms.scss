@@ -257,6 +257,22 @@
         padding-right: 20px;
         max-width: 50%;
         box-sizing: border-box;
+        &.item-unit {
+            position: relative;
+            input.form-control {
+                padding-right: 30px !important;
+            }
+            input.form-control::-webkit-outer-spin-button, input.form-control::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            span.unit {
+                position: absolute;
+                right: 30px;
+                top: 31px;
+                color: $border-input;
+            }
+        }
     }
 }
 .form-group {

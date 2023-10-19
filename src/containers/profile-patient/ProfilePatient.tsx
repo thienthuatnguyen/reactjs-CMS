@@ -1,4 +1,4 @@
-import { Avatar, Button, Grid } from "@material-ui/core";
+import { Avatar, Button, Grid, Icon } from "@material-ui/core";
 import "./ProfilePatient.scss";
 import addIcon from "../../assets/images/icon-user-create.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -18,7 +18,7 @@ function ProfilePatientPage() {
   const [listItem, setListItem] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     getData();
   }, []);
@@ -26,13 +26,13 @@ function ProfilePatientPage() {
   useEffect(() => {
     getData();
   }, [pagination.current_page]);
-  
+
   function getData() {
     let params: any = {
       page: pagination.current_page,
       per_page: pagination.per_page
     }
-    if(searchParams.get("value")) {
+    if (searchParams.get("value")) {
       params.search = searchParams.get("value");
     }
     profileService.getListMedicalProfile(params).then(
@@ -109,7 +109,7 @@ function ProfilePatientPage() {
           </Grid>}
           {(listItem.length <= 0) && <EmptyData />}
         </div>
-        {(listItem.length > 0) && <Pagination className={'my-pagination'} showFirstButton  showLastButton  onChange={handleChangePage} count={pagination.totalPage} page={pagination.current_page} variant="outlined" shape="rounded" />}
+        {(listItem.length > 0) && <Pagination className={'my-pagination'} showFirstButton showLastButton onChange={handleChangePage} count={pagination.totalPage} page={pagination.current_page} variant="outlined" shape="rounded" />}
       </div>
     </div>
   );

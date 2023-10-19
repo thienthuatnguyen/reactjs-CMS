@@ -102,6 +102,16 @@
                     }
                 }
             }
+            .btn-booking {
+                margin-top: 15px;
+                .my-btn.btn-text-blue {
+                    span.MuiButton-label {
+                        color: $blue;
+                        text-decoration: underline;
+                    }
+                }
+            }
+         
             &.box-profile-schedule {
                 margin-top: 15px;
                 .row-schedule {

@@ -32,5 +32,14 @@ export const addNewTodo = (text: string) => ({
     type: 'SET_USER',
     data
   })
+
+  export const setProfileId = (data: any) => ({
+    type: 'SET_PROFILE_ID',
+    data
+  })
   
+  export const setHospitalId = (data: any) => ({
+    type: 'SET_HOSPITAL_ID',
+    data
+  })
   

@@ -79,7 +79,7 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
     }
   }, []);
   useEffect(() => {
-    if(isEdit) {
+    if (isEdit) {
       reset(formValuesProfile);
     }
   }, [formValuesProfile]);
@@ -368,9 +368,10 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
             </div>
             <div className="items-inline-child">
 
-              <div className={`form-group item-input`}>
+              <div className={`form-group item-input item-unit`}>
                 <InputLabel htmlFor="height" className="label-config">
                   <span>Chiều cao</span></InputLabel>
+                <span className="unit">cm</span>
                 <input type="number" className="form-control bg-white" id="height" aria-describedby="height-helper-text"
                   defaultValue={formValuesProfile.height}
                   placeholder="Nhập chiều cao"
@@ -381,9 +382,10 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
                 />
 
               </div>
-              <div className={`form-group item-input`}>
+              <div className={`form-group item-input item-unit`}>
                 <InputLabel htmlFor="weight" className="label-config">
                   <span>Cân nặng</span></InputLabel>
+                <span className="unit">cm</span>
                 <input type="number" className="form-control bg-white" id="weight" aria-describedby="weight-helper-text"
                   defaultValue={formValuesProfile.weight}
                   placeholder="Nhập cân nặng"

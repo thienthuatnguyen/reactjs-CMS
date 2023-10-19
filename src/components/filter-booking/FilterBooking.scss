@@ -1,0 +1,76 @@
+@import '../../assets/scss/variables.scss';
+
+.search-content-filter-booking {
+    margin-top: 30px;
+
+    .btn-search {
+        width: 100%;
+    }
+    .btn-clear-filter {
+        img {
+            width: 13px;
+            height: 14px;
+        }
+        .MuiAvatar-root {
+            width: 20px;
+            height: 20px;
+        }
+        .MuiButton-endIcon {
+            margin-right: 3px;
+            margin-left: 10px;
+        }
+        border: 1px solid $red;
+        margin-bottom: 15px;
+        color: $red;
+        background-color: rgba(203, 7, 4, 0.1);
+    }
+    .title {
+        display: flex;
+        margin-bottom: 15px;
+
+        .text {
+            font-size: 20px;
+            font-weight: bold;
+            color: $blue-dark;
+            flex: none;
+            margin-right: 15px;
+        }
+
+        .line {
+            flex: 1 1 100%;
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                background-color: $green;
+                left: 0;
+                bottom: 5px;
+            }
+        }
+
+    }
+
+    .form-search {
+        background-color: #fff;
+
+        .search-form {
+            padding: 15px;
+        }
+    }
+}
+
+.wrapper-search-around {
+    background-color: #99d4d2;
+    margin-top: 5px;
+
+    .form-group {
+        label {
+            font-weight: bold;
+            color: $blue-dark;
+            margin-bottom: 15px;
+        }
+    }
+}

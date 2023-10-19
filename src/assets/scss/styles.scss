@@ -304,8 +304,15 @@ button.my-btn.btn-blue-dash.btn-outlined {
 
 button.my-btn.btn-green.btn-outlined {
     background-color: #fff;
-    color: $blue-dark;
+    color: $green;
     border: 1px solid $green;
+    box-shadow: none;
+}
+
+button.my-btn.btn-yellow.btn-outlined {
+    background-color: #fff;
+    color: $yellow;
+    border: 1px solid $yellow;
     box-shadow: none;
 }
 

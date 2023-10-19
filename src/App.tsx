@@ -5,17 +5,17 @@ import PublicRoute from './containers/public-router/PublicRoute';
 import PrivateRoute from './containers/private-router/PrivateRoute';
 import Login from './containers/login/Login';
 import SignUp from './containers/signup/SignUp';
-import LoginAuthention from './containers/login-authention/LoginAuthention';
 import ProfilePatientPage from './containers/profile-patient/ProfilePatient';
 import CreateProfilePage from './containers/create-profile/CreateProfile';
 import ProfilePatientDetailPage from './containers/profile-patient-detail/ProfilePatientDetail';
-import BookingSchedulePage from './containers/booking-schedule/BookingSchedule';
-import SearchProfilePage from './containers/search-profile/SearchProfile';
-import HospitalPage from './containers/hospital/HospitalPage';
-import HospitalDetailPage from './containers/hospital-detail/HospitalDetailPage';
 import ForgetPasswordPage from './containers/forget-password/ForgetPassword';
 import UserAccountPage from './containers/user-account/UserAccount';
 import VerifyForgotPasswordPage from './containers/verify-forgot-password/VerifyForgotPassword';
+import BookingWithDoctorPage from './containers/booking-with-doctor/BookingWithDoctorPage';
+import BookingWithHospitalPage from './containers/booking-with-hospital/BookingWithHospitalPage';
+import BookingAtHomePage from './containers/booking-at-home/BookingAtHomePage';
+import BookingSchedulePage from './containers/booking-schedule/BookingSchedule';
+import InvoicePage from './containers/invoice/InvoicePage';
 function App() {
   return (
     <div className="wrapper-app">
@@ -82,22 +82,47 @@ function App() {
           </PrivateRoute>} >
         </Route>
 
-        <Route path="/benh-vien">
-          <Route path="/benh-vien" element={
-            <PrivateRoute>
-              <HospitalPage></HospitalPage>
+        <Route path="/dat-kham-theo-bac-si">
+          <Route path="" element={
+            <PrivateRoute >
+              <BookingWithDoctorPage></BookingWithDoctorPage>
             </PrivateRoute>} />
-          <Route path=":id" element={
+        </Route>
+        <Route path="/dat-kham-theo-benh-vien">
+          <Route path="" element={
+            <PrivateRoute >
+              <BookingWithHospitalPage></BookingWithHospitalPage>
+            </PrivateRoute>}>
+          </Route>
+          <Route path="search" element={
             <PrivateRoute>
-              <HospitalDetailPage></HospitalDetailPage>
-            </PrivateRoute>} />
+              <BookingWithDoctorPage></BookingWithDoctorPage>
+            </PrivateRoute>}>
+          </Route>
+        </Route>
+        <Route path="/dat-cham-soc-tai-nha">
+          <Route path="" element={
+            <PrivateRoute >
+              <BookingAtHomePage></BookingAtHomePage>
+            </PrivateRoute>} >
+          </Route>
+          <Route path="search" element={
+            <PrivateRoute>
+              <BookingWithDoctorPage></BookingWithDoctorPage>
+            </PrivateRoute>}>
+          </Route>
+        </Route>
+
+        <Route path="/thanh-toan" element={
+          <PrivateRoute >
+            <InvoicePage></InvoicePage>
+          </PrivateRoute>} >
         </Route>
 
         <Route path="*" element={<NotFoundPage />}>
-
         </Route>
-        <Route path="/404" element={<NotFoundPage />}>
 
+        <Route path="/404" element={<NotFoundPage />}>
         </Route>
 
       </Routes>
