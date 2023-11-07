@@ -94,6 +94,61 @@
             padding: 15px;
             box-sizing: border-box;
 
+            .general-info {
+                display: flex;
+                margin-bottom: 60px;
+
+                .image-hospital {
+                    max-width: 400px;
+
+                    img {
+                        object-fit: cover;
+                        width: 100%;
+                    }
+                }
+
+                .info {
+                    padding-left: 30px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .top {
+                        .name {
+                            background: url('../../assets/images/icon-khoa.png') no-repeat left center;
+                            font-size: 18px;
+                            color: #1C508A;
+                            font-weight: bold;
+                            padding-left: 40px;
+                            height: 30px;
+                            display: inline-flex;
+                            align-items: center;
+                        }
+                        .address {
+                            background: url('../../assets/images/icon-location.png') no-repeat left center;
+                            font-size: 16px;
+                            color: #1C508A;
+                            padding-left: 40px;
+                            height: 40px;
+                            display: inline-flex;
+                            align-items: center;
+                            margin-top: 5px;
+                            width: 100%;
+                        }
+                    }
+
+                    .bottom {
+                        button {
+                            margin-right: 15px;
+
+                            &:last-child {
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
             .my-pagination {
                 margin-bottom: 30px;
             }
@@ -243,6 +298,25 @@
                 margin: 0;
                 min-width: 100%;
                 max-width: 100%;
+                .general-info {
+                    flex-direction: column;
+                    .image-hospital {
+                        max-width: 100%;
+                        margin-bottom: 15px;
+                    }
+                    .info {
+                        padding-left: 0;
+                        .bottom {
+                            display: flex;
+                            margin-top: 30px;
+                            justify-content: space-between;
+                            button {
+                                min-width: 45%;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
 
             }
         }

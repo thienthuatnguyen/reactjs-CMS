@@ -1,0 +1,46 @@
+.my-wrapper-auto-select {
+    height: 36px;
+    width: 100%;
+    box-sizing: border-box;
+
+    .my-auto-select {
+        font-size: 16px;
+        color: $body-color;
+        font-family: "Averta";
+        height: 100%;
+        background-color: #fff;
+        @include border-radius(5px);
+        border: 1px solid #c8c8c8;
+        box-sizing: border-box;
+
+        &.Mui-focused {
+            border: 1px solid $body-color;
+            background-color: #fff !important;
+        }
+
+        &::before,
+        &::after {
+            display: none;
+
+        }
+
+        .MuiSelect-select {
+            height: 100%;
+            box-sizing: border-box;
+            padding-left: 15px;
+            background-color: #fff !important;
+            @include border-radius(5px);
+        }
+        .MuiAutocomplete-inputRoot {
+            height: 36px;
+            &::before, &::after {
+                display: none;
+            }
+            input.MuiInput-input {
+                padding-left: 10px;
+                border: none !important;
+            }
+        }
+    }
+}
+

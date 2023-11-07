@@ -1,0 +1,94 @@
+button.my-btn {
+    height: 36px;
+    box-sizing: border-box;
+    text-transform: none;
+}
+
+button.my-btn.large-size {
+    height: 46px;
+    box-sizing: border-box;
+    text-transform: none;
+}
+
+button.my-btn.btn-green.btn-contained {
+    background-color: $green;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+}
+
+button.my-btn.btn-blue.btn-contained {
+    background-color: $blue-dark;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+
+    img {
+        width: 65%;
+        height: 65%;
+    }
+}
+
+button.my-btn.btn-blue.btn-outlined {
+    background-color: #fff;
+    color: $blue;
+    border: 1px solid $blue;
+    box-shadow: none;
+}
+
+button.my-btn.btn-blue-dash.btn-outlined {
+    background-color: #fff;
+    color: $blue-dark;
+    border: 1px solid $blue-dark;
+    box-shadow: none;
+}
+
+button.my-btn.btn-green.btn-outlined {
+    background-color: #fff;
+    color: $green;
+    border: 1px solid $green;
+    box-shadow: none;
+}
+
+button.my-btn.btn-yellow.btn-outlined {
+    background-color: #fff;
+    color: $yellow;
+    border: 1px solid $yellow;
+    box-shadow: none;
+}
+
+button.my-btn.btn-yellow.btn-contained {
+    background-color: $yellow;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+
+    img {
+        width: 65%;
+        height: 65%;
+    }
+}
+
+button.my-btn.btn-red.btn-contained {
+    background-color: $red;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+
+    img {
+        width: 65%;
+        height: 65%;
+    }
+}
+
+button.my-btn.btn-blue-dash.btn-contained {
+    background-color: $blue;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+
+    img {
+        width: 65%;
+        height: 65%;
+    }
+}

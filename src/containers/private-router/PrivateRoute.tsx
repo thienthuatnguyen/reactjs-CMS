@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { Footer } from "../../components/footer/Footer";
 import "./PrivateRoute.scss";
 import { Banner } from "../../components/banner/Banner";
@@ -9,7 +9,7 @@ import { setUser } from "../../actions/actions";
 import Header from "../../components/header/Header";
 import phone from "../../assets/images/phone-circle.svg";
 
-function PrivateRoute({ dispatch, children }) {
+function PrivateRoute({ dispatch }) {
 
   const [isVisible, setIsVisible] = useState(false);
   const [auth, setAuth] = useState(true);
@@ -51,7 +51,7 @@ function PrivateRoute({ dispatch, children }) {
       <div onScroll={handleScroll} className="page-content">
         <div ref={myRef}></div>
         <Banner></Banner>
-        {children}
+        <Outlet></Outlet>
         <Footer></Footer>
         {isVisible && <button className="btn-scroll-page" onClick={() => { scrollToTop() }}></button>}
         <div className="support-bar">

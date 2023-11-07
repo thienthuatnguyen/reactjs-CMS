@@ -42,4 +42,14 @@ export const addNewTodo = (text: string) => ({
     type: 'SET_HOSPITAL_ID',
     data
   })
+
+  export const setDoctorId = (data: any) => ({
+    type: 'SET_DOCTOR_ID',
+    data
+  })
+
+  export const setDepartmentId = (data: any) => ({
+    type: 'SET_DEPARTMENT_ID',
+    data
+  })
   

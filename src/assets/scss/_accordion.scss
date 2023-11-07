@@ -1,0 +1,44 @@
+.my-accordion.MuiPaper-root {
+    box-shadow: none;
+    border-bottom: 1px solid #c8c8c8;
+  
+    .MuiAccordionSummary-root {
+      padding: 0;
+      min-height: 40px;
+      height: 40px;
+  
+      .header-content {
+        display: flex;
+  
+        .date-text {
+          margin-right: 30px;
+        }
+      }
+  
+    }
+  
+    .MuiAvatar-img {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+    }
+  }
+  
+  .my-accordion.MuiAccordion-root {
+    &::before {
+      background-color: #c8c8c8;
+      display: none;
+    }
+  }
+  
+  .my-accordion.MuiAccordion-root.Mui-expanded {
+    margin: 0;
+    border-radius: 0;
+  }
+
+
+  @media only screen and (max-width: 768px) {
+    .my-accordion.MuiPaper-root .MuiAccordionSummary-root {
+      height: auto;
+    }
+  }

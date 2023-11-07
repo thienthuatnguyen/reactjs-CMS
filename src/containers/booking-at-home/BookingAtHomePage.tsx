@@ -13,7 +13,7 @@ import { EmptyData } from "../../components/empty-data/EmptyData";
 import { Hospital } from "../../models/hospital.model";
 import ChoseProfile from "../../components/chose-profile/ChoseProfile";
 import { connect } from "react-redux";
-import { setHospitalId, setProfileId } from "../../actions/actions";
+import { setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 );
 const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
-function BookingAtHomePage(props: any) {
+function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp}) {
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [open, setOpen] = React.useState(false);
   const [doctorName, setDoctorName] = React.useState('');
@@ -67,17 +67,18 @@ function BookingAtHomePage(props: any) {
   };
 
   function viewDetail(id) {
-    props.setHospitalId(id);
+    props.setHospitalIdProp(id);
     navigate(`/dat-cham-soc-tai-nha/search?hospital_id=${id}&work_at_home=true`);
   }
-  function bookingCalendar(name) {
+  function bookingCalendar(name, id) {
+    props.setDoctorIdProp(id);
     setDoctorName(name);
     setOpen(true);
   }
   function bookingWithProfile(data) {
-    if(data.profile_id && data.hospital_id) {
-      navigate('/dat-lich-kham');
+    if(data.profile_id && data.hospital_id && props.doctorIdProp) {
       setOpen(false);
+      navigate('/dat-lich-kham-voi-bac-si');
     } 
   }
   const getItem = doctors => doctors.map((item, index) => (
@@ -95,7 +96,7 @@ function BookingAtHomePage(props: any) {
           <li className="hospital">{item.address}</li>
           <li className="experience">{item.experience}</li>
         </ul>
-        <Button onClick={() => bookingCalendar(item.fullname)} variant="contained" className="my-btn btn-blue-dash btn-contained btn-detail">
+        <Button onClick={() => bookingCalendar(item.fullname, item.id)} variant="contained" className="my-btn btn-blue-dash btn-contained btn-detail">
           Đặt lịch khám
         </Button>
       </div>
@@ -183,9 +184,9 @@ function BookingAtHomePage(props: any) {
    
     if (params.hospital_id) {
       filterParams.hospital_id = params.hospital_id;
-      props.setHospitalId(params.hospital_id);
+      props.setHospitalIdProp(params.hospital_id);
     } else {
-      props.setHospitalId('');
+      props.setHospitalIdProp('');
     }
 
     if (params.radius) {
@@ -278,13 +279,15 @@ function BookingAtHomePage(props: any) {
 }
 
 const mapStateToProps = (state: any) => ({
-  profileId: state.profileId,
-  hospitalId: state.hospitalId
+  profileIdProp: state.profileId,
+  hospitalIdProp: state.hospitalId,
+  doctorIdProp: state.doctorId
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setProfileId: (data: any) => dispatch(setProfileId(data)),
-  setHospitalId: (data: any) => dispatch(setHospitalId(data)),
+  setProfileIdProp: (data: any) => dispatch(setProfileId(data)),
+  setHospitalIdProp: (data: any) => dispatch(setHospitalId(data)),
+  setDoctorIdProp: (data: any) => dispatch(setDoctorId(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookingAtHomePage);

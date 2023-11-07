@@ -8,12 +8,12 @@ import { Hospital } from "../../models/hospital.model";
 import imgDefault from "../../assets/images/avatar-loading.svg";
 import { EmptyData } from "../../components/empty-data/EmptyData";
 import FilterBookingHospital from "../../components/filter-booking-hospital/FilterBookingHospital";
-import { setHospitalId, setProfileId } from "../../actions/actions";
+import { setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
 import { connect } from "react-redux";
 
 
 
-function BookingWithHospitalPage(props: any) {
+function BookingWithHospitalPage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp}) {
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
   let filterParams: any = {};
@@ -25,7 +25,7 @@ function BookingWithHospitalPage(props: any) {
 
 
   function viewDetail(id) {
-    props.setHospitalId(id);
+    props.setHospitalIdProp(id);
     navigate(`/dat-kham-theo-benh-vien/search?hospital_id=${id}`);
   }
 
@@ -133,13 +133,15 @@ function BookingWithHospitalPage(props: any) {
   );
 }
 const mapStateToProps = (state: any) => ({
-  profileId: state.profileId,
-  hospitalId: state.hospitalId
+  profileIdProp: state.profileId,
+  hospitalIdProp: state.hospitalId,
+  doctorIdProp: state.doctorId
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setProfileId: (data: any) => dispatch(setProfileId(data)),
-  setHospitalId: (data: any) => dispatch(setHospitalId(data)),
+  setProfileIdProp: (data: any) => dispatch(setProfileId(data)),
+  setHospitalIdProp: (data: any) => dispatch(setHospitalId(data)),
+  setDoctorIdProp: (data: any) => dispatch(setDoctorId(data)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(BookingWithHospitalPage);
 

@@ -5,6 +5,7 @@ import visibilityFilter from './visibilityFilter'
 import user from './user'
 import profileId from './profileId'
 import hospitalId from './hospitalId'
+import doctorId from './doctorId'
 
 export default combineReducers({
   todos,
@@ -12,5 +13,6 @@ export default combineReducers({
   visibilityFilter,
   user,
   profileId,
-  hospitalId
+  hospitalId,
+  doctorId
 })

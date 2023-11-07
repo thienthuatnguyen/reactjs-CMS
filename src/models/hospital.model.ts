@@ -22,3 +22,19 @@ export class Hospital implements IHospital {
 		this.title = title ? title : '';
 	}
 }
+
+
+
+export interface IFee {
+	hospital_id: number;
+	doctor_id: number;
+}
+
+export interface IBooking {
+	hospital_id: number;
+	doctor_id: number;
+	profile_id: number;
+	department_id: number;
+	date_book: string;
+	time_book: string;
+}

@@ -1,40 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./BookingTime.scss";
 import { Button } from "@material-ui/core";
 
 
-export function BookingTime({ callBackTimeMorningData, callBackTimeAfternonData }) {
-  let morningTimes = ['07:00 - 08: 00','08:00 - 09: 00','09:00 - 10: 00','10:00 - 11: 00'];
-  let afternonTimes = ['13:00 - 14: 00','14:00 - 15: 00','15:00 - 16: 00','16:00 - 17: 00'];
-  const [morningTime, setMorningTime] = useState('07:00 - 08: 00');
-  const [afternonTime, setAfternonTime] = useState('13:00 - 14: 00');
+export function BookingTime({ timeWorks, callBackTimeData }) {
+ 
+  const [timeSelect, setTimeSelect] = useState();
 
-  function morningTimeCallback(value) {
-    setMorningTime(value);
-    callBackTimeMorningData(morningTime);
+
+  function timeCallback(data) {
+    setTimeSelect(data.id)
+    callBackTimeData(data);
   }
 
-  function afternonTimeCallback(value) {
-    setAfternonTime(value);
-    callBackTimeAfternonData(morningTime);
-  }
+  
 
-  const getMorningItem = morningTimes => morningTimes.map((item, index) => (
-    <Button key={index} variant="outlined" className={`my-btn  btn-blue btn-outlined btn-time-select ${item === morningTime ? 'active' : ''}`} onClick={()=> morningTimeCallback(item) } >{morningTime}</Button>
+  const getItem = times => times.map((item, index) => (
+    <Button key={index} variant="outlined" className={`my-btn  btn-blue btn-outlined btn-time-select ${item.id === timeSelect ? 'active' : ''}`} onClick={()=> timeCallback(item) } >{item.start_time} - {item.end_time}</Button>
   ));
-  const getAfternonItem = afternonTimes => afternonTimes.map((item, index) => (
-    <Button key={index} className={`my-btn btn-blue btn-outlined btn-time-select ${item === afternonTime ? 'active' : ''}`} onClick={()=> afternonTimeCallback(item) }>{afternonTime}</Button>
-  ));
+  
   return (
     <div className="wrapper-booking-time">
-      <div className="title">Buổi sáng</div>
+      <div className="title">Chọn giờ khám</div>
       <div className="row-button">
-        {getMorningItem(morningTimes)}
-      </div>
-
-      <div className="title">Buổi chiều</div>
-      <div className="row-button">
-        {getAfternonItem(afternonTimes)}
+        {timeWorks.length <= 0 && <p>Bác sĩ không có giờ khám trong ngày này, vui lòng chọn ngày khác!</p>}
+        {timeWorks.length > 0 && getItem(timeWorks)}
       </div>
     </div>
   )

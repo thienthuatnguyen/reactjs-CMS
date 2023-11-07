@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import ToastMessage from "../toast-message/ToastMessage";
 import { connect } from "react-redux";
-import { setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
+import { setDepartmentId, setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
 import { useNavigate } from "react-router-dom";
 import hopitalService from "../../services/hospitalService";
 
@@ -20,17 +20,18 @@ const useStyles = makeStyles(() =>
 
 );
 
-function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, callBackCloseModal, callBackCorfimModal, setProfileIdProp, setHospitalIdProp, setDoctorIdProp }) {
+function ChoseProfileBookHospital(props: { hospitalName, profileIdProp, hospitalIdProp, doctorIdProp, callBackCloseModal, callBackCorfimModal, setProfileIdProp, setHospitalIdProp, setDoctorIdProp, setDepartmentIdProp }) {
   const [profiles, setProfiles] = useState([]);
-  const [hospitals, setHospitals] = useState([]);
+  const [departments, setDepartments] = useState([]);
 
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [error, setError] = useState(false);
-  const [errorHospital, setErrorHospital] = useState(false);
+  const [errorDepartment, setErrorDepartment] = useState(false);
+
   const classes = useStyles();
   const [formValues, setFormValues] = React.useState({
     profile_id: '',
-    hospital_id: ''
+    department_id: ''
   });
   const navigate = useNavigate();
 
@@ -41,14 +42,9 @@ function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, call
         'profile_id': props.profileIdProp
       }));
     }
-    if (props.hospitalIdProp) {
-      setFormValues(prevState => ({
-        ...prevState,
-        'hospital_id': props.hospitalIdProp
-      }));
-    }
+    
     getProfiles();
-    getHospitals();
+    getDepartments();
   }, []);
 
   
@@ -58,12 +54,13 @@ function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, call
     if (!data.profile_id) {
       setError(true);
     }
-    if (!data.hospital_id) {
-      setErrorHospital(true);
+    if (!data.department_id) {
+      setErrorDepartment(true);
     }
-    if (data.profile_id && data.hospital_id) {
+   
+    if (data.profile_id && data.department_id) {
       props.setProfileIdProp(data.profile_id);
-      props.setHospitalIdProp(data.hospital_id);
+      props.setDepartmentIdProp(data.department_id);
       props.callBackCorfimModal(data);
     }
 
@@ -72,23 +69,25 @@ function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, call
   function closeToast() {
     setToastConfig({ type: '', isOpen: false, message: '' });
   }
+
+  function getDepartments() {
+    hopitalService.getDepartments({hospital_id: props.hospitalIdProp}).then((res) => {
+      let body = res.data;
+      if (body && body.error) {
+        setToastConfig({ type: 'error', isOpen: true, message: body.message });
+      } else {
+        setDepartments(body.data.departments);
+      }
+    });
+  }
+
+  
   function getProfiles() {
     profileService.getListMedicalProfile({}).then(
       (res) => {
         let body = res.data;
         if ((body.error === false) && body.data) {
           setProfiles(body.data.profiles);
-        }
-      }
-    )
-  }
-
-  function getHospitals() {
-    hopitalService.getHospitals({doctor_id: props.doctorIdProp}).then(
-      (res) => {
-        let body = res.data;
-        if ((body.error === false) && body.data) {
-          setHospitals(body.data.hospitals);
         }
       }
     )
@@ -103,13 +102,15 @@ function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, call
     }));
   }
 
-  function handleHospitalChange(item) {
-    setError(false);
+  function handleDepartmentChange(item) {
+    setErrorDepartment(false);
     setFormValues(prevState => ({
       ...prevState,
-      'hospital_id': item.target.value
+      'department_id': item.target.value
     }));
   }
+
+
   function handleCloseModal() {
     props.callBackCloseModal();
   }
@@ -124,15 +125,17 @@ function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, call
    
   }
 
-  function getHospitalName() {
-    if(formValues.hospital_id && hospitals.length > 0) {
-      let array: any = hospitals.filter((el: any) => {return el.id == formValues.hospital_id});
-      return array[0]?.title;
+  function getDepartmentName() {
+    if(formValues.department_id && departments.length) {
+      let array: any = departments.filter((el: any) => {return el.id === formValues.department_id});
+      return array[0].title;
     } else {
       return null;
     }
    
   }
+
+  
 
   return (
     <React.Fragment>
@@ -152,9 +155,12 @@ function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, call
             </div>
           </React.Fragment>}
         {profiles.length > 0 && <React.Fragment>
-          {formValues.profile_id && !formValues.hospital_id && <div className={classes.boxInfoBookingConfirm}>Bạn đã chọn hồ sơ {getProfileName()}. Vui lòng chọn bệnh viện có bác sĩ này đang làm việc.</div>}
-          {!formValues.profile_id && formValues.hospital_id && <div className={classes.boxInfoBookingConfirm}>Bạn đã chọn {getHospitalName()}. Vui lòng chọn hồ sơ đặt khám.</div>}
-          {formValues.profile_id && formValues.hospital_id && <div className={classes.boxInfoBookingConfirm}>Bạn đã chọn hồ sơ {getProfileName()} và {getHospitalName()}. Nếu bạn muốn thay đổi hồ sơ hoặc bệnh viện, bạn có thể chọn lại hồ sơ hoặc bệnh viện có bác sĩ này đang làm việc.</div>}
+          {formValues.profile_id && !formValues.department_id  && <div className={classes.boxInfoBookingConfirm}>Bạn đã chọn đặt khám tại {props.hospitalName} và hồ sơ {getProfileName()}. Vui lòng chọn khoa khám.</div>}
+          {!formValues.profile_id && formValues.department_id  && <div className={classes.boxInfoBookingConfirm}>Bạn đã chọn đặt khám tại {props.hospitalName}, khoa {getDepartmentName()}. Vui lòng chọn hồ sơ khám.</div>}
+
+          {formValues.profile_id  && formValues.department_id && <div className={classes.boxInfoBookingConfirm}>Bạn đã chọn đặt khám tại {props.hospitalName}, khoa {getDepartmentName()} và hồ sơ {getProfileName()}.</div>}
+
+          {!formValues.profile_id && !formValues.department_id && <div className={classes.boxInfoBookingConfirm}>Bạn đã chọn đặt khám tại {props.hospitalName}. Vui lòng chọn hồ sơ đặt khám và khoa khám.</div>}
 
           <div className={`form-group item-input ${error ? 'has-error' : ''}`}>
             <InputLabel id="profile-label" className="label-config"><span>Chọn hồ sơ đặt khám</span></InputLabel>
@@ -189,8 +195,9 @@ function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, call
               {error && <span id="profile-helper-text">Hồ sơ là bắt buộc.</span>}
             </div>
           </div>
-          <div className={`form-group item-input ${errorHospital ? 'has-error' : ''}`}>
-            <InputLabel id="profile-label" className="label-config"><span>Chọn bệnh viện đặt khám</span></InputLabel>
+
+          <div className={`form-group item-input ${errorDepartment ? 'has-error' : ''}`}>
+            <InputLabel id="profile-label" className="label-config"><span>Chọn khoa</span></InputLabel>
             <FormControl className={'my-wrapper-select'}>
               <Select
                 MenuProps={{
@@ -202,16 +209,16 @@ function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, call
                 }}
 
                 labelId="profile-label"
-                value={formValues.hospital_id}
-                onChange={handleHospitalChange}
+                value={formValues.department_id}
+                onChange={handleDepartmentChange}
                 displayEmpty
                 className={'my-select'}
 
               >
                 <MenuItem value="" disabled>
-                  Chọn bệnh viện...
+                  Chọn khoa...
                 </MenuItem>
-                {hospitals.map((el: any, index) => (
+                {departments.map((el: any, index) => (
                   <MenuItem key={index} value={el.id}>{el.title}</MenuItem>
                 ))}
               </Select>
@@ -219,9 +226,10 @@ function ChoseProfile(props: { profileIdProp, hospitalIdProp, doctorIdProp, call
             <div className="form-control-feedback">
               <span className="arrow"></span>
               <img src={imgError} alt="error" />
-              {errorHospital && <span id="profile-helper-text">Bệnh viện là bắt buộc.</span>}
+              {errorDepartment && <span id="profile-helper-text">Khoa là bắt buộc.</span>}
             </div>
           </div>
+          
           <div className="button-submit-right">
             <Button onClick={() => handleCloseModal()} variant="outlined" color="primary" type="button" className="my-btn btn-outlined btn-black">
               Hủy
@@ -245,7 +253,8 @@ const mapDispatchToProps = (dispatch: any) => ({
   setProfileIdProp: (data: any) => dispatch(setProfileId(data)),
   setHospitalIdProp: (data: any) => dispatch(setHospitalId(data)),
   setDoctorIdProp: (data: any) => dispatch(setDoctorId(data)),
+  setDepartmentIdProp: (data: any) => dispatch(setDepartmentId(data)),
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChoseProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(ChoseProfileBookHospital);

@@ -1,4 +1,4 @@
-import "./BookingSchedule.scss";
+import "../booking-schedule/BookingSchedule.scss";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,7 +15,7 @@ import ToastMessage from "../../components/toast-message/ToastMessage";
 import hopitalService from "../../services/hospitalService";
 import { ProfileInfoSchedule } from "../../components/profile-info-schedule/ProfileInfoSchedule";
 registerLocale('vi', vi)
-function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp}) {
+function BookingHospitalSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp}) {
   const [startDate, setStartDate] = useState(new Date());
 
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp
   const [timeWorks, setTimeWorks] = React.useState([]);
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   useEffect(() => {
-    if (!props.profileIdProp || !props.doctorIdProp || !props.hospitalIdProp) {
+    if (!props.profileIdProp || !props.hospitalIdProp) {
       navigate('/')
     } else {
       getProfile();
@@ -103,7 +103,7 @@ function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp
           <h1 className="title">Đặt lịch khám</h1>
           <div className="wrapper-content">
             <div className="left-content">
-              <ProfileInfoSchedule profileInfo = {profileInfo}></ProfileInfoSchedule>
+            <ProfileInfoSchedule profileInfo = {profileInfo}></ProfileInfoSchedule>
               <BookingTime timeWorks = {timeWorks} callBackTimeData={getTimeData}></BookingTime>
               <div className="booking-confirm">
                 <Button onClick={()=> confirmBooked()}
@@ -251,5 +251,5 @@ const mapDispatchToProps = (dispatch: any) => ({
   setDoctorIdProp: (data: any) => dispatch(setDoctorId(data)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookingSchedulePage);
+export default connect(mapStateToProps, mapDispatchToProps)(BookingHospitalSchedulePage);
 

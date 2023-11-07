@@ -9,6 +9,7 @@ import closeIcon from "../../assets/images/close.svg";
 import profileService from "../../services/profileService";
 import ToastMessage from "../toast-message/ToastMessage";
 import { useNavigate } from "react-router-dom";
+import { Autocomplete } from "@mui/material";
 
 const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
 
@@ -50,6 +51,8 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
     register,
     handleSubmit,
     reset,
+    clearErrors,
+    setValue,
     formState: { errors }
   } = useForm();
   useEffect(() => {
@@ -74,16 +77,31 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
         medical_history: profileInfo.medical_history,
         allergy: profileInfo.allergy
       });
+      if (isEdit) {
+        setValue("code_insurance", profileInfo.code_insurance);
+        setValue("full_name", profileInfo.full_name);
+        setValue("birthday", profileInfo.birthday);
+        setValue("phone_number", profileInfo.phone_number);
+        setValue("gender", profileInfo.gender);
+        setValue("profession_id", profileInfo.profession_id);
+        setValue("province_id", profileInfo.province_id);
+        setValue("district_id", profileInfo.district_id);
+        setValue("ward_id", profileInfo.ward_id);
+        setValue("address", profileInfo.address);
+        setValue("info_relative", profileInfo.info_relative);
+        setValue("reason", profileInfo.reason);
+        setValue("height", profileInfo.height);
+        setValue("weight", profileInfo.weight);
+        setValue("medical_history", profileInfo.medical_history);
+        setValue("allergy", profileInfo.allergy);
+      }
       getDistrict(profileInfo.province_id);
       getWard(profileInfo.district_id);
     }
   }, []);
-  useEffect(() => {
-    if (isEdit) {
-      reset(formValuesProfile);
-    }
-  }, [formValuesProfile]);
+
   const onSubmitCreateProfile = (data) => {
+    data.province_id = formValuesProfile.province_id;
     if (isEdit) {
       profileService.updateMedicalProfile(profileInfo.id, data).then((res) => {
         let body = res.data;
@@ -118,17 +136,31 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
   }
 
   function handleProvinceChange(item) {
-    setFormValuesProfile(prevState => ({
-      ...prevState,
-      'province_id': item.target.value
-    }));
-    getDistrict(item.target.value);
+    if (item) {
+      clearErrors("province_id")
+      setFormValuesProfile(prevState => ({
+        ...prevState,
+        'province_id': item.id,
+        'district_id': '',
+        'ward_id': ''
+      }));
+      getDistrict(item.id);
+    } else {
+      setFormValuesProfile(prevState => ({
+        ...prevState,
+        'province_id': '',
+        'district_id': '',
+        'ward_id': ''
+      }));
+    }
   }
 
   function handleDistrictChange(item) {
+    clearErrors("district_id")
     setFormValuesProfile(prevState => ({
       ...prevState,
-      'district_id': item.target.value
+      'district_id': item.target.value,
+      'ward_id': ''
     }));
     getWard(item.target.value);
   }
@@ -141,6 +173,7 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
   }
 
   function handleWardChange(item) {
+    clearErrors("ward_id")
     setFormValuesProfile(prevState => ({
       ...prevState,
       'ward_id': item.target.value
@@ -201,6 +234,7 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
       }
     });
   }
+
   return (
     <React.Fragment>
       <ToastMessage isOpen={configToast.isOpen} closeCallback={closeToast} type={configToast.type} message={configToast.message}></ToastMessage>
@@ -385,7 +419,7 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
               <div className={`form-group item-input item-unit`}>
                 <InputLabel htmlFor="weight" className="label-config">
                   <span>Cân nặng</span></InputLabel>
-                <span className="unit">cm</span>
+                <span className="unit">kg</span>
                 <input type="number" className="form-control bg-white" id="weight" aria-describedby="weight-helper-text"
                   defaultValue={formValuesProfile.weight}
                   placeholder="Nhập cân nặng"
@@ -404,32 +438,23 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
           <div className="items-inline">
             <div className="items-inline-child">
               <div className={`form-group item-input required ${errors.province_id ? 'has-error' : ''}`}>
-                <InputLabel id="province_id-label" className="label-config"><span>Tỉnh/thành</span></InputLabel>
-                <FormControl className={'my-wrapper-select'}>
-                  <Select
-                    MenuProps={{
-                      anchorOrigin: {
-                        vertical: "bottom",
-                        horizontal: "left"
-                      },
-                      getContentAnchorEl: null
+                <InputLabel htmlFor="province_id" className="label-config"><span>Tỉnh/thành</span></InputLabel>
+                <FormControl className={'my-wrapper-auto-select'}>
+                  <Autocomplete
+                    id="province_id"
+                    autoComplete={false}
+                    openOnFocus={true}
+                    value={provinces.filter((el: any) => { return el.id === formValuesProfile.province_id })[0] ? provinces.filter((el: any) => { return el.id === formValuesProfile.province_id })[0] : null}
+                    getOptionLabel={(option: any) => option.name}
+                    options={provinces}
+                    onChange={(event: any, newValue: any | null) => {
+                      handleProvinceChange(newValue);
                     }}
-                    inputProps={register("province_id", {
+                    className="my-auto-select"
+                    renderInput={(params) => <TextField  {...params}   {...register("province_id", {
                       required: true
-                    })}
-                    labelId="province_id-label"
-                    value={formValuesProfile.province_id}
-                    onChange={handleProvinceChange}
-                    displayEmpty
-                    className={'my-select'}
-                  >
-                    <MenuItem value="" disabled>
-                      Chọn tỉnh thành...
-                    </MenuItem>
-                    {provinces.map((el: any, index) => (
-                      <MenuItem key={index} value={el.id}>{el.name}</MenuItem>
-                    ))}
-                  </Select>
+                    })} placeholder="Chọn tỉnh thành..." />}
+                  />
                 </FormControl>
                 <div className="form-control-feedback">
                   <span className="arrow"></span>
@@ -449,7 +474,7 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
                       },
                       getContentAnchorEl: null
                     }}
-                    inputProps={register("district_id", {
+                    {...register("district_id", {
                       required: true
                     })}
                     labelId="district-label"
@@ -485,7 +510,7 @@ function ProfileUpsert({ isEdit, callBackCloseModal, profileInfo }) {
                       },
                       getContentAnchorEl: null
                     }}
-                    inputProps={register("ward_id", {
+                    {...register("ward_id", {
                       required: true
                     })}
                     labelId="ward-label"

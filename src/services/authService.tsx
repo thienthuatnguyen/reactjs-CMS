@@ -22,6 +22,9 @@ const authService = {
     verrifyForgetPassword: (data) => {
         return http.post('/customer/verify-forgot-password',data);
     },
+    getBanners: ()=> {
+        return http.get('/slider/list?slider_name=slider_banner');
+    },
    
 }
 

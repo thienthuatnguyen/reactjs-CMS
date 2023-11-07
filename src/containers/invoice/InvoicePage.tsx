@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import profileService from "../../services/profileService";
 import React from "react";
 import ToastMessage from "../../components/toast-message/ToastMessage";
-import { setHospitalId, setProfileId } from "../../actions/actions";
+import { setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
 import { connect } from "react-redux";
 import { Button, Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, RadioProps, makeStyles } from "@material-ui/core";
 import clsx from 'clsx';
+import hopitalService from "../../services/hospitalService";
 
 const useStyles = makeStyles({
   root: {
@@ -63,7 +64,7 @@ function StyledRadio(props: RadioProps) {
   );
 }
 
-function InvoicePage(props: any) {
+function InvoicePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp}) {
   const [profileInfo, setProfileInfo] = React.useState({
     full_name: '',
     birthday: '',
@@ -78,8 +79,22 @@ function InvoicePage(props: any) {
 
   useEffect(() => {
     getProfile();
+    getFee();
   }, []);
 
+
+  function getFee() {
+    hopitalService.callServiceFee({doctor_id: props.doctorIdProp, hospital_id: props.hospitalIdProp}).then(
+      (res) => {
+        let body = res.data;
+        if (body && body.error) {
+          setToastConfig({ type: 'error', isOpen: true, message: body.message });
+        } else {
+          console.log(body.data)
+        }
+      }
+    )
+  }
 
 
   function getProfile() {
@@ -141,7 +156,7 @@ function InvoicePage(props: any) {
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info sex">Giới tính:</div>
-                      <div className="col-content-info">{profileInfo.gender ? 'Nữ' : 'Nam'}</div>
+                      <div className="col-content-info">{(profileInfo.gender == '0') ? 'Nam' : 'Nữ'}</div>
                     </div>
                   </div>
                 </div>
@@ -222,13 +237,15 @@ function InvoicePage(props: any) {
 }
 
 const mapStateToProps = (state: any) => ({
-  profileId: state.profileId,
-  hospitalId: state.hospitalId
+  profileIdProp: state.profileId,
+  hospitalIdProp: state.hospitalId,
+  doctorIdProp: state.doctorId
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setProfileId: (data: any) => dispatch(setProfileId(data)),
-  setHospitalId: (data: any) => dispatch(setHospitalId(data)),
+  setProfileIdProp: (data: any) => dispatch(setProfileId(data)),
+  setHospitalIdProp: (data: any) => dispatch(setHospitalId(data)),
+  setDoctorIdProp: (data: any) => dispatch(setDoctorId(data)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(InvoicePage);
 

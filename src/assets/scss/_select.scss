@@ -1,0 +1,37 @@
+.my-wrapper-select {
+    height: 100%;
+    .btn-clear {
+      position: absolute;
+      right: 15px;
+      top:0;
+      box-sizing: border-box;
+      height: 100%;
+      background-color: transparent !important;
+      img {
+        width: 10px;
+      }
+    }
+    &.clear-button {
+      .MuiSelect-select.MuiSelect-select {
+        padding-right: 45px;
+      }
+    }
+    .my-select {
+      font-size: 16px;
+      color: $body-color;
+      font-family: "Averta";
+      height: 100%;
+  
+      &::before,
+      &::after {
+        display: none;
+  
+      }
+  
+      .MuiSelect-select {
+        height: 100%;
+        box-sizing: border-box;
+        padding-left: 15px;
+      }
+    }
+  }

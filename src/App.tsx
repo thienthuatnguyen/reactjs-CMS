@@ -1,5 +1,5 @@
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import NotFoundPage from './containers/NotFoundPage';
 import PublicRoute from './containers/public-router/PublicRoute';
 import PrivateRoute from './containers/private-router/PrivateRoute';
@@ -15,16 +15,13 @@ import BookingWithDoctorPage from './containers/booking-with-doctor/BookingWithD
 import BookingWithHospitalPage from './containers/booking-with-hospital/BookingWithHospitalPage';
 import BookingAtHomePage from './containers/booking-at-home/BookingAtHomePage';
 import BookingSchedulePage from './containers/booking-schedule/BookingSchedule';
+import BookingHospitalSchedulePage from './containers/booking-hospital-schedule/BookingHospitalSchedule';
+
 import InvoicePage from './containers/invoice/InvoicePage';
 function App() {
   return (
     <div className="wrapper-app">
       <Routes>
-        <Route path="/" element={
-          <PrivateRoute >
-            <ProfilePatientPage></ProfilePatientPage>
-          </PrivateRoute>} >
-        </Route>
         <Route path="/dang-nhap" element={
           <PublicRoute >
             <Login></Login>
@@ -46,78 +43,48 @@ function App() {
           </PublicRoute>} >
         </Route>
 
-        <Route path="/ho-so-benh-nhan">
-          <Route path="/ho-so-benh-nhan" element={
-            <PrivateRoute >
-              <ProfilePatientPage></ProfilePatientPage>
-            </PrivateRoute>} >
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="" element={<ProfilePatientPage />} />
+
+          <Route path="ho-so-benh-nhan">
+            <Route path="" element={<ProfilePatientPage></ProfilePatientPage>} >
+            </Route>
+            <Route path=":patentId" element={<ProfilePatientDetailPage></ProfilePatientDetailPage>} >
+            </Route>
+            <Route path="search" element={<ProfilePatientPage></ProfilePatientPage>} >
+            </Route>
           </Route>
-          <Route path=":patentId" element={
-            <PrivateRoute >
-              <ProfilePatientDetailPage></ProfilePatientDetailPage>
-            </PrivateRoute>} >
+
+          <Route path="quan-ly-tai-khoan" element={<UserAccountPage></UserAccountPage>} >
           </Route>
-          <Route path="search" element={
-            <PrivateRoute >
-              <ProfilePatientPage></ProfilePatientPage>
-            </PrivateRoute>} >
+
+          <Route path="tao-ho-so" element={<CreateProfilePage></CreateProfilePage>} >
+          </Route>
+
+          <Route path="dat-lich-kham-voi-bac-si" element={<BookingSchedulePage></BookingSchedulePage>} >
+          </Route>
+
+          <Route path="dat-lich-kham-voi-benh-vien" element={<BookingHospitalSchedulePage></BookingHospitalSchedulePage>} >
+          </Route>
+
+          <Route path="dat-kham-theo-bac-si" element={<BookingWithDoctorPage></BookingWithDoctorPage>}></Route>
+          <Route path="dat-kham-theo-benh-vien">
+            <Route path="" element={<BookingWithHospitalPage></BookingWithHospitalPage>}>
+            </Route>
+            <Route path="search" element={<BookingWithDoctorPage></BookingWithDoctorPage>}>
+            </Route>
+          </Route>
+          <Route path="dat-cham-soc-tai-nha">
+            <Route path="" element={<BookingAtHomePage></BookingAtHomePage>} >
+            </Route>
+            <Route path="search" element={<BookingWithDoctorPage></BookingWithDoctorPage>}>
+            </Route>
+          </Route>
+
+          <Route path="thanh-toan" element={<InvoicePage></InvoicePage>} >
           </Route>
         </Route>
 
-        <Route path="/quan-ly-tai-khoan" element={
-          <PrivateRoute >
-            <UserAccountPage></UserAccountPage>
-          </PrivateRoute>} >
-        </Route>
-
-        <Route path="/tao-ho-so" element={
-          <PrivateRoute >
-            <CreateProfilePage></CreateProfilePage>
-          </PrivateRoute>} >
-        </Route>
-
-        <Route path="/dat-lich-kham" element={
-          <PrivateRoute >
-            <BookingSchedulePage></BookingSchedulePage>
-          </PrivateRoute>} >
-        </Route>
-
-        <Route path="/dat-kham-theo-bac-si">
-          <Route path="" element={
-            <PrivateRoute >
-              <BookingWithDoctorPage></BookingWithDoctorPage>
-            </PrivateRoute>} />
-        </Route>
-        <Route path="/dat-kham-theo-benh-vien">
-          <Route path="" element={
-            <PrivateRoute >
-              <BookingWithHospitalPage></BookingWithHospitalPage>
-            </PrivateRoute>}>
-          </Route>
-          <Route path="search" element={
-            <PrivateRoute>
-              <BookingWithDoctorPage></BookingWithDoctorPage>
-            </PrivateRoute>}>
-          </Route>
-        </Route>
-        <Route path="/dat-cham-soc-tai-nha">
-          <Route path="" element={
-            <PrivateRoute >
-              <BookingAtHomePage></BookingAtHomePage>
-            </PrivateRoute>} >
-          </Route>
-          <Route path="search" element={
-            <PrivateRoute>
-              <BookingWithDoctorPage></BookingWithDoctorPage>
-            </PrivateRoute>}>
-          </Route>
-        </Route>
-
-        <Route path="/thanh-toan" element={
-          <PrivateRoute >
-            <InvoicePage></InvoicePage>
-          </PrivateRoute>} >
-        </Route>
 
         <Route path="*" element={<NotFoundPage />}>
         </Route>

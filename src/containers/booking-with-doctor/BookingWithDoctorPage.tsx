@@ -12,8 +12,9 @@ import { Pagination } from "@mui/material";
 import { EmptyData } from "../../components/empty-data/EmptyData";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { setHospitalId, setProfileId } from "../../actions/actions";
+import { setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
 import ChoseProfile from "../../components/chose-profile/ChoseProfile";
+import ChoseProfileBookHospital from "../../components/chose-profile-book-hospital/ChoseProfileBookHospital";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,9 +33,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 );
 const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
-function BookingWithDoctorPage(props: any) {
+function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp }) {
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [open, setOpen] = React.useState(false);
+  const [openModalBookHospital, setOpenModalBookHospital] = React.useState(false);
+
   const [doctorName, setDoctorName] = React.useState('');
   const [pagination, setPagination] = useState({
     current_page: 1,
@@ -52,41 +55,79 @@ function BookingWithDoctorPage(props: any) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [hospitalID, setHospitalID] = React.useState<any>();
   const [workAtHome, setWorkAtHome] = React.useState<any>();
+  const [hospitalData, setHospitalData] = React.useState<any>();
 
 
   useEffect(() => {
     if (searchParams.get("hospital_id")) {
       filterParams.hospital_id = searchParams.get("hospital_id");
-      props.setHospitalId(searchParams.get("hospital_id"));
-    } 
+      props.setHospitalIdProp(searchParams.get("hospital_id"));
+    }
     if (searchParams.get("work_at_home")) {
       filterParams.work_at_home = searchParams.get("work_at_home")
     }
     setHospitalID(searchParams.get("hospital_id"))
     setWorkAtHome(searchParams.get("work_at_home"))
-    getDoctors(filterParams)
+    getDoctors(filterParams);
+   
   }, [location]);
 
   useEffect(() => {
     getDoctors(filterParams);
   }, [pagination.current_page]);
 
+  useEffect(() => {
+    getHopitals();
+  }, [hospitalID]);
+
   const handleClose = () => {
     setOpen(false);
   };
 
+  const handleCloseModalBookingHospital = () => {
+    setOpenModalBookHospital(false);
+  };
 
-  function bookingCalendar(name) {
+
+  function bookingCalendar(name, id) {
+    props.setDoctorIdProp(id);
     setDoctorName(name);
     setOpen(true);
   }
 
-  function bookingWithProfile(data) {
-    if(data.profile_id && data.hospital_id) {
-      navigate('/dat-lich-kham');
-      setOpen(false);
-    } 
+  function bookingWithHospital() {
+    setOpenModalBookHospital(true);
   }
+
+  function bookingWithProfile(data) {
+    if (data.profile_id && data.hospital_id && props.doctorIdProp) {
+      setOpen(false);
+      navigate('/dat-lich-kham-voi-bac-si');
+    }
+  }
+
+  function bookingWithProfileHospital(data) {
+    if (data.profile_id) {
+      setOpen(false);
+      navigate('/dat-lich-kham-voi-benh-vien');
+    }
+  }
+
+
+  function getHopitals() {
+    hopitalService.getHospitals().then((res) => {
+      let body = res.data;
+      if (body && body.error) {
+        setToastConfig({ type: 'error', isOpen: true, message: body.message });
+      } else {
+        let array = body.data.hospitals;
+        let hospital_id = searchParams.get("hospital_id");
+        let item = array.filter(el=> { return el.id == hospital_id});
+        setHospitalData(item[0]);
+      }
+    });
+  }
+
   const getItem = doctors => doctors.map((item, index) => (
     <Grid key={index} item xs={12} sm={4} md={4}>
       <div className="wrapper-column">
@@ -102,7 +143,7 @@ function BookingWithDoctorPage(props: any) {
           <li className="hospital">{item.address}</li>
           <li className="experience">{item.experience}</li>
         </ul>
-        <Button onClick={() => bookingCalendar(item.fullname)} variant="contained" className="my-btn btn-blue-dash btn-contained btn-detail">
+        <Button onClick={() => bookingCalendar(item.fullname, item.id)} variant="contained" className="my-btn btn-blue-dash btn-contained btn-detail">
           Đặt lịch khám
         </Button>
       </div>
@@ -156,9 +197,9 @@ function BookingWithDoctorPage(props: any) {
     }
     if (params.hospital_id) {
       filterParams.hospital_id = params.hospital_id;
-      props.setHospitalId(params.hospital_id);
+      props.setHospitalIdProp(params.hospital_id);
     } else {
-      props.setHospitalId('');
+      props.setHospitalIdProp('');
     }
 
     if ((params.work_at_home !== null) && (params.work_at_home !== '') && (params.work_at_home !== undefined)) {
@@ -178,6 +219,29 @@ function BookingWithDoctorPage(props: any) {
 
     }
   }
+  const GeneralInfo = (data) => (
+    <div className="general-info">
+      <div className="image-hospital">
+      <img src={data.avatar} alt="img"
+            onError={(e: any) => {
+              e.target.src = imgDefault
+            }}></img>
+      </div>
+      <div className="info">
+        <div className="top">
+          <div className="name">{data.title}</div>
+          <div className="address">{data.address}</div>
+        </div>
+        <div className="bottom">
+          <Button onClick={()=> {bookingWithHospital()}}
+            variant="contained"
+            className="my-btn btn-blue-dash btn-contained">
+            Đặt lịch khám
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
 
   return (
     <React.Fragment>
@@ -186,10 +250,11 @@ function BookingWithDoctorPage(props: any) {
         <div className="container-app">
           <div className="content-booking">
             <div className="left-content">
-              <FilterBooking callBackParams={getFilterParams} hospitalId={hospitalID ? hospitalID : null} workAtHome = {workAtHome ? workAtHome : null}></FilterBooking>
+              <FilterBooking callBackParams={getFilterParams} hospitalId={hospitalID ? hospitalID : null} workAtHome={workAtHome ? workAtHome : null}></FilterBooking>
             </div>
             <div className="right-content">
               <div className="wrapper-right-content">
+              {hospitalID && hospitalData && GeneralInfo(hospitalData)}
                 <div className="wrapper-list-data">
                   <h2 className="title">
                     <span className="text">Danh sách bác sĩ hiện có</span>
@@ -225,7 +290,32 @@ function BookingWithDoctorPage(props: any) {
                           <CloseIcon />
                         </IconButton>
                       </div>
-                      <ChoseProfile callBackCorfimModal= {(vl)=> bookingWithProfile(vl)} callBackCloseModal = {()=> handleClose()}></ChoseProfile>
+                      <ChoseProfile callBackCorfimModal={(vl) => bookingWithProfile(vl)} callBackCloseModal={() => handleClose()}></ChoseProfile>
+                    </div>
+                  </Fade>
+                </Modal>
+
+                <Modal
+                  aria-labelledby="transition-modal-title"
+                  aria-describedby="transition-modal-description"
+                  className={classes.modal}
+                  open={openModalBookHospital}
+                  onClose={handleCloseModalBookingHospital}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
+                    timeout: 500,
+                  }}
+                >
+                  <Fade in={openModalBookHospital}>
+                    <div className="wrapper-my-modal small-size">
+                      <div className="head-modal">
+                        <h1 className="title">Đặt lịch khám với bệnh viện</h1>
+                        <IconButton onClick={handleCloseModalBookingHospital} aria-label="close">
+                          <CloseIcon />
+                        </IconButton>
+                      </div>
+                      <ChoseProfileBookHospital hospitalName = {hospitalData?.title ? hospitalData.title: 'N/A'} callBackCorfimModal={(vl) => bookingWithProfileHospital(vl)} callBackCloseModal={() => handleCloseModalBookingHospital()}></ChoseProfileBookHospital>
                     </div>
                   </Fade>
                 </Modal>
@@ -240,13 +330,15 @@ function BookingWithDoctorPage(props: any) {
 }
 
 const mapStateToProps = (state: any) => ({
-  profileId: state.profileId,
-  hospitalId: state.hospitalId
+  profileIdProp: state.profileId,
+  hospitalIdProp: state.hospitalId,
+  doctorIdProp: state.doctorId
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setProfileId: (data: any) => dispatch(setProfileId(data)),
-  setHospitalId: (data: any) => dispatch(setHospitalId(data)),
+  setProfileIdProp: (data: any) => dispatch(setProfileId(data)),
+  setHospitalIdProp: (data: any) => dispatch(setHospitalId(data)),
+  setDoctorIdProp: (data: any) => dispatch(setDoctorId(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookingWithDoctorPage);

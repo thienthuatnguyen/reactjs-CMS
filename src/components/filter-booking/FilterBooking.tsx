@@ -24,6 +24,7 @@ function FilterBooking({ callBackParams, hospitalId, workAtHome }) {
     department_id: '',
     province_id: '',
     district_id: '',
+    doctor_id: '',
     radius: '',
     work_at_home: ''
   });
@@ -237,7 +238,8 @@ function FilterBooking({ callBackParams, hospitalId, workAtHome }) {
                   {formValues.province_id && <IconButton onClick={() => {
                     setFormValues(prevState => ({
                       ...prevState,
-                      'province_id': ''
+                      'province_id': '',
+                      'district_id': ''
                     }));
                   }} className="btn-clear" aria-label="delete">
                     <CloseIcon />
