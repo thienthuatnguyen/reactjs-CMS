@@ -2,6 +2,12 @@ button.my-btn {
     height: 36px;
     box-sizing: border-box;
     text-transform: none;
+
+    &.Mui-disabled {
+        color: rgba(0, 0, 0, 0.26) !important;
+        box-shadow: none !important;
+        background-color: rgba(0, 0, 0, 0.12) !important;
+    }
 }
 
 button.my-btn.large-size {

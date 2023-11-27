@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import ToastMessage from "../toast-message/ToastMessage";
 import { connect } from "react-redux";
-import { setDepartmentId, setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
+import { setDepartmentId, setDoctorId, setDoctorName, setHospitalId, setProfileId } from "../../actions/actions";
 import { useNavigate } from "react-router-dom";
 import hopitalService from "../../services/hospitalService";
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() =>
 
 );
 
-function ChoseProfileBookHospital(props: { hospitalName, profileIdProp, hospitalIdProp, doctorIdProp, callBackCloseModal, callBackCorfimModal, setProfileIdProp, setHospitalIdProp, setDoctorIdProp, setDepartmentIdProp }) {
+function ChoseProfileBookHospital(props: { hospitalName, profileIdProp, hospitalIdProp, doctorIdProp, callBackCloseModal, callBackCorfimModal, setProfileIdProp, setHospitalIdProp, setDoctorIdProp, setDepartmentIdProp, setDoctorNameProp }) {
   const [profiles, setProfiles] = useState([]);
   const [departments, setDepartments] = useState([]);
 
@@ -61,6 +61,8 @@ function ChoseProfileBookHospital(props: { hospitalName, profileIdProp, hospital
     if (data.profile_id && data.department_id) {
       props.setProfileIdProp(data.profile_id);
       props.setDepartmentIdProp(data.department_id);
+      props.setDoctorIdProp(null);
+      props.setDoctorNameProp('');
       props.callBackCorfimModal(data);
     }
 
@@ -254,6 +256,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   setHospitalIdProp: (data: any) => dispatch(setHospitalId(data)),
   setDoctorIdProp: (data: any) => dispatch(setDoctorId(data)),
   setDepartmentIdProp: (data: any) => dispatch(setDepartmentId(data)),
+  setDoctorNameProp: (data: any) => dispatch(setDoctorName(data)),
 })
 
 

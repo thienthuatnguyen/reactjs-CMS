@@ -15,7 +15,6 @@ import BookingWithDoctorPage from './containers/booking-with-doctor/BookingWithD
 import BookingWithHospitalPage from './containers/booking-with-hospital/BookingWithHospitalPage';
 import BookingAtHomePage from './containers/booking-at-home/BookingAtHomePage';
 import BookingSchedulePage from './containers/booking-schedule/BookingSchedule';
-import BookingHospitalSchedulePage from './containers/booking-hospital-schedule/BookingHospitalSchedule';
 
 import InvoicePage from './containers/invoice/InvoicePage';
 function App() {
@@ -61,10 +60,7 @@ function App() {
           <Route path="tao-ho-so" element={<CreateProfilePage></CreateProfilePage>} >
           </Route>
 
-          <Route path="dat-lich-kham-voi-bac-si" element={<BookingSchedulePage></BookingSchedulePage>} >
-          </Route>
-
-          <Route path="dat-lich-kham-voi-benh-vien" element={<BookingHospitalSchedulePage></BookingHospitalSchedulePage>} >
+          <Route path="dat-lich-kham" element={<BookingSchedulePage></BookingSchedulePage>} >
           </Route>
 
           <Route path="dat-kham-theo-bac-si" element={<BookingWithDoctorPage></BookingWithDoctorPage>}></Route>
@@ -84,7 +80,6 @@ function App() {
           <Route path="thanh-toan" element={<InvoicePage></InvoicePage>} >
           </Route>
         </Route>
-
 
         <Route path="*" element={<NotFoundPage />}>
         </Route>

@@ -3,17 +3,18 @@ import "./BookingTime.scss";
 import { Button } from "@material-ui/core";
 
 
-export function BookingTime({ timeWorks, callBackTimeData }) {
+export function BookingTime({ reset, timeWorks, callBackTimeData }) {
  
-  const [timeSelect, setTimeSelect] = useState();
+  const [timeSelect, setTimeSelect] = useState(null);
 
+  useEffect(() => {
+    setTimeSelect(null);
+  }, [reset]);
 
   function timeCallback(data) {
     setTimeSelect(data.id)
     callBackTimeData(data);
   }
-
-  
 
   const getItem = times => times.map((item, index) => (
     <Button key={index} variant="outlined" className={`my-btn  btn-blue btn-outlined btn-time-select ${item.id === timeSelect ? 'active' : ''}`} onClick={()=> timeCallback(item) } >{item.start_time} - {item.end_time}</Button>

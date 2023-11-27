@@ -55,7 +55,7 @@ function CreateProfilePage() {
     } else {
       let params = {
         page: 1,
-        per_page: 10,
+        per_page: 100,
         search: data.profileId
       }
       profileService.getListMedicalProfile(params).then((res: any) => {

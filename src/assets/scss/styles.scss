@@ -49,6 +49,10 @@ body {
     overflow: hidden;
 }
 
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+
 ::-webkit-scrollbar {
     width: 12px;
     -webkit-appearance: none;
@@ -241,6 +245,11 @@ div#root {
 
 .container-app {
     width: 1320px;
+}
+@media only screen and (max-width: 1320px) {
+    .container-app {
+        width: 1250px;
+    }
 }
 
 @media only screen and (max-width: 768px) {

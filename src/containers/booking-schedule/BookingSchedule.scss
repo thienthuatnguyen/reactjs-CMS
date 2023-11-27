@@ -131,10 +131,12 @@
             }
         }
         .left-content {
-            padding-right: 50px;
+            padding-right: 30px;
+            box-sizing: border-box;
         }
         .right-content {
-            padding-left: 50px;
+            padding-left: 30px;
+            box-sizing: border-box;
            .detail-paper {
             .title-paper {
                 color: $blue;
@@ -155,17 +157,14 @@
            }
           
         }
-        .booking-confirm {
-            text-align: center;
-            margin-top: 195px;
+     
+    }
+    .booking-confirm {
+        text-align: center;
+            margin-top: 60px;
             button.btn-booking-confirm {
                 min-width: 200px;
             }
-        }
-        
-    }
-    .booking-confirm {
-       
         &.display-mobile {
             display: none;
         }
@@ -173,6 +172,16 @@
     }
 
 
+}
+@media only screen and (max-width: 1320px) {
+    .wrapper-booking-schedule-page .wrapper-content .right-content {
+        padding-left: 10px;
+        box-sizing: border-box;
+    }
+    .wrapper-booking-schedule-page .wrapper-content .left-content {
+        padding-right: 10px;
+        box-sizing: border-box;
+    }
 }
 
 @media only screen and (max-width: 768px) {

@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: $margin-bottom-page;
+
     h1.title {
         text-align: center;
         font-size: 30px;
@@ -16,16 +17,21 @@
         justify-content: center;
         text-transform: uppercase;
     }
+
     .display-mobile {
         display: none;
     }
+
     .wrapper-content {
         display: flex;
-        .left-content, .right-content {
+
+        .left-content,
+        .right-content {
             flex: 1 1 50%;
             max-width: 50%;
             min-width: 50%;
-            
+            box-sizing: border-box;
+
             .box-info {
                 background-color: #fff;
                 padding: 0 20px 20px 20px;
@@ -34,15 +40,17 @@
                 margin-bottom: 30px;
                 min-height: 270px;
                 box-sizing: border-box;
-                
+
                 &.no-padding {
                     padding: 0;
+
                     .box-title {
                         width: 100%;
                         margin-left: 0;
                         margin-bottom: 0;
                     }
                 }
+
                 .box-title {
                     background-color: $green;
                     color: #fff;
@@ -55,6 +63,7 @@
                     height: 36px;
                     margin-bottom: 20px;
                 }
+
                 .top-info {
                     display: flex;
                     align-items: center;
@@ -130,85 +139,177 @@
                     }
                 }
             }
+
             .info-invoice {
                 background-color: #fff;
                 padding: 15px 20px 20px 20px;
+
                 h2.title {
                     text-transform: uppercase;
                     color: $blue-dark;
                     font-size: 16px;
                     margin: 0;
                 }
+
                 .department-info {
                     margin-top: 15px;
                     padding: 10px 30px;
                     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
                     @include border-radius(10px);
+
                     .row-info {
                         display: flex;
                         padding: 15px 0;
                         border-bottom: 2px dashed $blue;
+
                         .col-item {
                             flex: 1 1 50%;
                         }
+
                         &:last-child {
                             border-bottom: 0;
                         }
                     }
+
+                    .my-wrapper-select .my-select .MuiSelect-select {
+                        padding-left: 0;
+                        padding-top: 0;
+                        padding-bottom: 0;
+                    }
                 }
+
                 .fee-plus {
                     margin-top: 30px;
                     margin-bottom: 20px;
                     border-bottom: 2px dashed $blue;
+
                     .row-info {
                         display: flex;
                         padding: 10px 0;
+
                         .col-item {
                             flex: 1 1 50%;
                             box-sizing: border-box;
+
                             &:first-child {
                                 padding-left: 100px;
                             }
+
                             &.blue {
                                 color: $blue;
                             }
-                            
+
                         }
+
                         &:last-child {
                             padding-bottom: 20px;
                         }
                     }
                 }
-                .btn-pay {
-                    margin-top: 30px;
-                    text-align: center;
+            }
+            .info-invoice.info-booking {
+                height: 422px;
+                box-sizing: border-box;
+                .content-info-booked {
+                    margin-top: 20px;
+                    .row-content {
+                        display: flex;
+                        margin-bottom: 10px;
+
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+
+                        .col-content {
+                            height: 30px;
+                            display: inline-flex;
+                            align-items: center;
+
+                            &:first-child {
+                                flex: 1 1 auto;
+                                max-width: 250px;
+                                min-width: 250px;
+                                width: 250px;
+                            }
+                        }
+                    }
                 }
-                
             }
         }
+
         .left-content {
-            padding-right: 50px;
+            padding-right: 20px;
         }
-        
+        .right-content {
+            padding-left: 20px;
+        }
+
+        .wrapper-method {
+
+            border: 1px solid $blue;
+            padding: 5px 10px 5px 15px;
+            margin-bottom: 15px;
+            @include border-radius(3px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .left-method {
+                .description {
+                    color: $brown;
+                    margin-bottom: 5px;
+                }
+                margin-right: 30px;
+            }
+            img {
+                width: 45px;
+            }
+        }
+
     }
-    
-   
-   
+    .btn-pay {
+        margin-top: 40px;
+        text-align: center;
+        button {
+            min-width: 200px;
+        }
+    }
+
+
+
+}
+
+@media only screen and (max-width: 1320px) {
+    .wrapper-invoice-page .wrapper-content .left-content {
+        padding-right: 10px;
+        box-sizing: border-box;
+    }
+
+    .wrapper-invoice-page .wrapper-content .right-content {
+        padding-left: 10px;
+        box-sizing: border-box;
+    }
 }
 
 @media only screen and (max-width: 768px) {
-    .wrapper-invoice-page .wrapper-content .left-content .box-info .content-info .row-content-info .col-content-info, .wrapper-invoice-page .wrapper-content .right-content .box-info .content-info .row-content-info .col-content-info {
+
+    .wrapper-invoice-page .wrapper-content .left-content .box-info .content-info .row-content-info .col-content-info,
+    .wrapper-invoice-page .wrapper-content .right-content .box-info .content-info .row-content-info .col-content-info {
         height: auto;
         min-height: 30px;
+
         &:first-child {
             width: 120px;
             min-width: 120px;
             max-width: 120px;
         }
     }
+
     .wrapper-invoice-page .wrapper-content {
         flex-wrap: wrap;
-        .left-content, .right-content {
+
+        .left-content,
+        .right-content {
             margin: 0;
             padding: 0;
             flex: 1 1 100%;
@@ -216,31 +317,38 @@
             max-width: 100%;
         }
     }
+
     .wrapper-invoice-page {
         margin-bottom: 40px;
-        .fee-plus .row-info .col-item:first-child, .wrapper-invoice-page .wrapper-content .right-content .info-invoice .fee-plus .row-info .col-item {
+
+        .fee-plus .row-info .col-item:first-child,
+        .wrapper-invoice-page .wrapper-content .right-content .info-invoice .fee-plus .row-info .col-item {
             padding-left: 20px !important;
         }
+
         .wrapper-content .left-content .info-invoice .department-info {
             padding: 10px 20px;
         }
+
         .hide-mobile {
             display: none;
         }
+
         .display-mobile {
             display: block;
-        }
-        .btn-pay {
-            text-align: center;
-            margin-top: 30px;
         }
         .info-invoice .fee-plus {
             border: none !important;
         }
     }
+
     .wrapper-invoice-page h1.title {
         font-size: 26px;
     }
-    
+
+    .wrapper-invoice-page .wrapper-content .left-content .info-invoice.info-booking, .wrapper-invoice-page .wrapper-content .right-content .info-invoice.info-booking {
+        margin-top: 30px;
+    }
+
 
 }

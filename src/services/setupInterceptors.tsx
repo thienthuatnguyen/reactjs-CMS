@@ -1,10 +1,10 @@
 import { baseURL } from '../utils/config'
 
-function SetupInterceptors(http)  {
+function SetupInterceptors(http, contentType?: any)  {
     http.interceptors.request.use(
         config => {
             config.headers['Authorization'] = `Bearer ${localStorage.getItem('o2fine')}`
-            config.headers['content-type'] = 'application/json'
+            config.headers['content-type'] = contentType['Content-Type'] ? contentType['Content-Type'] : 'application/json'
             return config
         },
         error => {

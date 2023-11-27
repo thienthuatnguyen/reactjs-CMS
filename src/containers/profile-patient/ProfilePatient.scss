@@ -101,6 +101,7 @@
                         }
                     }
                 }
+                
             }
             .btn-booking {
                 margin-top: 15px;
@@ -111,6 +112,9 @@
                     }
                 }
             }
+            .content-info-list-shedule-mobile {
+                display: none;
+            }
          
             &.box-profile-schedule {
                 margin-top: 15px;
@@ -118,18 +122,35 @@
                     display: flex;
                     border-bottom: 1px solid $border-input;
                     padding: 10px 0;
+                    align-items: center;
                     &:last-child {
                         border-bottom: none;
                     }
+                    button.my-btn {
+                        .MuiAvatar-root {
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
                     .col-item {
-                        flex: 1 1  50%;
-                        min-width: 50%;
-                        max-width: 50%;
+                        flex: 1 1 100%;
+                        padding: 0 5px;
+                        box-sizing: border-box;
+                        &:last-child {
+                            text-align: right;
+                        }
                         &.col-status {
                             color: $blue;
                         }
                     }
+                    &.row-schedule-header {
+                        font-weight: bold;
+                    }
                 }
+            }
+            &.box-profile-result {
+                min-height: 100%;
+                box-sizing: border-box;
             }
         }
     }
@@ -212,6 +233,16 @@
             padding-left: 40px;
             height: auto;
         }       
+    }
+
+}
+
+@media only screen and (max-width: 1300px) {
+    .content-info-list-shedule {
+        display: none;
+    }
+    .content-info-list-shedule-mobile {
+        display: block !important;
     }
 
 }

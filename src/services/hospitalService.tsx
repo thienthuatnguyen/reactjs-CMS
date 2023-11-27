@@ -1,5 +1,5 @@
 import { IBooking, IFee } from "../models/hospital.model";
-import http from "./httpConfig";
+import { http } from "./httpConfig";
 
 const hopitalService = {
 
@@ -22,7 +22,13 @@ const hopitalService = {
         return http.post('/hospital/cal-service-fee',data);
     },
     booking: (data: IBooking) => {
-        return http.post('/hospital/booking',data);
+        return http.post('/booking/create',data);
+    },
+    getMedicalService: () => {
+        return http.get('/hospital/medical-service');
+    },
+    getBookingDetails: (bookingId)=> {
+        return http.get(`/booking/detail/${bookingId}`, {params: {bookingId : bookingId}});
     },
    
 }

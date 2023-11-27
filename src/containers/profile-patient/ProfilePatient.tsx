@@ -35,6 +35,18 @@ function ProfilePatientPage() {
     if (searchParams.get("value")) {
       params.search = searchParams.get("value");
     }
+    if (searchParams.get("full_name")) {
+      params.full_name = searchParams.get("full_name");
+    }
+    if (searchParams.get("gender")) {
+      params.gender = searchParams.get("gender");
+    }
+    if (searchParams.get("birthday")) {
+      params.birthday = searchParams.get("birthday");
+    }
+    if (searchParams.get("province_id")) {
+      params.province_id = searchParams.get("province_id");
+    }
     profileService.getListMedicalProfile(params).then(
       (res) => {
         let body = res.data;

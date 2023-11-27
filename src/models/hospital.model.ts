@@ -31,10 +31,10 @@ export interface IFee {
 }
 
 export interface IBooking {
-	hospital_id: number;
-	doctor_id: number;
+	hospital_id?: number;
+	doctor_id?: number;
 	profile_id: number;
-	department_id: number;
+	department_id?: number;
 	date_book: string;
 	time_book: string;
 }

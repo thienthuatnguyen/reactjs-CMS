@@ -13,7 +13,7 @@ import { EmptyData } from "../../components/empty-data/EmptyData";
 import { Hospital } from "../../models/hospital.model";
 import ChoseProfile from "../../components/chose-profile/ChoseProfile";
 import { connect } from "react-redux";
-import { setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
+import { setDepartmentId, setDoctorId, setDoctorName, setHospitalId, setProfileId } from "../../actions/actions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 );
 const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
-function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp}) {
+function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp, setDepartmentIdProp, setDoctorNameProp}) {
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [open, setOpen] = React.useState(false);
   const [doctorName, setDoctorName] = React.useState('');
@@ -72,13 +72,15 @@ function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, 
   }
   function bookingCalendar(name, id) {
     props.setDoctorIdProp(id);
+    props.setDepartmentIdProp(null);
     setDoctorName(name);
+    props.setDoctorNameProp(name);
     setOpen(true);
   }
   function bookingWithProfile(data) {
     if(data.profile_id && data.hospital_id && props.doctorIdProp) {
       setOpen(false);
-      navigate('/dat-lich-kham-voi-bac-si');
+      navigate('/dat-lich-kham');
     } 
   }
   const getItem = doctors => doctors.map((item, index) => (
@@ -288,6 +290,8 @@ const mapDispatchToProps = (dispatch: any) => ({
   setProfileIdProp: (data: any) => dispatch(setProfileId(data)),
   setHospitalIdProp: (data: any) => dispatch(setHospitalId(data)),
   setDoctorIdProp: (data: any) => dispatch(setDoctorId(data)),
+  setDepartmentIdProp: (data: any) => dispatch(setDepartmentId(data)),
+  setDoctorNameProp: (data: any) => dispatch(setDoctorName(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookingAtHomePage);

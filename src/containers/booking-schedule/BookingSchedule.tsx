@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { BookingTime } from "../../components/booking-time/BookingTime";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
-import { setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
+import { setDateBooked, setDepartmentId, setDoctorId, setHospitalId, setProfileId, setTimeBooked } from "../../actions/actions";
 import { useNavigate } from "react-router-dom";
 import profileService from "../../services/profileService";
 import React from "react";
@@ -15,8 +15,10 @@ import ToastMessage from "../../components/toast-message/ToastMessage";
 import hopitalService from "../../services/hospitalService";
 import { ProfileInfoSchedule } from "../../components/profile-info-schedule/ProfileInfoSchedule";
 registerLocale('vi', vi)
-function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp}) {
-  const [startDate, setStartDate] = useState(new Date());
+function BookingSchedulePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, departmentIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp, setDepartmentIdProp, setDateBookedProp, setTimeBookedProp }) {
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState('');
+  const [resetTime, setResetTime] = useState(1);
 
   const navigate = useNavigate();
   const [profileInfo, setProfileInfo] = React.useState({
@@ -32,16 +34,34 @@ function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp
   const [timeWorks, setTimeWorks] = React.useState([]);
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   useEffect(() => {
-    if (!props.profileIdProp || !props.doctorIdProp || !props.hospitalIdProp) {
-      navigate('/')
-    } else {
+    if ((props.profileIdProp && props.doctorIdProp && props.hospitalIdProp) || (props.profileIdProp && props.departmentIdProp && props.hospitalIdProp)) {
       getProfile();
       getTimeWork((new Date()).getDay());
+    } else {
+      navigate('/')
     }
   }, []);
+
+  useEffect(() => {
+    if (time)
+      props.setTimeBookedProp(time);
+  }, [time]);
+
+  useEffect(() => {
+    if (date) {
+      let currentYear = date.getFullYear();
+      let currentMonth = date.getMonth() + 1; 
+      let currentDay = date.getDate();
+      props.setDateBookedProp(currentYear + '-' + currentMonth + '-' + currentDay)
+    }
+   
+  }, [date]);
+
   function handleDateChange(date) {
-    setStartDate(date);
-    getTimeWork(date.getDay())
+    setDate(date);
+    getTimeWork(date.getDay());
+    setTime('');
+    setResetTime(Math.random());
   }
   function getProfile() {
     profileService.findMedicalProfile(props.profileIdProp).then(
@@ -56,36 +76,38 @@ function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp
     )
   }
   function getTimeWork(dayWeek) {
-    // hopitalService.getTimeWorkDoctor({doctor_id: props.doctorId, hospital_id: props.hospitalId}).then(
-    //   (res) => {
-    //     let body = res.data;
-    //     if (body && body.error) {
-    //       setToastConfig({ type: 'error', isOpen: true, message: body.message });
-    //     } else {
-    //       setTimeWorks(body.data);
-    //     }
-    //   }
-    // )
-
-    hopitalService.getTimeWorkDoctor({doctor_id: 1, hospital_id: props.hospitalIdProp}).then(
+    let params: any = {};
+    if (props.departmentIdProp && props.hospitalIdProp) {
+      params = {
+        department_id: props.departmentIdProp,
+        hospital_id: props.hospitalIdProp
+      }
+    }
+    if (props.doctorIdProp && props.hospitalIdProp) {
+      params = {
+        doctor_id: props.doctorIdProp,
+        hospital_id: props.hospitalIdProp
+      }
+    }
+    hopitalService.getTimeWorkDoctor(params).then(
       (res) => {
         let body = res.data;
         if (body && body.error) {
           setToastConfig({ type: 'error', isOpen: true, message: body.message });
         } else {
-          let array: any = body.data.filter(el => {return el.weekday == dayWeek})
+          let array: any = body.data.filter(el => { return el.weekday == dayWeek })
           setTimeWorks(array);
         }
       }
     )
   }
 
-  
+
   function closeToast() {
     setToastConfig({ type: '', isOpen: false, message: '' });
   }
   function getTimeData(val) {
-    console.log(val)
+    setTime(val.start_time);
   }
 
   const filterWeekends = (date) => {
@@ -93,7 +115,7 @@ function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp
   };
 
   function confirmBooked() {
-    navigate('/thanh-toan')
+    navigate('/thanh-toan');
   }
   return (
     <React.Fragment>
@@ -103,25 +125,17 @@ function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp
           <h1 className="title">Đặt lịch khám</h1>
           <div className="wrapper-content">
             <div className="left-content">
-              <ProfileInfoSchedule profileInfo = {profileInfo}></ProfileInfoSchedule>
-              <BookingTime timeWorks = {timeWorks} callBackTimeData={getTimeData}></BookingTime>
-              <div className="booking-confirm">
-                <Button onClick={()=> confirmBooked()}
-                  variant="contained"
-                  className="my-btn btn-blue-dash btn-contained large-size btn-booking-confirm">
-                  Xác nhận
-                </Button>
-              </div>
-
+              <ProfileInfoSchedule profileInfo={profileInfo}></ProfileInfoSchedule>
+              <BookingTime reset={resetTime} timeWorks={timeWorks} callBackTimeData={getTimeData}></BookingTime>
             </div>
             <div className="right-content">
               <div className="box-info no-padding">
                 <div className="box-title">Vui lòng chọn ngày khám</div>
                 <div className="wrapper-my-datepicker">
-                  <DatePicker locale="vi" selected={startDate} inline onChange={handleDateChange} filterDate={filterWeekends} />
+                  <DatePicker locale="vi" selected={date} inline onChange={handleDateChange} filterDate={filterWeekends} />
                 </div>
               </div>
-              <div className="box-info">
+              {/* <div className="box-info">
                 <div className="box-title">Phiếu khám</div>
                 <div className="detail-paper">
                   <div className="title-paper">Bệnh viện chợ rẫy</div>
@@ -223,11 +237,11 @@ function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
-          <div className="booking-confirm display-mobile">
-            <Button onClick={()=> confirmBooked()}
+          <div className="booking-confirm">
+            <Button disabled={!time} onClick={() => confirmBooked()}
               variant="contained"
               className="my-btn btn-blue-dash btn-contained large-size btn-booking-confirm">
               Xác nhận
@@ -242,13 +256,17 @@ function BookingSchedulePage(props: {profileIdProp, hospitalIdProp, doctorIdProp
 const mapStateToProps = (state: any) => ({
   profileIdProp: state.profileId,
   hospitalIdProp: state.hospitalId,
-  doctorIdProp: state.doctorId
+  doctorIdProp: state.doctorId,
+  departmentIdProp: state.departmentId
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
   setProfileIdProp: (data: any) => dispatch(setProfileId(data)),
   setHospitalIdProp: (data: any) => dispatch(setHospitalId(data)),
   setDoctorIdProp: (data: any) => dispatch(setDoctorId(data)),
+  setDepartmentIdProp: (data: any) => dispatch(setDepartmentId(data)),
+  setDateBookedProp: (data: any) => dispatch(setDateBooked(data)),
+  setTimeBookedProp: (data: any) => dispatch(setTimeBooked(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookingSchedulePage);

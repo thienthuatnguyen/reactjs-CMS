@@ -1,4 +1,4 @@
-import http from "./httpConfig";
+import { http } from "./httpConfig";
 
 const authService = {
     login: (data) => {
