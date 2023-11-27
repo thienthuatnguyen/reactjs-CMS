@@ -2,7 +2,14 @@
 
 .loading-data {
   background-color: #fff;
-  padding: 30px;
+  padding: 10px 0px;
   width: 100%;
   box-sizing: border-box;
+  .react-loading-skeleton {
+    margin-bottom: 10px;
+    width: 70%;
+    &:first-child {
+      width: 50%;
+    }
+  }
 }

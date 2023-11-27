@@ -16,6 +16,7 @@ import ToastMessage from "../../components/toast-message/ToastMessage";
 import { connect } from "react-redux";
 import hopitalService from "../../services/hospitalService";
 import { setDepartmentId, setDoctorId, setDoctorName, setHospitalId, setProfileId } from "../../actions/actions";
+import { LoadingData } from "../../components/loading-data/loading-data";
 
 const DeleteIcon = () => (<img src={deleteIcon} alt="delete-icon"></img>);
 const EditIcon = () => (<img src={editIcon} alt="edit-icon"></img>);
@@ -52,7 +53,10 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
   });
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [bookingList, setBookingList] = React.useState([]);
+  const [loadingBookingList, setLoadingBookingList] = React.useState(false);
   const [bookedList, setBookedList] = React.useState<any>([]);
+  const [loadingBookedList, setLoadingBookedList] = React.useState<any>(false);
+
   useEffect(() => {
     if (params && params.patentId && params.patentId != '') {
       profileService.findMedicalProfile(params.patentId).then(
@@ -77,6 +81,7 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
             body.data.doctors.map((el: any) => {
               getBookingDetail(el.id)
             })
+            setLoadingBookingList(true);
           }
         }
       )
@@ -106,6 +111,7 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
           setToastConfig({ type: 'error', isOpen: true, message: body.message });
         } else {
           setBookedList(oldArray => [...oldArray, body.data.booking]);
+          setLoadingBookedList(true);
         }
       }
     )
@@ -246,32 +252,35 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
                     <div className="title">Tải kết quả khám</div>
                   </div>
                   <div className="content-info">
-                    {bookingList.length <= 0 && (
-                      <div>Bạn chưa thể tải lên kết quả khám do hồ sơ bạn chưa đặt khám !</div>
-                    )}
-                    {bookingList.map((item: any, index) => (
-                      <Accordion key={index} className="my-accordion">
-                        <AccordionSummary
-                          expandIcon={<Avatar
-                            src={
-                              ExpandMoreIcon
-                            }
-                          />}
-                          aria-controls="panel1a-content"
-                          id="panel1a-header"
-                        >
-                          <div className="header-content">
-                            <div className="date-text">{item.date_book}</div>
-                            <div className="date-text">{item.department?.title ? item.department?.title + '-' : ''}  {item.hospital.title}</div>
-                          </div>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                          <div className="detail-content">
-                            <UploadFileImage medicalResult={item.meidcal_result} id={'id' + index} callBackData={(val) => uploadData(val, item.id)}></UploadFileImage>
-                          </div>
-                        </AccordionDetails>
-                      </Accordion>
-                    ))}
+                    {!loadingBookingList && <LoadingData></LoadingData>}
+                    {loadingBookingList && <React.Fragment>
+                      {bookingList.length <= 0 && (
+                        <div>Bạn chưa thể tải lên kết quả khám do hồ sơ bạn chưa đặt khám !</div>
+                      )}
+                      {bookingList.map((item: any, index) => (
+                        <Accordion key={index} className="my-accordion">
+                          <AccordionSummary
+                            expandIcon={<Avatar
+                              src={
+                                ExpandMoreIcon
+                              }
+                            />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                          >
+                            <div className="header-content">
+                              <div className="date-text">{item.date_book}</div>
+                              <div className="date-text">{item.department?.title ? item.department?.title + '-' : ''}  {item.hospital.title}</div>
+                            </div>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <div className="detail-content">
+                              <UploadFileImage medicalResult={item.meidcal_result} id={'id' + index} callBackData={(val) => uploadData(val, item.id)}></UploadFileImage>
+                            </div>
+                          </AccordionDetails>
+                        </Accordion>
+                      ))}
+                    </React.Fragment>}
 
                   </div>
                 </div>
@@ -282,44 +291,48 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
                 <div className="title">Danh sách đặt khám</div>
               </div>
               <div className="content-info content-info-list-shedule">
-                {(bookedList.length <= 0) &&
-                  <div>Hồ sơ của bạn chưa đặt khám</div>}
-                {(bookedList.length > 0) && <React.Fragment>
-                  <div className="row-schedule row-schedule-header">
-                    <div className="col-item">Ngày đặt khám</div>
-                    <div className="col-item">Số thứ tự khám</div>
-                    <div className="col-item">Bệnh viện</div>
-                    <div className="col-item">Khoa</div>
-                    <div className="col-item">Bác sĩ</div>
-                    <div className="col-item">Dịch vụ khám</div>
-                    <div className="col-item"></div>
-                  </div>
-                  {bookedList.map((el: any, index: any) => (
-                    <div className="row-schedule" key={index}>
-                      <div className="col-item">{el.date_book} - {el.time_book}</div>
-                      <div className="col-item">{el.order_number}</div>
-                      <div className="col-item">{(el.hospital && el.hospital.title) ? el.hospital.title : 'N/A'}</div>
-                      <div className="col-item">{(el.department && el.department.title) ? el.department.title : 'Chưa xác định'}</div>
-                      <div className="col-item">{(el.doctor && el.doctor.fullname) ? el.doctor.fullname : 'Chưa xác định'}</div>
-                      <div className="col-item">{(el?.service !== null) ? el.service.title : 'Chưa xác định'}</div>
-                      <div className="col-item">
-                        <Button
-                          onClick={() => preBooking(el)}
-                          size="small"
-                          variant="contained"
-                          className="my-btn btn-green btn-contained"
-                          endIcon={<Avatar
-                            src={
-                              nextIcon
-                            }
-                          />}
-                        >
-                          Đặt tái khám
-                        </Button>
-                      </div>
+                {!loadingBookedList && <LoadingData></LoadingData>}
+                {loadingBookedList && <React.Fragment>
+                  {(bookedList.length <= 0) &&
+                    <div>Hồ sơ của bạn chưa đặt khám</div>}
+                  {(bookedList.length > 0) && <React.Fragment>
+                    <div className="row-schedule row-schedule-header">
+                      <div className="col-item">Ngày đặt khám</div>
+                      <div className="col-item">Số thứ tự khám</div>
+                      <div className="col-item">Bệnh viện</div>
+                      <div className="col-item">Khoa</div>
+                      <div className="col-item">Bác sĩ</div>
+                      <div className="col-item">Dịch vụ khám</div>
+                      <div className="col-item"></div>
                     </div>
-                  ))}
-                </React.Fragment>}
+                    {bookedList.map((el: any, index: any) => (
+                      <div className="row-schedule" key={index}>
+                        <div className="col-item">{el.date_book} - {el.time_book}</div>
+                        <div className="col-item">{el.order_number}</div>
+                        <div className="col-item">{(el.hospital && el.hospital.title) ? el.hospital.title : 'N/A'}</div>
+                        <div className="col-item">{(el.department && el.department.title) ? el.department.title : 'Chưa xác định'}</div>
+                        <div className="col-item">{(el.doctor && el.doctor.fullname) ? el.doctor.fullname : 'Chưa xác định'}</div>
+                        <div className="col-item">{(el?.service !== null) ? el.service.title : 'Chưa xác định'}</div>
+                        <div className="col-item">
+                          <Button
+                            onClick={() => preBooking(el)}
+                            size="small"
+                            variant="contained"
+                            className="my-btn btn-green btn-contained"
+                            endIcon={<Avatar
+                              src={
+                                nextIcon
+                              }
+                            />}
+                          >
+                            Đặt tái khám
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </React.Fragment>}
+                </React.Fragment>
+                }
               </div>
 
               <div className="content-info-list-shedule content-info-list-shedule-mobile">
@@ -394,7 +407,7 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
           }}
         >
           <Fade in={open}>
-            <div className="wrapper-my-modal">
+            <div className="wrapper-my-modal my-modal-form-edit">
               <ProfileUpsert profileInfo={profileInfo} isEdit={true} callBackCloseModal={handleClose}></ProfileUpsert>
             </div>
           </Fade>

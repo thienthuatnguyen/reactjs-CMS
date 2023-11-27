@@ -41,13 +41,22 @@
         top: 5px;
       }
     }
+    &.my-modal-form-edit {
+      min-width: 1024px;
+      .items-inline {
+        margin: 0 -10px;
+      }
+      .items-inline .item-input {
+        padding: 0 10px;
+      }
+    }
   }
 
   @media only screen and (max-width: 768px) {
     .wrapper-my-modal {
-      min-width: unset;
+      min-width: unset !important;
       &.small-size {
-        min-width: unset;
+        min-width: unset !important;
       }
     }
   }
