@@ -51,6 +51,8 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
     id: ''
 
   });
+  const [loadingProfileInfo, setLoadingProfileInfo] = React.useState(false);
+
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [bookingList, setBookingList] = React.useState([]);
   const [loadingBookingList, setLoadingBookingList] = React.useState(false);
@@ -66,6 +68,7 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
             setToastConfig({ type: 'error', isOpen: true, message: body.message });
           } else {
             setProfileInfo(body.data.profile);
+            setLoadingProfileInfo(true);
           }
         }
       )
@@ -222,19 +225,19 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
                   <div className="content-info">
                     <div className="row-content-info">
                       <div className="col-content-info birthday">Ngày sinh:</div>
-                      <div className="col-content-info">{profileInfo.birthday}</div>
+                      <div className="col-content-info">{ loadingProfileInfo ? profileInfo.birthday: <LoadingData width={'60%'} count={1}></LoadingData>}</div>
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info code">Mã hồ sơ bệnh nhân:</div>
-                      <div className="col-content-info">{profileInfo.code}</div>
+                      <div className="col-content-info">{loadingProfileInfo ? profileInfo.code: <LoadingData width={'60%'} count={1}></LoadingData>}</div>
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info phone">Số điện thoại:</div>
-                      <div className="col-content-info">{profileInfo.phone_number}</div>
+                      <div className="col-content-info">{loadingProfileInfo ? profileInfo.phone_number: <LoadingData width={'60%'} count={1}></LoadingData>}</div>
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info address">Địa chỉ:</div>
-                      <div className="col-content-info">{profileInfo.address}</div>
+                      <div className="col-content-info">{loadingProfileInfo ? profileInfo.address: <LoadingData width={'60%'} count={1}></LoadingData>}</div>
                     </div>
                   </div>
                   <div className="btn-booking">
@@ -252,7 +255,7 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
                     <div className="title">Tải kết quả khám</div>
                   </div>
                   <div className="content-info">
-                    {!loadingBookingList && <LoadingData></LoadingData>}
+                    {!loadingBookingList && <LoadingData width={'100%'} count = {3}></LoadingData>}
                     {loadingBookingList && <React.Fragment>
                       {bookingList.length <= 0 && (
                         <div>Bạn chưa thể tải lên kết quả khám do hồ sơ bạn chưa đặt khám !</div>
@@ -291,7 +294,7 @@ function ProfilePatientDetailPage(props: { profileIdProp, hospitalIdProp, doctor
                 <div className="title">Danh sách đặt khám</div>
               </div>
               <div className="content-info content-info-list-shedule">
-                {!loadingBookedList && <LoadingData></LoadingData>}
+                {!loadingBookedList && <LoadingData width={'100%'} count = {3}></LoadingData>}
                 {loadingBookedList && <React.Fragment>
                   {(bookedList.length <= 0) &&
                     <div>Hồ sơ của bạn chưa đặt khám</div>}

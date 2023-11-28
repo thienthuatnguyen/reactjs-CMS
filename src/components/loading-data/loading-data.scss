@@ -5,11 +5,15 @@
   padding: 10px 0px;
   width: 100%;
   box-sizing: border-box;
+  &.single-loading {
+    margin-bottom: 0px;
+    padding: 0;
+    height: 20px;
+    .react-loading-skeleton {
+      margin-bottom: 0;
+    }
+  }
   .react-loading-skeleton {
     margin-bottom: 10px;
-    width: 70%;
-    &:first-child {
-      width: 50%;
-    }
   }
 }

@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import hopitalService from "../../services/hospitalService";
 import { useNavigate } from "react-router-dom";
 import paymentService from "../../services/paymentService";
+import { LoadingData } from "../../components/loading-data/loading-data";
 
 
 const useStyles = makeStyles({
@@ -83,6 +84,8 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
   });
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [medicalServices, setMedicalServices] = useState([]);
+  const [loadingMedicalServices, setLoadingMedicalServices] = useState(false);
+
   const [medicalService, setMedicalService] = useState(1);
   const [methods, setMethods] = useState<any>();
   const [methodType, setMethodType] = React.useState<any>(null);
@@ -156,7 +159,8 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
           setToastConfig({ type: 'error', isOpen: true, message: body.message });
         } else {
           setMedicalServices(body.data.medicalServices);
-          setMedicalService(body.data.medicalServices[0].id)
+          setMedicalService(body.data.medicalServices[0].id);
+          setLoadingMedicalServices(true);
         }
       }
     )
@@ -295,19 +299,19 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
                   <div className="content-info">
                     <div className="row-content-info">
                       <div className="col-content-info birthday">Ngày sinh:</div>
-                      <div className="col-content-info">{profileInfo.birthday}</div>
+                      <div className="col-content-info">{profileInfo.birthday ? profileInfo.birthday : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info phone">Số điện thoại:</div>
-                      <div className="col-content-info">{profileInfo.phone_number}</div>
+                      <div className="col-content-info">{profileInfo.phone_number ? profileInfo.phone_number : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info address">Địa chỉ:</div>
-                      <div className="col-content-info">{profileInfo.address}</div>
+                      <div className="col-content-info">{profileInfo.address ? profileInfo.address : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info sex">Giới tính:</div>
-                      <div className="col-content-info">{(profileInfo.gender == '0') ? 'Nam' : 'Nữ'}</div>
+                      <div className="col-content-info">{profileInfo.gender ? ((profileInfo.gender == '0') ? 'Nam' : 'Nữ') : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
                     </div>
                   </div>
                 </div>
@@ -316,34 +320,33 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
               <div className="info-invoice">
                 <h2 className="title">Thông tin thanh toán</h2>
                 <div className="department-info">
-                  {/* <div className="row-info">
-                    <div className="col-item">Chuyên khoa</div>
-                    <div className="col-item upercase">NỘI CƠ XƯƠNG KHỚP</div>
-                  </div> */}
                   <div className="row-info">
                     <div className="col-item">Dịch vụ</div>
                     <div className="col-item upercase">
-                      <FormControl className={'my-wrapper-select'}>
-                        <Select
-                          MenuProps={{
-                            anchorOrigin: {
-                              vertical: "bottom",
-                              horizontal: "left"
-                            },
-                            getContentAnchorEl: null
-                          }}
+                      {!loadingMedicalServices && <LoadingData count={1} width={'100%'}></LoadingData>}
+                      {loadingMedicalServices &&
+                        <FormControl className={'my-wrapper-select'}>
+                          <Select
+                            MenuProps={{
+                              anchorOrigin: {
+                                vertical: "bottom",
+                                horizontal: "left"
+                              },
+                              getContentAnchorEl: null
+                            }}
 
-                          labelId="gender-label"
-                          value={medicalService}
-                          onChange={handleServiceChange}
-                          displayEmpty
-                          className={'my-select'}
-                        >
-                          {medicalServices.map((el: any, index) => (
-                            <MenuItem key={index} value={el.id}>{el.title}</MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
+                            labelId="gender-label"
+                            value={medicalService}
+                            onChange={handleServiceChange}
+                            displayEmpty
+                            className={'my-select'}
+                          >
+                            {medicalServices.map((el: any, index) => (
+                              <MenuItem key={index} value={el.id}>{el.title}</MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      }
                     </div>
                   </div>
                   <div className="row-info">
@@ -375,7 +378,8 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
               <div className="box-info">
                 <div className="box-title">Chọn phương thức thanh toán</div>
                 <div className="radio-group">
-                  <FormControl component="fieldset">
+                  {!methods && <LoadingData count={3} width={'70%'}></LoadingData>}
+                  {methods && <FormControl component="fieldset">
                     <RadioGroup value={methodType} onChange={handleChangeRadio} aria-label="method" name="paymentMethod">
                       {methods && methods.map((el: any, index) => (
                         <div key={index} className="wrapper-method">
@@ -390,7 +394,7 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
                         </div>
                       ))}
                     </RadioGroup>
-                  </FormControl>
+                  </FormControl>}
                 </div>
               </div>
 
@@ -404,15 +408,15 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
 
                   <div className="row-content">
                     <div className="col-content">Bệnh viện:</div>
-                    <div className="col-content">{getHospitalName() ? getHospitalName() : 'N/A'}</div>
+                    <div className="col-content">{getHospitalName() ? getHospitalName() : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
                   </div>
                   {getDepartmentName() && <div className="row-content">
                     <div className="col-content">Khoa:</div>
-                    <div className="col-content">{getDepartmentName()}</div>
+                    <div className="col-content">{getDepartmentName() ? getDepartmentName() : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
                   </div>}
                   {props.doctorNameProp && <div className="row-content">
                     <div className="col-content">Bác sĩ:</div>
-                    <div className="col-content">{props.doctorNameProp}</div>
+                    <div className="col-content">{props.doctorNameProp ? props.doctorNameProp : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
                   </div>
                   }
                   <div className="row-content">
@@ -432,11 +436,11 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
 
                   <div className="row-content">
                     <div className="col-content">Ngày khám:</div>
-                    <div className="col-content">{props.dateBookedProp}</div>
+                    <div className="col-content">{props.dateBookedProp ? props.dateBookedProp : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
                   </div>
                   <div className="row-content">
                     <div className="col-content">Giờ khám:</div>
-                    <div className="col-content">{props.timeBookedProp}</div>
+                    <div className="col-content">{props.timeBookedProp ? props.timeBookedProp : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
                   </div>
                 </div>
               </div>

@@ -74,12 +74,13 @@
                         height: 30px;
                         display: inline-flex;
                         align-items: center;
+                        flex: 1 1 100%;
                         &:first-child {
                             padding-left: 40px;
                             flex:1 1 auto;
-                            max-width: 180px;
-                            min-width: 180px;
-                            width: 180px;
+                            max-width: 220px;
+                            min-width: 220px;
+                            width: 220px;
                         }
                         &.birthday {
                             background: url('../../assets/images/birthday-icon.png') no-repeat left center;
