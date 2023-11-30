@@ -80,8 +80,8 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
     reason: '',
     medical_history: '',
     allergy: ''
-
   });
+  const [loadedProfile, setLoadedProfile] = useState(false);
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [medicalServices, setMedicalServices] = useState([]);
   const [loadingMedicalServices, setLoadingMedicalServices] = useState(false);
@@ -182,6 +182,7 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
           setToastConfig({ type: 'error', isOpen: true, message: body.message });
         } else {
           setProfileInfo(body.data.profile);
+          setLoadedProfile(true);
         }
       }
     )
@@ -299,19 +300,19 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
                   <div className="content-info">
                     <div className="row-content-info">
                       <div className="col-content-info birthday">Ngày sinh:</div>
-                      <div className="col-content-info">{profileInfo.birthday ? profileInfo.birthday : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
+                      <div className="col-content-info">{profileInfo.birthday ? profileInfo.birthday : <LoadingData variant="text" width={'40%'} count={1}></LoadingData>}</div>
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info phone">Số điện thoại:</div>
-                      <div className="col-content-info">{profileInfo.phone_number ? profileInfo.phone_number : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
+                      <div className="col-content-info">{profileInfo.phone_number ? profileInfo.phone_number : <LoadingData variant="text" width={'40%'} count={1}></LoadingData>}</div>
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info address">Địa chỉ:</div>
-                      <div className="col-content-info">{profileInfo.address ? profileInfo.address : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
+                      <div className="col-content-info">{profileInfo.address ? profileInfo.address : <LoadingData variant="text" width={'80%'} count={1}></LoadingData>}</div>
                     </div>
                     <div className="row-content-info">
                       <div className="col-content-info sex">Giới tính:</div>
-                      <div className="col-content-info">{profileInfo.gender ? ((profileInfo.gender == '0') ? 'Nam' : 'Nữ') : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
+                      <div className="col-content-info">{profileInfo.gender ? ((profileInfo.gender == '0') ? 'Nam' : 'Nữ') : <LoadingData variant="text" width={'30%'} count={1}></LoadingData>}</div>
                     </div>
                   </div>
                 </div>
@@ -323,7 +324,7 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
                   <div className="row-info">
                     <div className="col-item">Dịch vụ</div>
                     <div className="col-item upercase">
-                      {!loadingMedicalServices && <LoadingData count={1} width={'100%'}></LoadingData>}
+                      {!loadingMedicalServices && <LoadingData variant="text" count={1} width={'100%'}></LoadingData>}
                       {loadingMedicalServices &&
                         <FormControl className={'my-wrapper-select'}>
                           <Select
@@ -378,7 +379,7 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
               <div className="box-info">
                 <div className="box-title">Chọn phương thức thanh toán</div>
                 <div className="radio-group">
-                  {!methods && <LoadingData count={3} width={'70%'}></LoadingData>}
+                  {!methods && <LoadingData variant="rounded" count={2} width={'70%'} height = {70}></LoadingData>}
                   {methods && <FormControl component="fieldset">
                     <RadioGroup value={methodType} onChange={handleChangeRadio} aria-label="method" name="paymentMethod">
                       {methods && methods.map((el: any, index) => (
@@ -408,39 +409,39 @@ function InvoicePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, depar
 
                   <div className="row-content">
                     <div className="col-content">Bệnh viện:</div>
-                    <div className="col-content">{getHospitalName() ? getHospitalName() : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
+                    <div className="col-content">{getHospitalName() ? getHospitalName() : <LoadingData variant="text" count={1} width={'70%'}></LoadingData>}</div>
                   </div>
                   {getDepartmentName() && <div className="row-content">
                     <div className="col-content">Khoa:</div>
-                    <div className="col-content">{getDepartmentName() ? getDepartmentName() : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
+                    <div className="col-content">{getDepartmentName() ? getDepartmentName() : <LoadingData variant="text" count={1} width={'90%'}></LoadingData>}</div>
                   </div>}
                   {props.doctorNameProp && <div className="row-content">
                     <div className="col-content">Bác sĩ:</div>
-                    <div className="col-content">{props.doctorNameProp ? props.doctorNameProp : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
+                    <div className="col-content">{loadedProfile ? props.doctorNameProp : <LoadingData variant="text" count={1} width={'90%'}></LoadingData>}</div>
                   </div>
                   }
                   <div className="row-content">
                     <div className="col-content">Lý do khám và triệu chứng:</div>
-                    <div className="col-content">{profileInfo.reason ? profileInfo.reason : 'Chưa xác định'}</div>
+                    <div className="col-content">{loadedProfile ? (profileInfo.reason ? profileInfo.reason : 'Chưa xác định') : <LoadingData variant="text" count={1} width={'70%'}></LoadingData>}</div>
                   </div>
 
                   <div className="row-content">
                     <div className="col-content">Tiểu sử bệnh lý nền:</div>
-                    <div className="col-content">{profileInfo.medical_history ? profileInfo.medical_history : 'Chưa xác định'}</div>
+                    <div className="col-content">{loadedProfile ? (profileInfo.medical_history ? profileInfo.medical_history : 'Chưa xác định') : <LoadingData variant="text" count={1} width={'70%'}></LoadingData>}</div>
                   </div>
 
                   <div className="row-content">
                     <div className="col-content">Dị ứng:</div>
-                    <div className="col-content">{profileInfo.allergy ? profileInfo.allergy : 'Chưa xác định'}</div>
+                    <div className="col-content">{loadedProfile ? (profileInfo.allergy ? profileInfo.allergy : 'Chưa xác định'): <LoadingData variant="text" count={1} width={'70%'}></LoadingData>}</div>
                   </div>
 
                   <div className="row-content">
                     <div className="col-content">Ngày khám:</div>
-                    <div className="col-content">{props.dateBookedProp ? props.dateBookedProp : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
+                    <div className="col-content">{loadedProfile ? props.dateBookedProp : <LoadingData variant="text" count={1} width={'60%'}></LoadingData>}</div>
                   </div>
                   <div className="row-content">
                     <div className="col-content">Giờ khám:</div>
-                    <div className="col-content">{props.timeBookedProp ? props.timeBookedProp : <LoadingData count={1} width={'90%'}></LoadingData>}</div>
+                    <div className="col-content">{loadedProfile ? props.timeBookedProp : <LoadingData variant="text" count={1} width={'60%'}></LoadingData>}</div>
                   </div>
                 </div>
               </div>

@@ -8,12 +8,11 @@
   &.single-loading {
     margin-bottom: 0px;
     padding: 0;
-    height: 20px;
-    .react-loading-skeleton {
+    .MuiSkeleton-root {
       margin-bottom: 0;
     }
   }
-  .react-loading-skeleton {
+  .MuiSkeleton-root {
     margin-bottom: 10px;
   }
 }

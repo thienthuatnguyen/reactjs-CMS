@@ -1,11 +1,31 @@
 import "./loading-data.scss";
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from '@mui/material/Skeleton';
 
-export function LoadingData({count, width}) {
-  return (
-    <div className={count == 1 ? 'loading-data single-loading' : 'loading-data'}>
-        <Skeleton height={20} count={count} borderRadius = {3} width={width} />
-    </div>
-  )
+export function LoadingData(props) {
+  if (props.count <= 1) {
+    return (
+      <div className="loading-data single-loading">
+        <Skeleton variant={props.variant} height={props.height ? props.height : 30} width={props.width} />
+      </div>
+    )
+  } else {
+    let array: any = [];
+    for (let i = 0; i < props.count; i++) {
+      array.push(i);
+    }
+    return (
+      <div className="loading-data">
+        {
+          array.map(() => (
+            <Skeleton variant={props.variant} height={props.height ? props.height : 30} width={props.width} />
+          ))
+        }
+      </div>
+    )
+
+  }
+
 }
+
+
+

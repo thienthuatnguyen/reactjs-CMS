@@ -11,19 +11,19 @@ export function ProfileInfoSchedule({profileInfo}) {
         <div className="content-info">
           <div className="row-content-info">
             <div className="col-content-info birthday">Ngày sinh:</div>
-            <div className="col-content-info">{profileInfo.birthday ? profileInfo.birthday: <LoadingData width={'70%'} count={1}></LoadingData>}</div>
+            <div className="col-content-info">{profileInfo.birthday ? profileInfo.birthday: <LoadingData variant="text" width={'50%'} count={1}></LoadingData>}</div>
           </div>
           <div className="row-content-info">
             <div className="col-content-info phone">Số điện thoại:</div>
-            <div className="col-content-info">{profileInfo.phone_number ? profileInfo.phone_number : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
+            <div className="col-content-info">{profileInfo.phone_number ? profileInfo.phone_number : <LoadingData variant="text" width={'70%'} count={1}></LoadingData>}</div>
           </div>
           <div className="row-content-info">
             <div className="col-content-info address">Địa chỉ:</div>
-            <div className="col-content-info">{profileInfo.address ? profileInfo.address: <LoadingData width={'70%'} count={1}></LoadingData>}</div>
+            <div className="col-content-info">{profileInfo.address ? profileInfo.address: <LoadingData variant="text" width={'95%'} count={1}></LoadingData>}</div>
           </div>
           <div className="row-content-info">
             <div className="col-content-info sex">Giới tính:</div>
-            <div className="col-content-info">{profileInfo.gender ? ((profileInfo.gender == '0') ? 'Nam' : 'Nữ') : <LoadingData width={'70%'} count={1}></LoadingData>}</div>
+            <div className="col-content-info">{profileInfo.gender ? ((profileInfo.gender == '0') ? 'Nam' : 'Nữ') : <LoadingData variant="text" width={'50%'} count={1}></LoadingData>}</div>
           </div>
         </div>
       </div>
