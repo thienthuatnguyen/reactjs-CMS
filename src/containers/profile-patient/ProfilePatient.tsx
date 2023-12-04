@@ -6,6 +6,8 @@ import { EmptyData } from "../../components/empty-data/EmptyData";
 import { useEffect, useState } from "react";
 import profileService from "../../services/profileService";
 import { Pagination } from "@mui/material";
+import React from "react";
+import { Loading } from "../../components/loading/Loading";
 
 function ProfilePatientPage() {
   const [pagination, setPagination] = useState({
@@ -18,6 +20,7 @@ function ProfilePatientPage() {
   const [listItem, setListItem] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [loadingData, setLoadingData] = React.useState(true);
 
   useEffect(() => {
     getData();
@@ -28,6 +31,7 @@ function ProfilePatientPage() {
   }, [pagination.current_page]);
 
   function getData() {
+    setLoadingData(true);
     let params: any = {
       page: pagination.current_page,
       per_page: pagination.per_page
@@ -59,7 +63,11 @@ function ProfilePatientPage() {
           }));
         }
       }
-    )
+    ).finally(() => {
+      setTimeout(() => {
+        setLoadingData(false);
+      }, 500);
+    });
   }
 
   function handleChangePage(event, val) {
@@ -115,13 +123,20 @@ function ProfilePatientPage() {
             Tạo hồ sơ của bạn
           </Button>
         </div>
-        <div className="list-profile">
-          {(listItem.length > 0) && <Grid container spacing={2}>
-            {getList(listItem)}
-          </Grid>}
-          {(listItem.length <= 0) && <EmptyData />}
-        </div>
-        {(listItem.length > 0) && <Pagination className={'my-pagination'} showFirstButton showLastButton onChange={handleChangePage} count={pagination.totalPage} page={pagination.current_page} variant="outlined" shape="rounded" />}
+        {loadingData &&
+          <div className="loading-space">
+            <Loading color={'#000'}></Loading>
+          </div>}
+        {!loadingData && <React.Fragment>
+          <div className="list-profile">
+            {(listItem.length > 0) && <Grid container spacing={2}>
+              {getList(listItem)}
+            </Grid>}
+            {(listItem.length <= 0) && <EmptyData />}
+          </div>
+          {(listItem.length > 0) && <Pagination className={'my-pagination'} showFirstButton showLastButton onChange={handleChangePage} count={pagination.totalPage} page={pagination.current_page} variant="outlined" shape="rounded" />}
+        </React.Fragment>
+        }
       </div>
     </div>
   );

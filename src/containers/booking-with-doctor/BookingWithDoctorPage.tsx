@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { setDepartmentId, setDoctorId, setDoctorName, setHospitalId, setProfileId } from "../../actions/actions";
 import ChoseProfile from "../../components/chose-profile/ChoseProfile";
 import ChoseProfileBookHospital from "../../components/chose-profile-book-hospital/ChoseProfileBookHospital";
+import { Loading } from "../../components/loading/Loading";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 );
 const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
-function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdProp,departmentIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp, setDepartmentIdProp, setDoctorNameProp }) {
+function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdProp, departmentIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp, setDepartmentIdProp, setDoctorNameProp }) {
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [open, setOpen] = React.useState(false);
   const [openModalBookHospital, setOpenModalBookHospital] = React.useState(false);
@@ -57,6 +58,8 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
   const [workAtHome, setWorkAtHome] = React.useState<any>();
   const [hospitalData, setHospitalData] = React.useState<any>();
 
+  const [loadingData, setLoadingData] = React.useState(true);
+
 
   useEffect(() => {
     if (searchParams.get("hospital_id")) {
@@ -69,7 +72,7 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
     setHospitalID(searchParams.get("hospital_id"))
     setWorkAtHome(searchParams.get("work_at_home"))
     getDoctors(filterParams);
-   
+
   }, [location]);
 
   useEffect(() => {
@@ -124,7 +127,7 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
       } else {
         let array = body.data.hospitals;
         let hospital_id = searchParams.get("hospital_id");
-        let item = array.filter(el=> { return el.id == hospital_id});
+        let item = array.filter(el => { return el.id == hospital_id });
         setHospitalData(item[0]);
       }
     });
@@ -161,6 +164,7 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
     setToastConfig({ type: '', isOpen: false, message: '' });
   }
   function getDoctors(filterParams?: any) {
+    setLoadingData(true);
     let params: any = {
       page: pagination.current_page,
       per_page: pagination.per_page
@@ -178,6 +182,10 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
           'totalPage': body.data.meta.totalPage
         }));
       }
+    }).finally(() => {
+      setTimeout(() => {
+        setLoadingData(false);
+      }, 500);
     });
   }
   function getFilterParams(params) {
@@ -224,10 +232,10 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
   const GeneralInfo = (data) => (
     <div className="general-info">
       <div className="image-hospital">
-      <img src={data.avatar} alt="img"
-            onError={(e: any) => {
-              e.target.src = imgDefault
-            }}></img>
+        <img src={data.avatar} alt="img"
+          onError={(e: any) => {
+            e.target.src = imgDefault
+          }}></img>
       </div>
       <div className="info">
         <div className="top">
@@ -235,7 +243,7 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
           <div className="address">{data.address}</div>
         </div>
         <div className="bottom">
-          <Button onClick={()=> {bookingWithHospital()}}
+          <Button onClick={() => { bookingWithHospital() }}
             variant="contained"
             className="my-btn btn-blue-dash btn-contained">
             Đặt lịch khám
@@ -256,13 +264,14 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
             </div>
             <div className="right-content">
               <div className="wrapper-right-content">
-              {hospitalID && hospitalData && GeneralInfo(hospitalData)}
+                {hospitalID && hospitalData && GeneralInfo(hospitalData)}
                 <div className="wrapper-list-data">
                   <h2 className="title">
                     <span className="text">Danh sách bác sĩ hiện có</span>
                     <span className="line"></span>
                   </h2>
-                  <div className="list-data">
+                  {loadingData && <Loading color={'#000'}></Loading>}
+                  {!loadingData && <div className="list-data">
                     {(doctors.length <= 0) && <EmptyData></EmptyData>}
                     {(doctors.length > 0) &&
                       <React.Fragment> <Grid container spacing={2}>
@@ -270,7 +279,7 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
                       </Grid>
                         <Pagination className={'my-pagination'} showFirstButton showLastButton onChange={handleChangePage} count={pagination.totalPage} page={pagination.current_page} variant="outlined" shape="rounded" />
                       </React.Fragment>}
-                  </div>
+                  </div>}
                 </div>
                 <Modal
                   aria-labelledby="transition-modal-title"
@@ -317,7 +326,7 @@ function BookingWithDoctorPage(props: { profileIdProp, hospitalIdProp, doctorIdP
                           <CloseIcon />
                         </IconButton>
                       </div>
-                      <ChoseProfileBookHospital hospitalName = {hospitalData?.title ? hospitalData.title: 'N/A'} callBackCorfimModal={(vl) => bookingWithProfileHospital(vl)} callBackCloseModal={() => handleCloseModalBookingHospital()}></ChoseProfileBookHospital>
+                      <ChoseProfileBookHospital hospitalName={hospitalData?.title ? hospitalData.title : 'N/A'} callBackCorfimModal={(vl) => bookingWithProfileHospital(vl)} callBackCloseModal={() => handleCloseModalBookingHospital()}></ChoseProfileBookHospital>
                     </div>
                   </Fade>
                 </Modal>

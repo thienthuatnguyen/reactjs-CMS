@@ -10,15 +10,18 @@ import { EmptyData } from "../../components/empty-data/EmptyData";
 import FilterBookingHospital from "../../components/filter-booking-hospital/FilterBookingHospital";
 import { setDoctorId, setHospitalId, setProfileId } from "../../actions/actions";
 import { connect } from "react-redux";
+import { Loading } from "../../components/loading/Loading";
 
 
 
-function BookingWithHospitalPage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp}) {
+function BookingWithHospitalPage(props: { profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp }) {
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
   let filterParams: any = {};
 
   const navigate = useNavigate();
+  const [loadingData, setLoadingData] = React.useState(true);
+
   useEffect(() => {
     getHopitals();
   }, []);
@@ -55,14 +58,19 @@ function BookingWithHospitalPage(props: {profileIdProp, hospitalIdProp, doctorId
     setToastConfig({ type: '', isOpen: false, message: '' });
   }
   function getHopitals(filterParams?: any) {
+    setLoadingData(true);
     hopitalService.getHospitals(filterParams).then((res) => {
       let body = res.data;
       if (body && body.error) {
         setToastConfig({ type: 'error', isOpen: true, message: body.message });
       } else {
         setHospitals(body.data.hospitals);
-       
+
       }
+    }).finally(() => {
+      setTimeout(() => {
+        setLoadingData(false);
+      }, 500);
     });
   }
   function getFilterParams(params) {
@@ -113,14 +121,16 @@ function BookingWithHospitalPage(props: {profileIdProp, hospitalIdProp, doctorId
                     <span className="text">Danh sách bệnh viện</span>
                     <span className="line"></span>
                   </h2>
-                  <div className="list-data">
-                  {(hospitals.length <= 0) && <EmptyData></EmptyData>}
+                  {loadingData && <Loading color={'#000'}></Loading>}
+                  {!loadingData && <div className="list-data">
+                    {(hospitals.length <= 0) && <EmptyData></EmptyData>}
                     {(hospitals.length > 0) &&
                       <React.Fragment> <Grid container spacing={2}>
                         {getItem(hospitals)}
                       </Grid>
                       </React.Fragment>}
                   </div>
+                  }
                 </div>
 
               </div>

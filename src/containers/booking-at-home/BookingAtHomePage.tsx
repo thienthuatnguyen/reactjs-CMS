@@ -14,6 +14,7 @@ import { Hospital } from "../../models/hospital.model";
 import ChoseProfile from "../../components/chose-profile/ChoseProfile";
 import { connect } from "react-redux";
 import { setDepartmentId, setDoctorId, setDoctorName, setHospitalId, setProfileId } from "../../actions/actions";
+import { Loading } from "../../components/loading/Loading";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 );
 const CloseIcon = () => (<img src={closeIcon} alt="close-icon"></img>);
-function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp, setDepartmentIdProp, setDoctorNameProp}) {
+function BookingAtHomePage(props: { profileIdProp, hospitalIdProp, doctorIdProp, setProfileIdProp, setHospitalIdProp, setDoctorIdProp, setDepartmentIdProp, setDoctorNameProp }) {
   const [configToast, setToastConfig] = useState({ type: '', isOpen: false, message: '' });
   const [open, setOpen] = React.useState(false);
   const [doctorName, setDoctorName] = React.useState('');
@@ -50,6 +51,8 @@ function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, 
   const classes = useStyles();
   const [hospitalID, setHospitalID] = React.useState<any>();
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
+  const [loadingData, setLoadingData] = React.useState(true);
+  const [loadingHospital, setLoadingHospital] = React.useState(true);
 
 
   useEffect(() => {
@@ -78,10 +81,10 @@ function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, 
     setOpen(true);
   }
   function bookingWithProfile(data) {
-    if(data.profile_id && data.hospital_id && props.doctorIdProp) {
+    if (data.profile_id && data.hospital_id && props.doctorIdProp) {
       setOpen(false);
       navigate('/dat-lich-kham');
-    } 
+    }
   }
   const getItem = doctors => doctors.map((item, index) => (
     <Grid key={index} item xs={12} sm={4} md={4}>
@@ -135,6 +138,7 @@ function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, 
     setToastConfig({ type: '', isOpen: false, message: '' });
   }
   function getDoctors(filterParams?: any) {
+    setLoadingData(true);
     let params: any = {
       page: pagination.current_page,
       per_page: pagination.per_page
@@ -153,18 +157,26 @@ function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, 
           'totalPage': body.data.meta.totalPage
         }));
       }
+    }).finally(() => {
+      setTimeout(() => {
+        setLoadingData(false);
+      }, 500);
     });
   }
   function getHopitals() {
+    setLoadingHospital(true);
     hopitalService.getHospitals({ work_at_home: true }).then((res) => {
       let body = res.data;
       if (body && body.error) {
         setToastConfig({ type: 'error', isOpen: true, message: body.message });
       } else {
         setHospitals(body.data.hospitals);
-
       }
-    });
+    }).finally(() => {
+      setTimeout(() => {
+        setLoadingHospital(false);
+      }, 500);
+    });;
   }
   function getFilterParams(params) {
     filterParams = {};
@@ -183,7 +195,7 @@ function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, 
     if (params.doctor_type_id) {
       filterParams.doctor_type_id = params.doctor_type_id;
     }
-   
+
     if (params.hospital_id) {
       filterParams.hospital_id = params.hospital_id;
       props.setHospitalIdProp(params.hospital_id);
@@ -217,12 +229,13 @@ function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, 
             </div>
             <div className="right-content">
               <div className="wrapper-right-content">
-                <div className="wrapper-list-data">
+                <div className="wrapper-list-data min-height">
                   <h2 className="title">
                     <span className="text">Danh sách bác sĩ chăm sóc tại nhà</span>
                     <span className="line"></span>
                   </h2>
-                  <div className="list-data">
+                  {loadingData && <Loading color={'#000'}></Loading>}
+                  {!loadingData && <div className="list-data">
                     {(doctors.length <= 0) && <EmptyData></EmptyData>}
                     {(doctors.length > 0) &&
                       <React.Fragment> <Grid container spacing={2}>
@@ -231,20 +244,22 @@ function BookingAtHomePage(props: {profileIdProp, hospitalIdProp, doctorIdProp, 
                         <Pagination className={'my-pagination'} showFirstButton showLastButton onChange={handleChangePage} count={pagination.totalPage} page={pagination.current_page} variant="outlined" shape="rounded" />
                       </React.Fragment>}
                   </div>
+                  }
                 </div>
-                <div className="wrapper-list-data">
+                <div className="wrapper-list-data min-height">
                   <h2 className="title">
                     <span className="text">Danh sách bệnh viện chăm sóc tại nhà</span>
                     <span className="line"></span>
                   </h2>
-                  <div className="list-data">
+                  {loadingHospital && <Loading color={'#000'}></Loading>}
+                  {!loadingHospital && <div className="list-data">
                     {(hospitals.length <= 0) && <EmptyData></EmptyData>}
                     {(hospitals.length > 0) &&
                       <React.Fragment> <Grid container spacing={2}>
                         {getItemHospital(hospitals)}
                       </Grid>
                       </React.Fragment>}
-                  </div>
+                  </div>}
                 </div>
                 <Modal
                   aria-labelledby="transition-modal-title"

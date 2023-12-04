@@ -93,7 +93,7 @@
             background-color: #fff;
             padding: 15px;
             box-sizing: border-box;
-
+            position: relative;
             .general-info {
                 display: flex;
                 margin-bottom: 60px;
@@ -157,7 +157,11 @@
                 display: flex;
                 flex-wrap: wrap;
                 margin-bottom: 40px;
-
+                flex-direction: column;
+                &.min-height {
+                    position: relative;
+                    min-height: 400px;
+                }
                 h2.title {
                     font-size: 20px;
                     font-weight: bold;
@@ -298,6 +302,9 @@
                 margin: 0;
                 min-width: 100%;
                 max-width: 100%;
+                .wrapper-list-data {
+                    min-height: 400px;
+                }
                 .general-info {
                     flex-direction: column;
                     .image-hospital {

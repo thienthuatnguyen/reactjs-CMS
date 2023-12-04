@@ -16,6 +16,11 @@
         justify-content: center;
         text-transform: uppercase;
     }
+    .loading-space {
+        min-height: 400px;
+        width: 100%;
+        position: relative;
+    }
     .top-title-page {
         display: flex;
         align-items: center;
